@@ -11,6 +11,7 @@ interface IProject {
   status: 'In developing' | 'Released';
   rate: number;
   img: string;
+  link: string;
 }
 const projects: IProject[] = [
   {
@@ -19,7 +20,8 @@ const projects: IProject[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     status: 'In developing',
     rate: 1,
-    img: mowopedia
+    img: mowopedia,
+    link: 'https://mowopedia.000webhostapp.com/'
   },
   {
     name: 'eCommerce',
@@ -27,15 +29,16 @@ const projects: IProject[] = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     status: 'In developing',
     rate: 2,
-    img: eCommerce
+    img: eCommerce,
+    link: 'https://github.com/Migawk/eCommerce'
   }
 ];
 const showAble = ref(2);
 if (window.innerWidth < 1366) showAble.value = 1;
 document.addEventListener('mousemove', () => {
   // any, NEEDS TO CHANGEG KINDA EVENT
-  if (window.innerWidth < 1350) return showAble.value = 1;
-  if (window.innerWidth > 1350) return showAble.value = 2;
+  if (window.innerWidth < 1350) return (showAble.value = 1);
+  if (window.innerWidth > 1350) return (showAble.value = 2);
 });
 </script>
 <template>
@@ -45,10 +48,12 @@ document.addEventListener('mousemove', () => {
     </slider-button>
     <slider-content>
       <slider-element
-        v-for="({ name, description, status, rate, img }, index) in projects.slice(0, showAble)"
+        v-for="({ name, description, status, rate, img, link }, index) in projects.slice(0, showAble)"
         :key="index"
       >
-        <img :src="img" />
+        <a :href="link">
+          <img :src="img" />
+        </a>
         <slider-element-info>
           <slider-element-rate>
             <img :src="star" />
@@ -99,8 +104,11 @@ slider-element
     gap: 48px
     font-size: 24px
     font-weight: 800
-    &>img
+    &>a
         border-radius: 12px
+        &>img
+          width: 100%
+          height: 100%
 
     &-info
         background: #46546C

@@ -76,6 +76,8 @@ article
     flex-direction: column
     padding: 48px 64px
     min-width: 100vw
+    max-width: 100vw
+    overflow: hidden
 h1
     font-size: 108px
     text-align: center
@@ -86,6 +88,10 @@ h1
     justify-content: center
     gap: 24px
     padding: 32px 24px
+
+@media screen and (max-width: 900px)
+  .list
+    flex-wrap: wrap
 .element
     text-decoration: none
     color: #FFF7D4

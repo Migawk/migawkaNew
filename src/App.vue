@@ -37,10 +37,16 @@ window.onscroll = () => {
   const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
   const newScroll = window.scrollY;
   const direction = oldScrollY < newScroll ? 'down' : 'up';
-  direction === 'down' ? (ind += 1) : (ind -= 1);
-
+  
   oldScrollY = newScroll;
+  if (ind === 1) {
+    if(whyMe.getBoundingClientRect().y > 0) return;
+    const scrolled = Math.abs(whyMe.getBoundingClientRect().y);
+    if(scrolled < window.innerHeight*.3) return; // 30%
+  }
 
+  direction === 'down' ? (ind += 1) : (ind -= 1);
+  
   if (ind === 4 && direction === 'down') {
     header.animate(
       {
