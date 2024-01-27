@@ -35,7 +35,7 @@ import FooterWave from '@/SVG/FooterWave.vue';
 footer
     background: #000
     color: #fff
-    height: 100vh
+    min-height: 100vh
     padding: 72px 60px 0 60px
 
 h2

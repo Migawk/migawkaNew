@@ -91,6 +91,18 @@ h1
             transform: rotateY(180deg)
             width: 261px
             height: 332px
+            z-index: 3
+
+@media screen and (max-width: 600px)
+    .eggs
+        &1 > svg
+            left: -30px
+            top: -15px
+            width: calc(341px / 2)
+            height: calc(286px / 2)
+        &2 > svg
+            width: calc(261px / 2)
+            height: calc(332px / 2)
 
 .glass
     width: 384px
@@ -99,6 +111,7 @@ h1
     background: rgba(91, 121, 91, .5)
     transform: rotate(-125deg)
     pointer-events: none
+    z-index: 10
     &Pos
         position: absolute
         top: 50%

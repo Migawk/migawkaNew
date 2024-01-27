@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TheArrow from '@/SVG/TheArrow.vue';
-import eCommerce from '@/assets/eCommerce.jpg';
-import mowopedia from '@/assets/mowopedia.jpg';
+import eCommerce from '@/assets/eCommerceA.jpg';
+import mowopedia from '@/assets/mowopediaA.jpg';
 import star from '@/assets/star.svg';
 import { ref } from 'vue';
 

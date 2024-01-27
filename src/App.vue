@@ -22,7 +22,7 @@ window.onscroll = () => {
   }, 1000);
 
   const hello = document.getElementById('hello');
-  const whyMe = document.getElementById('whyMe');
+  const whyMe = document.getElementById('whyMe')! as HTMLElement;
   const portfolio = document.getElementById('portfolio');
   const skills = document.getElementById('skillsSlide');
 
@@ -37,16 +37,23 @@ window.onscroll = () => {
   const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
   const newScroll = window.scrollY;
   const direction = oldScrollY < newScroll ? 'down' : 'up';
-  
+
   oldScrollY = newScroll;
-  if (ind === 1) {
-    if(whyMe.getBoundingClientRect().y > 0) return;
-    const scrolled = Math.abs(whyMe.getBoundingClientRect().y);
-    if(scrolled < window.innerHeight*.3) return; // 30%
+  if ((ind === 1 || ind === 2) && direction === 'down') {
+    if (slides[ind].getBoundingClientRect().y > 0) return;
+    const scrolled = slides[ind].getBoundingClientRect().height + slides[ind].getBoundingClientRect().y;
+
+    if (window.innerHeight < scrolled) return;
   }
 
+  // if (slides[ind].getBoundingClientRect().y > 0) return;
+  // const scrolled =
+  //   slides[ind].getBoundingClientRect().height + slides[ind].getBoundingClientRect().y;
+
+  // if (window.innerHeight < scrolled) return;
+
   direction === 'down' ? (ind += 1) : (ind -= 1);
-  
+
   if (ind === 4 && direction === 'down') {
     header.animate(
       {
@@ -107,10 +114,10 @@ window.onscroll = () => {
     );
   }
   if (ind < 0) ind = 0;
-  if(ind === 4 && direction === 'up') {
-    window.scrollTo(0, window.scrollY-window.innerHeight);
+  if (ind === 4 && direction === 'up') {
+    window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
-  };
+  }
 
   slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null;
 };
@@ -163,9 +170,9 @@ window.onscroll = () => {
       <TheSkills id="skillsSlide" />
       <TheBlog id="blogSlide" />
     </the-page-slider>
-    <TheIntrested id="intrested"/>
-    <TheBasement id="basement"/>
-    <TheFooter/>
+    <TheIntrested id="intrested" />
+    <TheBasement id="basement" />
+    <TheFooter />
   </main>
 </template>
 

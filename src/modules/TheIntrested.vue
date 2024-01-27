@@ -17,10 +17,10 @@ import locker from '@/assets/locker.svg';
       </div>
       <button class="toFooter">To footer</button>
     </section>
-    <InterestedEggs id="topEggs" />
     <div id="poser">
-      <div></div>
-      <InterestedEggs id="bottomEggs" />
+      <!-- <div></div> -->
+      <div><InterestedEggs id="topEggs" /></div>
+      <div><InterestedEggs id="bottomEggs" /></div>
     </div>
   </article>
 </template>
@@ -37,6 +37,8 @@ article
   justify-content: space-between
   flex-direction: column
   height: 100vh
+  width: 100vw
+  overflow: hidden
 #bottomEggs
     transform: rotate(180deg)
 

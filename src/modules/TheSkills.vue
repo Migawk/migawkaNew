@@ -96,9 +96,15 @@ skill-column
   section
     display: flex
     flex-direction: column
+    align-items: center
     gap: 24px
   skill-column
     gap: 24px
+
+@media screen and (max-width: 700px)
+  skill-column
+    width: 100%
+
 the-skill
     background: #ECE5C7
     color: #354259
