@@ -1,8 +1,11 @@
-<script setup lang="ts">
+<script setup lang="ts" defer>
 
 import InterestedEggs from '@/SVG/InterestedEggs.vue';
 import locker from '@/assets/locker.svg';
 
+// setTimeout(() => document.getElementsByClassName('button')[0].addEventListener('click', (e) => {
+//   console.log(e);
+// }), 500);
 </script>
 <template>
   <article>
@@ -18,7 +21,6 @@ import locker from '@/assets/locker.svg';
       <button class="toFooter">To footer</button>
     </section>
     <div id="poser">
-      <!-- <div></div> -->
       <div><InterestedEggs id="topEggs" /></div>
       <div><InterestedEggs id="bottomEggs" /></div>
     </div>

@@ -7,7 +7,7 @@ import TheYouTube from '@/SVG/TheYouTube.vue';
 
 import mowopedia from '@/assets/mowopedia.jpg';
 import paper from '@/assets/paper.svg';
-import wave from '@/assets/wave4.svg';
+import wave from '@/assets/wave4n.svg';
 
 const blogContent = [
   {
@@ -35,7 +35,7 @@ const blogContent = [
 
 <template>
   <article>
-    <img :src="wave" class="wave"/>
+    <img :src="wave" class="wave" id="blogWave"/>
     <div class="content">
       <h1>The Blog</h1>
       <section class="list">
@@ -147,7 +147,6 @@ nav
 .wave
   min-width: 100px
   width: 100px
-  // transform: translateX(2px)
   min-height: 100vh
   object-fit: cover
 </style>

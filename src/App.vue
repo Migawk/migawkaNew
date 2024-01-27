@@ -28,6 +28,7 @@ window.onscroll = () => {
 
   const slider = document.querySelector('the-page-slider')!;
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
+  const blogWave = document.querySelector('#blogWave')! as HTMLElement;
   const header = document.querySelector('header')! as HTMLElement;
   const headersBottomWave = document.querySelector('#headersBottomWave')! as HTMLElement;
   const intrested = document.querySelector('#intrested')! as HTMLElement;
@@ -41,7 +42,8 @@ window.onscroll = () => {
   oldScrollY = newScroll;
   if ((ind === 1 || ind === 2) && direction === 'down') {
     if (slides[ind].getBoundingClientRect().y > 0) return;
-    const scrolled = slides[ind].getBoundingClientRect().height + slides[ind].getBoundingClientRect().y;
+    const scrolled =
+      slides[ind].getBoundingClientRect().height + slides[ind].getBoundingClientRect().y;
 
     if (window.innerHeight < scrolled) return;
   }
@@ -54,6 +56,9 @@ window.onscroll = () => {
 
   direction === 'down' ? (ind += 1) : (ind -= 1);
 
+  if (ind === 4) {
+    (skills as HTMLElement).scrollIntoView()
+  }
   if (ind === 4 && direction === 'down') {
     header.animate(
       {
@@ -73,9 +78,18 @@ window.onscroll = () => {
         fill: 'forwards'
       }
     );
-    blogSlide?.animate(
+    blogSlide.animate(
       {
         transform: 'translate(calc(-100vw - 100px), 0)'
+      },
+      {
+        duration: 1000,
+        fill: 'forwards'
+      }
+    );
+    blogWave.animate(
+      {
+        transform: 'translate(-36px)'
       },
       {
         duration: 750,
@@ -103,9 +117,18 @@ window.onscroll = () => {
         fill: 'forwards'
       }
     );
-    blogSlide?.animate(
+    blogSlide.animate(
       {
         transform: 'translate(0, 0)'
+      },
+      {
+        duration: 1000,
+        fill: 'forwards'
+      }
+    );
+    blogWave.animate(
+      {
+        transform: 'translate(0)'
       },
       {
         duration: 750,
