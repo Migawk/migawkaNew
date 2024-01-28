@@ -48,7 +48,10 @@ document.addEventListener('mousemove', () => {
     </slider-button>
     <slider-content>
       <slider-element
-        v-for="({ name, description, status, rate, img, link }, index) in projects.slice(0, showAble)"
+        v-for="({ name, description, status, rate, img, link }, index) in projects.slice(
+          0,
+          showAble
+        )"
         :key="index"
       >
         <a :href="link">

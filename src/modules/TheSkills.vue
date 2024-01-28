@@ -30,7 +30,7 @@ const skills: ISkill[] = [
 <template>
   <article id="skills">
     <h1>Skills</h1>
-    <TheBracket class="bracket"/>
+    <TheBracket class="bracket" />
     <section>
       <skill-column>
         <the-skill v-for="({ name, description }, index) in skills.slice(0, 2)" :key="index">

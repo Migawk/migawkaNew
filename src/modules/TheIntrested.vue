@@ -1,5 +1,4 @@
 <script setup lang="ts" defer>
-
 import InterestedEggs from '@/SVG/InterestedEggs.vue';
 import locker from '@/assets/locker.svg';
 
@@ -14,7 +13,7 @@ import locker from '@/assets/locker.svg';
       <div class="resume">
         <span>* Required a password</span>
         <button class="button">
-          <img :src="locker" alt="write password"/>
+          <img :src="locker" alt="write password" />
           <span>Open the resume</span>
         </button>
       </div>

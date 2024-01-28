@@ -5,7 +5,7 @@ import TheTelegram from '@/SVG/TheTelegram.vue';
 import BlogWave from '@/SVG/BlogWave.vue';
 import TheYouTube from '@/SVG/TheYouTube.vue';
 
-import mowopedia from '@/assets/mowopedia.jpg';
+import mowopedia from '../assets/mowopedia.jpg';
 import paper from '@/assets/paper.svg';
 import wave from '@/assets/wave4n.svg';
 
@@ -35,7 +35,7 @@ const blogContent = [
 
 <template>
   <article>
-    <img :src="wave" class="wave" id="blogWave"/>
+    <BlogWave class="wave" id="blogWave" />
     <div class="content">
       <h1>The Blog</h1>
       <section class="list">
@@ -54,7 +54,9 @@ const blogContent = [
       <section class="navNormal">
         <nav>
           <a href="https://github.com/Migawk" class="github"><TheGitHub /></a>
-          <a href="https://www.linkedin.com/in/yevhen-klimov-625a4226a/" class="linkedIn"><TheLinkedIn /></a>
+          <a href="https://www.linkedin.com/in/yevhen-klimov-625a4226a/" class="linkedIn"
+            ><TheLinkedIn
+          /></a>
           <a href="https://www.youtube.com/@MigawkaSpace" class="youtube"><TheYouTube /></a>
           <a href="t.me/Migawk" class="telegram"><TheTelegram /></a>
         </nav>
@@ -145,8 +147,9 @@ nav
     background: #08C
 
 .wave
-  min-width: 100px
-  width: 100px
+  min-width: 256px
+  width: 256px
   min-height: 100vh
   object-fit: cover
+  transform: translateX(calc(64px + 16px))
 </style>
