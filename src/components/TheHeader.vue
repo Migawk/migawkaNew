@@ -24,16 +24,20 @@ import TheBurger from '@/SVG/TheBurger.vue';
 </template>
 <style scoped lang="sass">
 .topWave
-    transform: translateY(6px)
+    transform: translateY(6px) scaleY(1.2)
 .bottomWave
     transform: rotate(180deg) translateY(6px)
     z-index: 998
     position: sticky
-    top: 0
+    top: 20px
+
+@media screen and (max-width: 550px)
+  .bottomWave
+    top: 40px
 
 header
     position: sticky
-    top: 10px
+    top: 0
     background: #ECE5C7
     display: flex
     align-items: center

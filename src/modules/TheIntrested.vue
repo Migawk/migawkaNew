@@ -61,6 +61,12 @@ section
 
 h1
   font-size: 108px
+  text-align: center
+
+@media screen and (max-width: 600px)
+  h1
+    font-size: 64px
+
 
 .resume
   color: #9C4747

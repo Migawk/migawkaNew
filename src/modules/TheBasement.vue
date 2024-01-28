@@ -12,7 +12,6 @@
 </template>
 
 <style scoped lang="sass">
-
 h1
     font-size: 92px
     color: #F5F5DC

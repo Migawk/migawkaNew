@@ -43,7 +43,7 @@ import server from '@/assets/server.svg';
           </div>
         </div>
         <div class="bigAdvantage">
-          <div class="img"><img :src="webpage" /></div>
+          <div class="img"><img :src="server" /></div>
           <div class="info">
             <div class="title">Back-end / Sysadmin</div>
             <div class="des">
@@ -103,9 +103,10 @@ h1
         height: 64px
         display: flex
         justify-content: center
-        align-content: center
+        align-items: center
         &>img
             width: 36px
+            height: 36px
     &>.title
         font-size: 36px
         font-weight: 800
@@ -125,6 +126,8 @@ h1
         display: flex
         justify-content: center
         align-items: center
+        &>img
+          min-width: 86px
     &>.info
         &>.title
             font-size: 32px

@@ -14,17 +14,28 @@ let ind = 0;
 let isScroll = false;
 
 window.onscroll = () => {
-  if (isScroll) return;
+  const hello = document.getElementById('hello');
+  const whyMe = document.getElementById('whyMe')! as HTMLElement;
+  const portfolio = document.getElementById('portfolio');
+  const skills = document.getElementById('skillsSlide');
+  const header = document.querySelector('header')! as HTMLElement;
+  const headersBottomWave = document.querySelector('#headersBottomWave')! as HTMLElement;
+  const intrested = document.querySelector('#intrested')! as HTMLElement;
+  const basement = document.querySelector('#basement')! as HTMLElement;
+  const footer = document.querySelector('#footer')! as HTMLElement;
+  const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
+
+  if (isScroll) {
+    if(ind === 1 || ind === 2) return;
+    slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
+    return;
+  };
   isScroll = true;
   setTimeout(() => {
     isScroll = false;
     oldScrollY = window.scrollY;
   }, 1000);
 
-  const hello = document.getElementById('hello');
-  const whyMe = document.getElementById('whyMe')! as HTMLElement;
-  const portfolio = document.getElementById('portfolio');
-  const skills = document.getElementById('skillsSlide');
 
   const slider = document.querySelector('the-page-slider')!;
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
@@ -34,13 +45,7 @@ window.onscroll = () => {
     document.querySelector('#blogWave2')!,
     document.querySelector('#blogWave3')!
   ];
-  const header = document.querySelector('header')! as HTMLElement;
-  const headersBottomWave = document.querySelector('#headersBottomWave')! as HTMLElement;
-  const intrested = document.querySelector('#intrested')! as HTMLElement;
-  const basement = document.querySelector('#basement')! as HTMLElement;
-  const footer = document.querySelector('#footer')! as HTMLElement;
 
-  const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
   const newScroll = window.scrollY;
   const direction = oldScrollY < newScroll ? 'down' : 'up';
 
@@ -85,7 +90,7 @@ window.onscroll = () => {
     );
     blogSlide.animate(
       {
-        transform: 'translate(calc(-100vw - 256px), 0)'
+        transform: 'translate(calc(-100vw - 512px), 0)'
       },
       {
         duration: 1000,
@@ -94,11 +99,12 @@ window.onscroll = () => {
     );
     bW1.animate(
       {
-        transform: 'translate(-64px)'
+        transform: 'translate(-128px)'
       },
       {
         duration: 1000,
-        fill: 'forwards'
+        fill: 'forwards',
+        easing: 'cubic-bezier(1,.25,1,.25)'
       }
     );
     bW2.animate(
@@ -155,7 +161,7 @@ window.onscroll = () => {
         transform: 'translate(0px)'
       },
       {
-        duration: 1000,
+        duration: 4000,
         fill: 'forwards'
       }
     );
@@ -183,8 +189,7 @@ window.onscroll = () => {
     window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
   }
-
-  slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null;
+  slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
 };
 
 // document.addEventListener('scroll', () => {

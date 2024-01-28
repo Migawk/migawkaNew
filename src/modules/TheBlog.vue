@@ -147,9 +147,9 @@ nav
     background: #08C
 
 .wave
-  min-width: 256px
-  width: 256px
+  min-width: 512px
+  width: 512px
   min-height: 100vh
   object-fit: cover
-  transform: translateX(calc(64px + 16px))
+  transform: translateX(256px)
 </style>

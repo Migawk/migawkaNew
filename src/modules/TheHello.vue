@@ -112,6 +112,7 @@ h1
     transform: rotate(-125deg)
     pointer-events: none
     z-index: 10
+    border-radius: 128px/96px
     &Pos
         position: absolute
         top: 50%
