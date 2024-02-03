@@ -26,16 +26,15 @@ window.onscroll = () => {
   const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
 
   if (isScroll) {
-    if(ind === 1 || ind === 2) return;
-    slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
+    if (ind === 1 || ind === 2) return;
+    slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null;
     return;
-  };
+  }
   isScroll = true;
   setTimeout(() => {
     isScroll = false;
     oldScrollY = window.scrollY;
   }, 1000);
-
 
   const slider = document.querySelector('the-page-slider')!;
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
@@ -67,7 +66,8 @@ window.onscroll = () => {
   direction === 'down' ? (ind += 1) : (ind -= 1);
 
   if (ind === 4) {
-    (skills as HTMLElement).scrollIntoView();
+    // (skills as HTMLElement).scrollIntoView();
+    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top)
   }
   if (ind === 4 && direction === 'down') {
     header.animate(
@@ -189,7 +189,11 @@ window.onscroll = () => {
     window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
   }
-  slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
+  console.log(ind);
+  // slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
+  slides[ind]
+    ? window.scrollTo(0, window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top)
+    : null;
 };
 
 // document.addEventListener('scroll', () => {
