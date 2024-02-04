@@ -27,7 +27,8 @@ window.onscroll = () => {
 
   if (isScroll) {
     if (ind === 1 || ind === 2) return;
-    slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null;
+    const scrollTo = Math.abs(Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top));
+    slides[ind] ? window.scrollTo(0, scrollTo) : null;
     return;
   }
   isScroll = true;
@@ -36,13 +37,10 @@ window.onscroll = () => {
     oldScrollY = window.scrollY;
   }, 1000);
 
-  const slider = document.querySelector('the-page-slider')!;
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
-  const blogWave = document.querySelector('#blogWave')! as HTMLElement;
-  const [bW1, bW2, bW3] = [
+  const [bW1, bW2] = [
     document.querySelector('#blogWave1')!,
-    document.querySelector('#blogWave2')!,
-    document.querySelector('#blogWave3')!
+    document.querySelector('#blogWave2')!
   ];
 
   const newScroll = window.scrollY;
@@ -57,12 +55,6 @@ window.onscroll = () => {
     if (window.innerHeight < scrolled) return;
   }
 
-  // if (slides[ind].getBoundingClientRect().y > 0) return;
-  // const scrolled =
-  //   slides[ind].getBoundingClientRect().height + slides[ind].getBoundingClientRect().y;
-
-  // if (window.innerHeight < scrolled) return;
-
   direction === 'down' ? (ind += 1) : (ind -= 1);
 
   if (ind === 4) {
@@ -70,6 +62,7 @@ window.onscroll = () => {
     window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top)
   }
   if (ind === 4 && direction === 'down') {
+    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top)
     header.animate(
       {
         transform: 'translateY(-128px)'
@@ -116,16 +109,6 @@ window.onscroll = () => {
         fill: 'forwards'
       }
     );
-
-    // blogWave.animate(
-    //   {
-    //     transform: 'translate(-36px)'
-    //   },
-    //   {
-    //     duration: 750,
-    //     fill: 'forwards'
-    //   }
-    // );
     return;
   }
   if (ind === 3 && direction === 'up') {
@@ -184,54 +167,22 @@ window.onscroll = () => {
     //   }
     // );
   }
+  
   if (ind < 0) ind = 0;
+  if (ind > 7) ind = 7;
+
   if (ind === 4 && direction === 'up') {
     window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
   }
-  console.log(ind);
-  // slides[ind] ? (slides[ind] as HTMLElement).scrollIntoView() : null
+  const scrollTo = Math.abs(Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top));
+
+  console.log(scrollTo);
   slides[ind]
-    ? window.scrollTo(0, window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top)
+    ? 
+    setTimeout(function() {window.scrollTo(0, scrollTo);},1)
     : null;
 };
-
-// document.addEventListener('scroll', () => {
-// const el = document.querySelector('the-page-slider')!;
-// const blogSlide = document.querySelector('#blogSlide')! as any;
-// const skillsSlide = document.querySelector('#skillsSlide')! as any;
-// const header = document.querySelector('header')! as any;
-// const headersBottomWave = document.querySelector('#headersBottomWave')! as any;
-
-// const { top, height } = el.getBoundingClientRect();
-
-// if (top < 0) {
-//   header.style.display = 'none';
-//   headersBottomWave.style.display = 'none';
-//   const progress = ((~top + 1) / height) * 2 * 100;
-//   console.log(progress);
-//   if (progress > 100) {
-//     header.style.top = '0';
-//     headersBottomWave.style.top = '0';
-
-//     blogSlide.style = `transform: translate(-100%, 100%)`;
-//     skillsSlide.style = `transform: translate(-100%, 100%)`;
-//   } else {
-//     const res = `translate(${-progress}%, ${progress}%)`;
-//     console.log(res);
-//     blogSlide.animate([{ transform: res }], { duration: 200 });
-//     skillsSlide.animate([{ transform: res }], { duration: 200 });
-
-//     header.style.top = '-100px';
-//     headersBottomWave.style.display = 'none';
-//   }
-// } else {
-//   blogSlide.style = `transform: translateX(0%)`;
-//   skillsSlide.style = `transform: translateX(0%)`;
-//   header.style.display = 'flex';
-//   headersBottomWave.style.display = 'block';
-// }
-// });
 </script>
 
 <template>
@@ -251,6 +202,9 @@ window.onscroll = () => {
 </template>
 
 <style scoped lang="sass">
+main
+  max-width: 100vw
+  min-width: 100vw
 the-page-slider
   display: flex
   width: 100vw
