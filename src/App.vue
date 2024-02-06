@@ -26,8 +26,10 @@ window.onscroll = () => {
   const slides = [hello, whyMe, portfolio, skills, null, intrested, basement, footer];
 
   if (isScroll) {
-    if (ind === 1 || ind === 2) return;
-    const scrollTo = Math.abs(Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top));
+    if (ind === 1 || ind === 2 || ind === 4) return;
+    const scrollTo = Math.abs(
+      Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top)
+    );
     slides[ind] ? window.scrollTo(0, scrollTo) : null;
     return;
   }
@@ -38,10 +40,7 @@ window.onscroll = () => {
   }, 1000);
 
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
-  const [bW1, bW2] = [
-    document.querySelector('#blogWave1')!,
-    document.querySelector('#blogWave2')!
-  ];
+  const [bW1, bW2] = [document.querySelector('#blogWave1')!, document.querySelector('#blogWave2')!];
 
   const newScroll = window.scrollY;
   const direction = oldScrollY < newScroll ? 'down' : 'up';
@@ -56,13 +55,65 @@ window.onscroll = () => {
   }
 
   direction === 'down' ? (ind += 1) : (ind -= 1);
+  console.log((skills as HTMLElement).getBoundingClientRect().top);
 
-  if (ind === 4) {
-    // (skills as HTMLElement).scrollIntoView();
-    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top)
+  if (ind === 3 && direction === 'up') {
+    header.animate(
+      {
+        transform: 'translate(0px)'
+      },
+      {
+        duration: 250,
+        fill: 'forwards'
+      }
+    );
+    headersBottomWave.animate(
+      {
+        transform: 'rotate(180deg) translateY(6px)'
+      },
+      {
+        duration: 250,
+        fill: 'forwards'
+      }
+    );
+    blogSlide.animate(
+      {
+        transform: 'translate(0, 0)'
+      },
+      {
+        duration: 1000,
+        fill: 'forwards'
+      }
+    );
+    bW1.animate(
+      {
+        transform: 'translate(0px)'
+      },
+      {
+        duration: 4000,
+        fill: 'forwards'
+      }
+    );
+    bW2.animate(
+      {
+        transform: 'translate(0px)'
+      },
+      {
+        duration: 1000,
+        fill: 'forwards'
+      }
+    );
+  }
+  if (ind === 3 && direction === 'down') {
+    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top);
+    return;
+  }
+  if (ind === 4 && direction !== 'down') {
+    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top);
+    return;
   }
   if (ind === 4 && direction === 'down') {
-    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top)
+    window.scrollTo(0, window.scrollY + (skills as HTMLElement).getBoundingClientRect().top);
     header.animate(
       {
         transform: 'translateY(-128px)'
@@ -111,76 +162,22 @@ window.onscroll = () => {
     );
     return;
   }
-  if (ind === 3 && direction === 'up') {
-    header.animate(
-      {
-        transform: 'translate(0px)'
-      },
-      {
-        duration: 250,
-        fill: 'forwards'
-      }
-    );
-    headersBottomWave.animate(
-      {
-        transform: 'rotate(180deg) translateY(6px)'
-      },
-      {
-        duration: 250,
-        fill: 'forwards'
-      }
-    );
-    blogSlide.animate(
-      {
-        transform: 'translate(0, 0)'
-      },
-      {
-        duration: 1000,
-        fill: 'forwards'
-      }
-    );
-    bW1.animate(
-      {
-        transform: 'translate(0px)'
-      },
-      {
-        duration: 4000,
-        fill: 'forwards'
-      }
-    );
-    bW2.animate(
-      {
-        transform: 'translate(0px)'
-      },
-      {
-        duration: 1000,
-        fill: 'forwards'
-      }
-    );
-    // blogWave.animate(
-    //   {
-    //     transform: 'translate(0)'
-    //   },
-    //   {
-    //     duration: 750,
-    //     fill: 'forwards'
-    //   }
-    // );
-  }
-  
+
   if (ind < 0) ind = 0;
   if (ind > 7) ind = 7;
 
   if (ind === 4 && direction === 'up') {
     window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
-  }
-  const scrollTo = Math.abs(Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top));
+  } 
+  const scrollTo = Math.abs(
+    Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top)
+  );
 
-  console.log(scrollTo);
   slides[ind]
-    ? 
-    setTimeout(function() {window.scrollTo(0, scrollTo);},1)
+    ? setTimeout(function () {
+        window.scrollTo(0, scrollTo);
+      }, 1)
     : null;
 };
 </script>
