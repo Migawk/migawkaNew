@@ -69,6 +69,8 @@ const blogContent = [
 
 article
   display: flex
+  min-width: 100vw
+  max-width: 100vw
 .content
     background: #648764
     color: #FFF7D4

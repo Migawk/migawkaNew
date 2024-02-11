@@ -29,7 +29,7 @@ import FooterWave from '@/SVG/FooterWave.vue';
 .wave
     background: #648764
     transform: translateY(12px) scaleY(1.4)
-    width: 100vw
+    max-width: 100vw
     overflow: hidden
 
 footer

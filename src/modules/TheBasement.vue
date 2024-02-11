@@ -22,7 +22,7 @@ h2
 article
     padding-top: 2vh
     padding-bottom: 12vh
-    width: 100vw
+    // width: 100vw
     min-height: 100vh
     display: flex
     flex-direction: column

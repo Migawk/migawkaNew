@@ -54,7 +54,7 @@ section
   flex-direction: column
   position: absolute
   padding: 36px 0
-  width: 100vw
+  max-width: 100vw
   height: 100vh
   color: #FFFFFF
   z-index: 1

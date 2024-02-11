@@ -38,14 +38,14 @@ window.onscroll = () => {
     isScroll = false;
     oldScrollY = window.scrollY;
   }, 1000);
-
+  
   const blogSlide = document.querySelector('#blogSlide')! as HTMLElement;
   const [bW1, bW2] = [document.querySelector('#blogWave1')!, document.querySelector('#blogWave2')!];
-
+  
   const newScroll = window.scrollY;
   const direction = oldScrollY < newScroll ? 'down' : 'up';
-
   oldScrollY = newScroll;
+
   if ((ind === 1 || ind === 2) && direction === 'down') {
     if (slides[ind]!.getBoundingClientRect().y > 0) return;
     const scrolled =
@@ -53,9 +53,10 @@ window.onscroll = () => {
 
     if (window.innerHeight < scrolled) return;
   }
-
+  
   direction === 'down' ? (ind += 1) : (ind -= 1);
-  console.log((skills as HTMLElement).getBoundingClientRect().top);
+
+  console.log(ind, direction);
 
   if (ind === 3 && direction === 'up') {
     header.animate(
@@ -169,13 +170,13 @@ window.onscroll = () => {
   if (ind === 4 && direction === 'up') {
     window.scrollTo(0, window.scrollY - window.innerHeight);
     return;
-  } 
+  }
   const scrollTo = Math.abs(
     Math.round(window.scrollY + (slides[ind] as HTMLElement).getBoundingClientRect().top)
   );
 
   slides[ind]
-    ? setTimeout(function () {
+    ? setTimeout(() => {
         window.scrollTo(0, scrollTo);
       }, 1)
     : null;
@@ -201,10 +202,12 @@ window.onscroll = () => {
 <style scoped lang="sass">
 main
   max-width: 100vw
-  min-width: 100vw
+  min-height: 100vh
+  box-sizing: content-box
+  overflow: hidden
 the-page-slider
   display: flex
-  width: 100vw
+  max-width: 100vw
   height: 200vh
   overflow: hidden
   background: #A3B96E

@@ -49,7 +49,7 @@ nav
             border-bottom-right-radius: 16px
 article
     background: #648764
-    width: 100vw
+    max-width: 100vw
     height: 100vh
     color: #F5F5DC
     overflow: hidden
@@ -60,7 +60,8 @@ article
         display: block
         top: 100%
         left: 0
-        width: 100vw
+        min-width: 97vw
+        max-width: 100vw
         height: 64px
         z-index: -2
 h1

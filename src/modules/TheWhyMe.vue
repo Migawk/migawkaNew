@@ -61,7 +61,7 @@ import server from '@/assets/server.svg';
 <style scoped lang="sass">
 article
     background: #A3B96E
-    width: 100vw
+    max-width: 100vw
     padding: 36px
     transform: translateY(-96px)
     z-index: 1
@@ -166,12 +166,12 @@ h1
     justify-content: center
     align-items: flex-start
 
-
 .normalization
-    width: 100vw
-    height: 224px
-    position: absolute
-    background: #A3B96E
-    transform: translateY(-96px)
-    z-index: -2
+  min-width: 100%
+  max-width: 100%
+  height: 224px
+  position: absolute
+  background: #A3B96E
+  transform: translateY(-96px)
+  z-index: -2
 </style>
