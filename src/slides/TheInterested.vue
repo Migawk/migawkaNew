@@ -73,4 +73,13 @@ h1
     left: 0
     transform: rotate(180deg)
     z-index: 3
+
+@media screen and (max-width: 768px)
+    h1
+        font-size: 36px
+
+    .topEggs
+        transform: scale(.5)
+    .bottomEggs
+        transform: scale(.5)
 </style>

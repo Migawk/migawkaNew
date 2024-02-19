@@ -72,6 +72,7 @@ import HeaderWave from '@/SVG/HeaderWave.vue';
     position: absolute
     top: calc(100% + 120px)
     height: 100%
+    width: 100%
 
 .wave1
   position: absolute

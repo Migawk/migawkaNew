@@ -71,6 +71,10 @@ h1
     border-radius: 12px
   &::-webkit-scrollbar-track
     border-radius: 12px
+
+@media screen and (max-width: 768px)
+  .list
+    flex-direction: column
 .project
   display: flex
   flex-direction: column

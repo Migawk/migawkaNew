@@ -31,10 +31,14 @@ article
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
+    width: 56%
 
 h1
     font-size: 60px
-    width: 768px
+
+@media screen and (max-width: 700px)
+  h1
+    font-size: 32px
 
 .bottomEggs
     display: flex
@@ -42,6 +46,7 @@ h1
     position: absolute
     bottom: 0
     right: 0
+    overflow: hidden
     &>*
         transform: rotate(180deg) scale(.7) translate(-128px, -128px)
 
