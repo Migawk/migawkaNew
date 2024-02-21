@@ -25,7 +25,15 @@ function changeSlide(deltaY: number = 0) {
   const basement = document.getElementById('basement')!;
   const footer = document.getElementById('footer')!;
 
-  const slides = [hi, whyMe, portfolio, skills, blog, interested, basement, footer];
+  const slides = [
+    {name: 'hello', element: hi, bonus: 0},
+    {name: 'whyMe', element: whyMe, bonus: 96},
+    {name: 'portfolio', element: portfolio, bonus: 0},
+    {name: 'skills', element: skills, bonus: 0},
+    {name: 'blog', element: blog, bonus: 0},
+    {name: 'interested', element: interested, bonus: 0},
+    {name: 'basement', element: basement, bonus: 0},
+    {name: 'footer', element: footer, bonus: 0}];
 
   if (deltaY > 0) {
     // down
@@ -33,11 +41,9 @@ function changeSlide(deltaY: number = 0) {
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
 
-    if (scrolled.scrolled < 95 && scrolled.scrolled !== -1 && slides[currentSlide].id == 'whyMe') {
-      console.log('quit');
+    if (scrolled.scrolled < 95 && scrolled.scrolled !== -1 && slides[currentSlide].element.id == 'whyMe') {
       return;
     } else {
-      console.log('passed');
       const page = document.getElementById('page')!;
       scrolled.changeScrolled(-1);
       page.scrollTo(0, page.scrollHeight);
@@ -46,7 +52,7 @@ function changeSlide(deltaY: number = 0) {
     currentSlide++;
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
 
-    slides[currentSlide].animate(
+    slides[currentSlide].element.animate(
       {
         top: '0px'
       },
@@ -62,7 +68,7 @@ function changeSlide(deltaY: number = 0) {
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
 
-    if (scrolled.scrolled > 1 && scrolled.scrolled !== -1 && slides[currentSlide].id == 'whyMe') {
+    if (scrolled.scrolled > 1 && scrolled.scrolled !== -1 && slides[currentSlide].element.id == 'whyMe') {
       return;
     } else {
       const page = document.getElementById('page')!;
@@ -73,9 +79,9 @@ function changeSlide(deltaY: number = 0) {
     currentSlide--;
 
     if (currentSlide < 0) return (currentSlide = 0);
-    slides[currentSlide + 1].animate(
+    slides[currentSlide + 1].element.animate(
       {
-        top: '100%'
+        top: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'
       },
       {
         duration: 750,

@@ -12,12 +12,7 @@ onMounted(() => {
   const page = document.getElementById('page')!;
   page.addEventListener('scroll', (e) => {
     const newScrolled = page.scrollTop / (page.scrollHeight - window.innerHeight) * 100;
-    console.log(newScrolled);
     scrolled.changeScrolled(newScrolled);
-    // pageScrollTop
-    // pageScrollHeight
-    // windowHeight
-    //scrollTOp
   });
 });
 </script>
@@ -89,6 +84,7 @@ onMounted(() => {
 <style lang="sass" scoped>
 article
   position: absolute
+  top: calc(100% + 96px)
   height: 100%
 .page
   background: #A3B96E
@@ -99,6 +95,7 @@ article
 .wave1
   position: absolute
   transform: translateY(-100%)
+  height: 96px
 .box
     background: #ECE5C7
     color: #354259
