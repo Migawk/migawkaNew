@@ -5,59 +5,79 @@ import phone from '../assets/phone.svg';
 import server from '../assets/server.svg';
 import webpage from '../assets/webpage.svg';
 import HeaderWave from '@/SVG/HeaderWave.vue';
+import scrolled from '../store/scrolled';
+import { onMounted } from 'vue';
 
+onMounted(() => {
+  const page = document.getElementById('page')!;
+  page.addEventListener('scroll', (e) => {
+    const newScrolled = page.scrollTop / (page.scrollHeight - window.innerHeight) * 100;
+    console.log(newScrolled);
+    scrolled.changeScrolled(newScrolled);
+    // pageScrollTop
+    // pageScrollHeight
+    // windowHeight
+    //scrollTOp
+  });
+});
 </script>
 <template>
   <article id="whyMe">
-    <HeaderWave id="wave1" class="wave1"/>
-    <div class="box">
-      <h1>Why me?</h1>
-      <div class="smallAdvantages">
-        <div class="smallAdvantage">
-          <div class="smallAdvantageImg">
-            <img :src="speed" alt="" />
+    <HeaderWave id="wave1" class="wave1" />
+    <div class="page" id="page">
+      <div class="box">
+        <h1>Why me?</h1>
+        <div class="smallAdvantages">
+          <div class="smallAdvantagePar">
+            <div class="smallAdvantage">
+              <div class="smallAdvantageImg">
+                <img :src="speed" alt="" />
+              </div>
+              <div class="smallAdvantageName">Rapid</div>
+              <div class="smallAdvantageDescription">I prefer to write quick to load websites.</div>
+            </div>
+            <div class="smallAdvantage">
+              <div class="smallAdvantageImg"><img :src="pizza" alt="" /></div>
+              <div class="smallAdvantageName">Youthful</div>
+              <div class="smallAdvantageDescription">For teenagers, children and young adult.</div>
+            </div>
           </div>
-          <div class="smallAdvantageName">Rapid</div>
-          <div class="smallAdvantageDescription">I prefer to write quick to load websites.</div>
-        </div>
-        <div class="smallAdvantage">
-          <div class="smallAdvantageImg"><img :src="pizza" alt="" /></div>
-          <div class="smallAdvantageName">Youthful</div>
-          <div class="smallAdvantageDescription">For teenagers, children and young adult.</div>
-        </div>
-        <div class="smallAdvantage">
-          <div class="smallAdvantageImg"><img :src="phone" alt="" /></div>
-          <div class="smallAdvantageName">Responsive</div>
-          <div class="smallAdvantageDescription">
-            Websites always works on any devices: Phone, Tablet, PC, TV.
-          </div>
-        </div>
-        <div class="smallAdvantage">
-          <div class="smallAdvantageImg"><img :src="server" alt="" /></div>
-          <div class="smallAdvantageName">Web-server</div>
-          <div class="smallAdvantageDescription">
-            Proficient in web server management and configuration.
-          </div>
-        </div>
-      </div>
-      <div class="bigAdvantages">
-        <div class="bigAdvantage">
-          <div class="bigAdvantageImg"><img :src="webpage"/></div>
-          <div class="bigAdvantageContent">
-            <div class="bigAdvantageName">Front-end</div>
-            <div class="bigAdvantageDescription">
-              Proficient in front-end development. Interested in creating responsive and
-              user-friendly interfaces to enhance overall user experience.
+          <div class="smallAdvantagePar">
+            <div class="smallAdvantage">
+              <div class="smallAdvantageImg"><img :src="phone" alt="" /></div>
+              <div class="smallAdvantageName">Responsive</div>
+              <div class="smallAdvantageDescription">
+                Websites always works on any devices: Phone, Tablet, PC, TV.
+              </div>
+            </div>
+            <div class="smallAdvantage">
+              <div class="smallAdvantageImg"><img :src="server" alt="" /></div>
+              <div class="smallAdvantageName">Web-server</div>
+              <div class="smallAdvantageDescription">
+                Proficient in web server management and configuration.
+              </div>
             </div>
           </div>
         </div>
-        <div class="bigAdvantage">
-          <div class="bigAdvantageImg"><img :src="server"/></div>
-          <div class="bigAdvantageContent">
-            <div class="bigAdvantageName">Back-end / Sysadmin</div>
-            <div class="bigAdvantageDescription">
-              Experienced in back-end, particular in server-side programming and adept at system
-              administration tasks for performance and reliability.
+        <div class="bigAdvantages">
+          <div class="bigAdvantage">
+            <div class="bigAdvantageImg"><img :src="webpage" /></div>
+            <div class="bigAdvantageContent">
+              <div class="bigAdvantageName">Front-end</div>
+              <div class="bigAdvantageDescription">
+                Proficient in front-end development. Interested in creating responsive and
+                user-friendly interfaces to enhance overall user experience.
+              </div>
+            </div>
+          </div>
+          <div class="bigAdvantage">
+            <div class="bigAdvantageImg"><img :src="server" /></div>
+            <div class="bigAdvantageContent">
+              <div class="bigAdvantageName">Back-end / Sysadmin</div>
+              <div class="bigAdvantageDescription">
+                Experienced in back-end, particular in server-side programming and adept at system
+                administration tasks for performance and reliability.
+              </div>
             </div>
           </div>
         </div>
@@ -67,12 +87,14 @@ import HeaderWave from '@/SVG/HeaderWave.vue';
 </template>
 
 <style lang="sass" scoped>
-#whyMe
-    background: #A3B96E
-    position: absolute
-    top: calc(100% + 120px)
-    height: 100%
-    width: 100%
+article
+  position: absolute
+  height: 100%
+.page
+  background: #A3B96E
+  max-width: 100vw
+  overflow-y: scroll
+  height: 100%
 
 .wave1
   position: absolute
@@ -95,14 +117,16 @@ h1
 .smallAdvantages
     display: flex
     justify-content: space-between
-    gap: 64px
+    gap: 96px
+    flex-wrap: wrap
 
 .smallAdvantage
     display: flex
     flex-direction: column
     align-items: center
-    width: 15%
+    width: 20%
     text-align: center
+    justify-content: space-between
     &Img
         width: 64px
         height: 64px
@@ -119,15 +143,23 @@ h1
         font-weight: bold
     &Description
         font-size: 24px
+    &Par
+      display: flex
+      justify-content: space-between
+      width: 100%
+      &>*
+        width: 50%
 
 .bigAdvantages
     display: flex
     justify-content: space-between
+    flex-wrap: wrap
 
 .bigAdvantage
     display: flex
     gap: 10px
     width: 50%
+    flex-wrap: wrap
     &Img
         min-width: 152px
         max-width: 152px
@@ -151,4 +183,18 @@ h1
         font-weight: 700
     &Description
         font-size: 22px
+
+@media screen and (max-width: 720px)
+  .smallAdvantage
+    &Name
+      font-size: 24px
+    &Description
+      display: none
+    &Img
+      width: 96px
+      height: 96px
+      &>img
+        height: 56px
+  .bigAdvantage
+    width: auto
 </style>
