@@ -95,7 +95,7 @@ article
 .wave1
   position: absolute
   transform: translateY(-100%)
-  height: 96px
+  // height: 96px
 .box
     background: #ECE5C7
     color: #354259

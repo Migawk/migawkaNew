@@ -5,34 +5,38 @@ import star from '../assets/star.svg';
 </script>
 <template>
   <article id="portfolio">
-    <h1>Portfolio</h1>
-    <div class="list">
-      <div class="project">
-        <img :src="mowopedia" class="projectImg" />
-        <div class="projectRating">
-          <div class="stars"><img :src="star" alt="" />1</div>
-          <div class="status">In developing</div>
-        </div>
-        <div class="projectContent">
-          <div class="projectTitle">Mowopedia</div>
-          <div class="projectDescription">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    <div class="page" id="page1">
+      <h1>Portfolio</h1>
+      <div class="list">
+        <div class="project">
+          <img :src="mowopedia" class="projectImg" />
+          <div class="projectRating">
+            <div class="stars"><img :src="star" alt="" />1</div>
+            <div class="status">In developing</div>
+          </div>
+          <div class="projectContent">
+            <div class="projectTitle">Mowopedia</div>
+            <div class="projectDescription">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
           </div>
         </div>
-      </div>
-      <div class="project">
-        <img :src="eCommerce" class="projectImg" />
-        <div class="projectRating">
-          <div class="stars"><img :src="star" alt="" />2</div>
-          <div class="status">In developing</div>
-        </div>
-        <div class="projectContent">
-          <div class="projectTitle">eCommerce</div>
-          <div class="projectDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        <div class="project">
+          <img :src="eCommerce" class="projectImg" />
+          <div class="projectRating">
+            <div class="stars"><img :src="star" alt="" />2</div>
+            <div class="status">In developing</div>
+          </div>
+          <div class="projectContent">
+            <div class="projectTitle">eCommerce</div>
+            <div class="projectDescription">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -41,10 +45,14 @@ import star from '../assets/star.svg';
 <style lang="sass" scoped>
 article
     background: #354259
-    height: 100%
     width: 100%
+    height: 100%
     position: absolute
     top: 100%
+
+.page
+  overflow-y: scroll
+  max-height: 100vh
 
 h1
     font-size: 96px
@@ -58,8 +66,7 @@ h1
   justify-content: center
   align-items: center
   gap: 64px
-  overflow-y: scroll
-  height: 60%
+  min-height: max-content
   &::-webkit-scrollbar
     width: 4px
     border-radius: 4px

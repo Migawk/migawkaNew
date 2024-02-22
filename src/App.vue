@@ -15,6 +15,26 @@ let isScroll = false;
 let start = 0;
 let deltaY = 0;
 
+function scrollable(slideContentId: string, direction: 'up' | 'down') {
+  isScroll = false;
+  const page = document.getElementById(slideContentId)!; // take directly
+  const localScrolled = page.scrollTop / (page.scrollHeight - window.innerHeight) * 100;
+  if (direction === 'down') {
+    if (localScrolled < 99 && localScrolled !== -1) {
+      return false;
+    } else {
+      scrolled.changeScrolled(-1);
+      // page.scrollTo(0, 0);
+    }
+  } else {
+    if (localScrolled > 1 && localScrolled !== -1) {
+      return false;
+    } else {
+      scrolled.changeScrolled(-1);
+      // page.scrollTo(0, page.scrollHeight);
+    }
+  }
+}
 function changeSlide(deltaY: number = 0) {
   const hi = document.getElementById('hello')!;
   const whyMe = document.getElementById('whyMe')!;
@@ -26,14 +46,15 @@ function changeSlide(deltaY: number = 0) {
   const footer = document.getElementById('footer')!;
 
   const slides = [
-    {name: 'hello', element: hi, bonus: 0},
-    {name: 'whyMe', element: whyMe, bonus: 96},
-    {name: 'portfolio', element: portfolio, bonus: 0},
-    {name: 'skills', element: skills, bonus: 0},
-    {name: 'blog', element: blog, bonus: 0},
-    {name: 'interested', element: interested, bonus: 0},
-    {name: 'basement', element: basement, bonus: 0},
-    {name: 'footer', element: footer, bonus: 0}];
+    { name: 'hello', element: hi, bonus: 0, direction: 'down' },
+    { name: 'whyMe', element: whyMe, bonus: 96, direction: 'down' },
+    { name: 'portfolio', element: portfolio, bonus: 0, direction: 'down' },
+    { name: 'skills', element: skills, bonus: 0, direction: 'down' },
+    { name: 'blog', element: blog, bonus: 0, direction: 'right' },
+    { name: 'interested', element: interested, bonus: 0, direction: 'down' },
+    { name: 'basement', element: basement, bonus: 0, direction: 'down' },
+    { name: 'footer', element: footer, bonus: 0, direction: 'down' }
+  ].slice(0, 3);
 
   if (deltaY > 0) {
     // down
@@ -41,12 +62,11 @@ function changeSlide(deltaY: number = 0) {
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
 
-    if (scrolled.scrolled < 95 && scrolled.scrolled !== -1 && slides[currentSlide].element.id == 'whyMe') {
-      return;
-    } else {
-      const page = document.getElementById('page')!;
-      scrolled.changeScrolled(-1);
-      page.scrollTo(0, page.scrollHeight);
+    if (currentSlide === 1) {
+      if(scrollable('page', 'down') === false) return;
+    }
+    if(currentSlide === 2) {
+      if(scrollable('page', 'down') === false) return;
     }
 
     currentSlide++;
@@ -68,12 +88,11 @@ function changeSlide(deltaY: number = 0) {
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
 
-    if (scrolled.scrolled > 1 && scrolled.scrolled !== -1 && slides[currentSlide].element.id == 'whyMe') {
-      return;
-    } else {
-      const page = document.getElementById('page')!;
-      page.scrollTo(0, 0);
-      scrolled.changeScrolled(-1);
+    if (currentSlide === 1) {
+      if(scrollable('page', 'up') === false) return;
+    }
+    if(currentSlide === 2) {
+      if(scrollable('page1', 'up') === false) return;
     }
 
     currentSlide--;
