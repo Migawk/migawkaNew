@@ -84,13 +84,16 @@ onMounted(() => {
 <style lang="sass" scoped>
 article
   position: absolute
-  top: calc(100% + 96px)
+  top: calc(100% + 300px)
   height: 100%
 .page
   background: #A3B96E
   max-width: 100vw
   overflow-y: scroll
   height: 100%
+
+  &::-webkit-scrollbar
+    display: none
 
 .wave1
   position: absolute
@@ -114,7 +117,7 @@ h1
 .smallAdvantages
     display: flex
     justify-content: space-between
-    gap: 96px
+    gap: 32px
     flex-wrap: wrap
 
 .smallAdvantage
@@ -142,7 +145,7 @@ h1
         font-size: 24px
     &Par
       display: flex
-      justify-content: space-between
+      gap: 32px
       width: 100%
       &>*
         width: 50%

@@ -16,18 +16,18 @@ let start = 0;
 let deltaY = 0;
 
 function scrollable(slideContentId: string, direction: 'up' | 'down') {
-  isScroll = false;
+  // isScroll = false;
   const page = document.getElementById(slideContentId)!; // take directly
-  const localScrolled = page.scrollTop / (page.scrollHeight - window.innerHeight) * 100;
+  const localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
   if (direction === 'down') {
-    if (localScrolled < 99 && localScrolled !== -1) {
+    if (localScrolled < 95 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
       // page.scrollTo(0, 0);
     }
   } else {
-    if (localScrolled > 1 && localScrolled !== -1) {
+    if (localScrolled > 5 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
@@ -47,14 +47,14 @@ function changeSlide(deltaY: number = 0) {
 
   const slides = [
     { name: 'hello', element: hi, bonus: 0, direction: 'down' },
-    { name: 'whyMe', element: whyMe, bonus: 96, direction: 'down' },
-    { name: 'portfolio', element: portfolio, bonus: 0, direction: 'down' },
-    { name: 'skills', element: skills, bonus: 0, direction: 'down' },
-    { name: 'blog', element: blog, bonus: 0, direction: 'right' },
+    { name: 'whyMe', element: whyMe, bonus: 300, direction: 'down' },
+    { name: 'portfolio', element: portfolio, bonus: 300, direction: 'down' },
+    { name: 'skills', element: skills, bonus: 300, direction: 'down' },
+    { name: 'blog', element: blog, bonus: 300, direction: 'right' },
     { name: 'interested', element: interested, bonus: 0, direction: 'down' },
     { name: 'basement', element: basement, bonus: 0, direction: 'down' },
-    { name: 'footer', element: footer, bonus: 0, direction: 'down' }
-  ].slice(0, 3);
+    { name: 'footer', element: footer, bonus: 300, direction: 'down' }
+  ];
 
   if (deltaY > 0) {
     // down
@@ -63,15 +63,28 @@ function changeSlide(deltaY: number = 0) {
     setTimeout(() => (isScroll = false), 1000);
 
     if (currentSlide === 1) {
-      if(scrollable('page', 'down') === false) return;
+      if (scrollable('page', 'down') === false) return;
     }
-    if(currentSlide === 2) {
-      if(scrollable('page', 'down') === false) return;
+    if (currentSlide === 2) {
+      if (scrollable('page1', 'down') === false) return;
     }
 
     currentSlide++;
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
 
+    if (slides[currentSlide].direction === 'right') {
+      slides[currentSlide].element.animate(
+        {
+          left: '0%'
+        },
+        {
+          duration: 750,
+          fill: 'forwards',
+          easing: 'cubic-bezier(.49,0,.64,1.06)'
+        }
+      );
+      return;
+    }
     slides[currentSlide].element.animate(
       {
         top: '0px'
@@ -89,15 +102,29 @@ function changeSlide(deltaY: number = 0) {
     setTimeout(() => (isScroll = false), 1000);
 
     if (currentSlide === 1) {
-      if(scrollable('page', 'up') === false) return;
+      if (scrollable('page', 'up') === false) return;
     }
-    if(currentSlide === 2) {
-      if(scrollable('page1', 'up') === false) return;
+    if (currentSlide === 2) {
+      if (scrollable('page1', 'up') === false) return;
     }
 
     currentSlide--;
 
     if (currentSlide < 0) return (currentSlide = 0);
+
+    if (slides[currentSlide+1].direction === 'right') {
+      slides[currentSlide+1].element.animate(
+        {
+          left: 'calc(100% + ' + slides[currentSlide+1].bonus + 'px)'
+        },
+        {
+          duration: 750,
+          fill: 'forwards',
+          easing: 'cubic-bezier(.49,0,.64,1.06)'
+        }
+      );
+      return;
+    }
     slides[currentSlide + 1].element.animate(
       {
         top: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'

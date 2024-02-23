@@ -1,7 +1,11 @@
+<script lang="ts" setup>
+import Wave from '../SVG/FooterWave.vue';
+</script>
 <template>
   <footer id="footer">
-    <h1>If you’re seeking something else</h1>
-    <div>
+    <Wave class="wave" />
+    <div class="page">
+      <h1>If you’re seeking something else</h1>
       <ul>
         <li>
           <p>
@@ -27,17 +31,25 @@
 <style lang="sass" scoped>
 footer
     position: absolute
-    top: 100%
-    width: 100%
+    top: calc(100% + 300px)
+    width: 100vw
     height: 100%
-    background: #000
-    color: #fff
-    display: flex
-    flex-direction: column
-    justify-content: space-between
-    padding: 36px
-    z-index: 7
 
+.page
+  position: absolute
+  background: #000
+  color: #fff
+  display: flex
+  flex-direction: column
+  padding: 36px
+  width: 100vw
+  height: 100vh
+  z-index: 7
+
+.wave
+  position: absolute
+  transform: translateY(-100%)
+  z-index: 8
 h1
     text-align: center
 
@@ -45,7 +57,9 @@ ul
     padding-left: 24px
     font-size: 24px
     display: flex
+    justify-content: space-between
     flex-direction: column
     gap: 16px
     margin-top: 16px
+    height: 100%
 </style>

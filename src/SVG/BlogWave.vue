@@ -1,12 +1,5 @@
 <template>
-  <svg
-    id="visual"
-    width="201.5"
-    height="900"
-    version="1.1"
-    viewBox="0 0 201.5 900"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg id="visual" viewBox="0 0 201.5 900" xmlns="http://www.w3.org/2000/svg">
     <path
       id="blogWave1"
       d="m4.044 900-1.7-30c-1.6-30-5-90 1.4-150 6.3-60 22.3-120 33.3-180s17-120 13.2-180c-3.9-60-17.5-120-25.7-180s-10.8-120-12.2-150l-1.3-30h154.5v900z"

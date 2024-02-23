@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import mowopedia from '../assets/mowopediaA.jpg';
 import eCommerce from '../assets/eCommerceA.jpg';
+import PortfolioWave from '@/SVG/PortfolioWave.vue';
 import star from '../assets/star.svg';
 </script>
 <template>
   <article id="portfolio">
+    <PortfolioWave class="wave" />
     <div class="page" id="page1">
       <h1>Portfolio</h1>
       <div class="list">
@@ -44,15 +46,22 @@ import star from '../assets/star.svg';
 </template>
 <style lang="sass" scoped>
 article
-    background: #354259
     width: 100%
     height: 100%
     position: absolute
-    top: 100%
+    top: calc( 100% + 300px )
 
+.wave
+  position: absolute
+  transform: translateY(-99%)
 .page
   overflow-y: scroll
-  max-height: 100vh
+  padding: 64px 0
+  height: 100vh
+  background: #354259
+
+  &::-webkit-scrollbar
+    display: none
 
 h1
     font-size: 96px

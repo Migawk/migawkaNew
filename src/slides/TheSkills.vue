@@ -1,6 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Wave from '../SVG/SkillWave.vue';
+</script>
 <template>
   <article id="skills">
+    <Wave class="wave"/>
     <h1>Skills</h1>
     <div class="parentense"></div>
     <div class="skills">
@@ -8,7 +11,7 @@
             <div class="skill">
                 <div class="name">Front-end</div>
                 <hr>
-                <div class="content">Layouting, SASS, React.js, Vue.js, Responsive, Semantic, Redux/Zustand.</div>
+                <div class="content">Layouting, SASS, React.js, Vue.js, Responsive, Semantic,<br/>Redux/Zustand.</div>
             </div>
             <div class="skill">
                 <div class="name">Back-end</div>
@@ -25,7 +28,7 @@
             <div class="skill">
                 <div class="name">Other</div>
                 <hr>
-                <div class="content">Git, PostgreSQL, MySQL, SQLite, TypeScript, declarative(Rx.js), lodash, Inkscape(SVG), Python.</div>
+                <div class="content">Git, PostgreSQL, MySQL, SQLite, TypeScript,<br/> declarative(Rx.js), lodash, Inkscape(SVG), Python.</div>
             </div>
         </div>
     </div>
@@ -37,8 +40,12 @@ article
     height: 100%
     width: 100%
     position: absolute
-    // top: 100%
+    top: calc(100% + 300px)
     font-weight: 700
+
+.wave
+    position: absolute
+    transform: translateY(-100%)
 
 h1
     text-align: center
