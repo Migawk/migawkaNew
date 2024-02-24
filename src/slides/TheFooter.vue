@@ -29,11 +29,11 @@
 <style lang="sass" scoped>
 footer
     width: 100vw
-    height: 100%
-    position: absolute
-    z-index: 20
+    height: 100vh
     background: #000
     color: #fff
+    position: relative
+    z-index: 15
 
 .page
   display: flex

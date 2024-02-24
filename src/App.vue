@@ -8,6 +8,7 @@ import TheInterested from './slides/TheInterested.vue';
 import TheBasement from './slides/TheBasement.vue';
 import TheFooter from './slides/TheFooter.vue';
 import scrolled from './store/scrolled';
+import TheBasementAndFooter from './slides/TheBasementAndFooter.vue';
 
 let currentSlide = 0;
 let isScroll = false;
@@ -20,14 +21,14 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
   const page = document.getElementById(slideContentId)!; // take directly
   const localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
   if (direction === 'down') {
-    if (localScrolled < 80 && localScrolled !== -1) {
+    if (localScrolled < 95 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
       // page.scrollTo(0, 0);
     }
   } else {
-    if (localScrolled > 20 && localScrolled !== -1) {
+    if (localScrolled > 5 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
@@ -39,16 +40,46 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
 function transition(slides: any[], direction: 'up' | 'down') {
   if (direction === 'down') {
     if (slides[currentSlide].direction === 'right') {
-      slides[currentSlide].element.children[0].animate(
-        {
-          left: '0%'
-        },
-        {
-          duration: 750,
-          fill: 'forwards',
-          easing: 'cubic-bezier(.49,0,.64,1.06)'
-        }
-      );
+      const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
+      if (w1 && w2 && w3) {
+        w1.animate(
+          {
+            left: '-200%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+        w2.animate(
+          {
+            left: '-200%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1700,
+            fill: 'forwards'
+          }
+        );
+        w3.animate(
+          {
+            left: '-200%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1900,
+            fill: 'forwards'
+          }
+        );
+        slides[currentSlide].element.children[1].animate({
+          left: '-100%'
+        }, {
+          easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1700,
+            fill: 'forwards'
+        });
+      }
       return;
     }
     if (slides[currentSlide]) {
@@ -104,18 +135,48 @@ function transition(slides: any[], direction: 'up' | 'down') {
       }, 200);
       return;
     }
-  } else {
+  } else { // up
     if (slides[currentSlide + 1].direction === 'right') {
-      slides[currentSlide + 1].element.children[0].animate(
-        {
-          left: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'
-        },
-        {
-          duration: 750,
-          fill: 'forwards',
-          easing: 'cubic-bezier(.49,0,.64,1.06)'
-        }
-      );
+      const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children;
+      if (w1 && w2 && w3) {
+        w1.animate(
+          {
+            left: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+        w2.animate(
+          {
+            left: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1700,
+            fill: 'forwards'
+          }
+        );
+        w3.animate(
+          {
+            left: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1900,
+            fill: 'forwards'
+          }
+        );
+        slides[currentSlide + 1].element.children[1].animate({
+          left: '100%'
+        }, {
+          easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1700,
+            fill: 'forwards'
+        });
+      }
       return;
     }
     if (slides[currentSlide + 1]) {
@@ -179,8 +240,7 @@ function changeSlide(deltaY: number = 0) {
   const skills = document.getElementById('skills')!;
   const blog = document.getElementById('blog')!;
   const interested = document.getElementById('interested')!;
-  const basement = document.getElementById('basement')!;
-  const footer = document.getElementById('footer')!;
+  const baseFooter = document.getElementById('baseFooter')!;
 
   const slides = [
     { name: 'hello', element: hi, bonus: 0, direction: 'down' },
@@ -189,8 +249,7 @@ function changeSlide(deltaY: number = 0) {
     { name: 'skills', element: skills, bonus: 300, direction: 'down' },
     { name: 'blog', element: blog, bonus: 300, direction: 'right' },
     { name: 'interested', element: interested, bonus: 0, direction: 'down' },
-    { name: 'basement', element: basement, bonus: 0, direction: 'down' },
-    { name: 'footer', element: footer, bonus: 450, direction: 'down' }
+    { name: 'baseFooter', element: baseFooter, bonus: 0, direction: 'down' }
   ];
 
   if (deltaY > 0) {
@@ -198,12 +257,15 @@ function changeSlide(deltaY: number = 0) {
     if (isScroll) return;
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
-    
-    if (currentSlide === 1) {
+
+    if (slides[currentSlide].name === 'whyMe') {
       if (scrollable('page', 'down') === false) return;
     }
-    if (currentSlide === 2) {
+    if (slides[currentSlide].name === 'portfolio') {
       if (scrollable('page1', 'down') === false) return;
+    }
+    if (slides[currentSlide].name === 'baseFooter') {
+      if (scrollable('page2', 'down') === false) return;
     }
 
     currentSlide++;
@@ -221,6 +283,9 @@ function changeSlide(deltaY: number = 0) {
     }
     if (currentSlide === 2) {
       if (scrollable('page1', 'up') === false) return;
+    }
+    if (currentSlide === 6) {
+      if (scrollable('page2', 'up') === false) return;
     }
 
     currentSlide--;
@@ -249,8 +314,9 @@ window.addEventListener('wheel', (e) => {
     <TheSkills />
     <TheBlog />
     <TheInterested />
-    <TheBasement />
-    <TheFooter />
+    <TheBasementAndFooter />
+    <!-- <TheBasement />
+    <TheFooter /> -->
   </main>
 </template>
 <style lang="sass" scoped>
