@@ -127,7 +127,7 @@ h1
   &Description
     font-size: 24px
 
-@media screen and (max-width: 460px)
+@media screen and (max-width: 500px)
   h1
     font-size: 40px
   .list

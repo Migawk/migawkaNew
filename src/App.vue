@@ -72,6 +72,58 @@ function changeSlide(deltaY: number = 0) {
     currentSlide++;
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
 
+    if (slides[currentSlide].name === 'whyMe') {
+      const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
+      w1.animate(
+        {
+          top: '-190%'
+        },
+        {
+          easing: 'cubic-bezier(.2,.95,.38,.74)',
+          duration: 1500,
+          fill: 'forwards'
+        }
+      );
+      setTimeout(() => {
+        w2.animate(
+          {
+            top: '-170%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+      }, 100);
+      setTimeout(() => {
+        w3.animate(
+          {
+            top: '-150%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1750,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+
+      setTimeout(() => {
+        slides[currentSlide].element.animate(
+          {
+            top: '0px'
+          },
+          {
+            easing: 'cubic-bezier(.30,0,.64,1.10)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+      return;
+    } ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     if (slides[currentSlide].direction === 'right') {
       slides[currentSlide].element.children[0].animate(
         {
@@ -109,8 +161,59 @@ function changeSlide(deltaY: number = 0) {
     }
 
     currentSlide--;
-
     if (currentSlide < 0) return (currentSlide = 0);
+
+    if (slides[currentSlide+1].name === 'whyMe') {
+      const [w1, w2, w3] = slides[currentSlide+1].element.children[0].children;
+      w1.animate(
+        {
+          top: '100%'
+        },
+        {
+          easing: 'cubic-bezier(.2,.95,.38,.74)',
+          duration: 2000,
+          fill: 'forwards'
+        }
+      );
+      setTimeout(() => {
+        w2.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1000,
+            fill: 'forwards'
+          }
+        );
+      }, 100);
+      setTimeout(() => {
+        w3.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+
+      setTimeout(() => {
+        slides[currentSlide+1].element.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.30,0,.64,1.10)',
+            duration: 750,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+      return;
+    } ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (slides[currentSlide + 1].direction === 'right') {
       slides[currentSlide + 1].element.children[0].animate(

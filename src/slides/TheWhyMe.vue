@@ -6,6 +6,8 @@ import server from '../assets/server.svg';
 import webpage from '../assets/webpage.svg';
 import HeaderWave from '@/SVG/HeaderWave.vue';
 import scrolled from '../store/scrolled';
+import purpleWave from '../assets/slideTransition/purpleWave.svg';
+
 import { onMounted } from 'vue';
 
 onMounted(() => {
@@ -18,7 +20,59 @@ onMounted(() => {
 </script>
 <template>
   <article id="whyMe">
-    <HeaderWave id="wave1" class="wave1" />
+    <div class="waves">
+      <div class="wave1">
+        <svg viewBox="0 0 900 224.8" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path1"
+            d="m0 48.84 21.5-11.7c21.5-11.6 64.5-35 107.3-37 42.9-2 85.5 17.4 128.4 31.4 42.8 14 85.8 22.6 128.6 19.1 42.9-3.5 85.5-19.1 128.4-16 42.8 3.2 85.8 25.2 128.6 30.4 42.9 5.1 85.5-6.5 128.4-8 42.8-1.5 85.8 7.1 107.3 11.5l21.5 4.3v152h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#836bba"
+          />
+        </svg>
+        <div class="wave1Bg"></div>
+        <svg viewBox="0 0 900 224.8" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path1"
+            d="m0 48.84 21.5-11.7c21.5-11.6 64.5-35 107.3-37 42.9-2 85.5 17.4 128.4 31.4 42.8 14 85.8 22.6 128.6 19.1 42.9-3.5 85.5-19.1 128.4-16 42.8 3.2 85.8 25.2 128.6 30.4 42.9 5.1 85.5-6.5 128.4-8 42.8-1.5 85.8 7.1 107.3 11.5l21.5 4.3v152h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#836bba"
+          />
+        </svg>
+      </div>
+      <div class="wave2">
+        <svg viewBox="0 0 900 165" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path2"
+            d="m0 42 21.5-3.8c21.5-3.9 64.5-11.5 107.3-13.5 42.9-2 85.5 1.6 128.4-0.5 42.8-2.2 85.8-10.2 128.6-8.5 42.9 1.6 85.5 13 128.4 14.3 42.8 1.3 85.8-7.3 128.6-6.7 42.9 0.7 85.5 10.7 128.4 8.4 42.8-2.4 85.8-17 107.3-24.4l21.5-7.3v165h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#00aecd"
+          />
+        </svg>
+        <div class="wave2Bg"></div>
+        <svg viewBox="0 0 900 165" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path2"
+            d="m0 42 21.5-3.8c21.5-3.9 64.5-11.5 107.3-13.5 42.9-2 85.5 1.6 128.4-0.5 42.8-2.2 85.8-10.2 128.6-8.5 42.9 1.6 85.5 13 128.4 14.3 42.8 1.3 85.8-7.3 128.6-6.7 42.9 0.7 85.5 10.7 128.4 8.4 42.8-2.4 85.8-17 107.3-24.4l21.5-7.3v165h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#00aecd"
+          />
+        </svg>
+      </div>
+      <div class="wave3">
+        <svg viewBox="0 0 900 100.1" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path3"
+            d="m0 2.054 21.5 8.2c21.5 8.1 64.5 24.5 107.3 25.3 42.9 0.8 85.5-13.8 128.4-16.2 42.8-2.3 85.8 7.7 128.6 12.5 42.9 4.9 85.5 4.5 128.4 2.5 42.8-2 85.8-5.6 128.6-14 42.9-8.3 85.5-21.3 128.4-20.3 42.8 1 85.8 16 107.3 23.5l21.5 7.5v69h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#a3d2a1"
+          />
+        </svg>
+        <div class="wave3Bg"></div>
+        <svg viewBox="0 0 900 100.1" xmlns="http://www.w3.org/2000/svg">
+          <path
+            id="path3"
+            d="m0 2.054 21.5 8.2c21.5 8.1 64.5 24.5 107.3 25.3 42.9 0.8 85.5-13.8 128.4-16.2 42.8-2.3 85.8 7.7 128.6 12.5 42.9 4.9 85.5 4.5 128.4 2.5 42.8-2 85.8-5.6 128.6-14 42.9-8.3 85.5-21.3 128.4-20.3 42.8 1 85.8 16 107.3 23.5l21.5 7.5v69h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
+            fill="#a3d2a1"
+          />
+        </svg>
+      </div>
+    </div>
     <div class="page" id="page">
       <div class="box">
         <h1>Why me?</h1>
@@ -91,13 +145,49 @@ article
   max-width: 100vw
   overflow-y: scroll
   height: 100%
+  z-index: 20
 
   &::-webkit-scrollbar
     display: none
 
 .wave1
   position: absolute
-  transform: translateY(-100%)
+  top: 100%
+  z-index: 5
+  &>svg
+    transform: translateY(4%)
+    &:last-child
+      transform: rotate(180deg) translateY(4px)
+  &Bg
+    background: #836bba
+    width: 100vw
+    height: 100vh
+
+.wave2
+  position: absolute
+  top: 100%
+  z-index: 6
+  &>svg
+    transform: translateY(4%)
+    &:last-child
+      transform: rotate(180deg) translateY(4px)
+  &Bg
+    background: #00aecd
+    width: 100vw
+    height: 100vh
+
+.wave3
+  position: absolute
+  top: 100%
+  z-index: 7
+  &>svg
+    transform: translateY(4%)
+    &:last-child
+      transform: rotate(180deg) translateY(4px)
+  &Bg
+    background: #a3d2a1
+    width: 100vw
+    height: 100vh
 .box
     background: #ECE5C7
     color: #354259
@@ -189,7 +279,7 @@ h1
     justify-content: space-between
   .smallAdvantagePar
     width: 100%
-  
+
   .bigAdvantage
     justify-content: center
     align-items: center
