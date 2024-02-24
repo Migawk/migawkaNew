@@ -35,6 +35,143 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
     }
   }
 }
+
+function transition(slides: any[], direction: 'up' | 'down') {
+  if (direction === 'down') {
+    if (slides[currentSlide].direction === 'right') {
+      slides[currentSlide].element.children[0].animate(
+        {
+          left: '0%'
+        },
+        {
+          duration: 750,
+          fill: 'forwards',
+          easing: 'cubic-bezier(.49,0,.64,1.06)'
+        }
+      );
+      return;
+    }
+    if (slides[currentSlide]) {
+      const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
+      if (w1 && w2 && w3) {
+        w1.animate(
+          {
+            top: '-220%'
+          },
+          {
+            easing: 'cubic-bezier(.2,.95,.38,.74)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+        setTimeout(() => {
+          w2.animate(
+            {
+              top: '-220%'
+            },
+            {
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 1500,
+              fill: 'forwards'
+            }
+          );
+        }, 100);
+        setTimeout(() => {
+          w3.animate(
+            {
+              top: '-220%'
+            },
+            {
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 1750,
+              fill: 'forwards'
+            }
+          );
+        }, 200);
+      }
+
+      setTimeout(() => {
+        slides[currentSlide].element.animate(
+          {
+            top: '0px'
+          },
+          {
+            easing: 'cubic-bezier(.30,0,.64,1.10)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+      return;
+    }
+  } else {
+    if (slides[currentSlide + 1].direction === 'right') {
+      slides[currentSlide + 1].element.children[0].animate(
+        {
+          left: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'
+        },
+        {
+          duration: 750,
+          fill: 'forwards',
+          easing: 'cubic-bezier(.49,0,.64,1.06)'
+        }
+      );
+      return;
+    }
+    if (slides[currentSlide + 1]) {
+      const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children;
+      if (w1 && w2 && w3) {
+        w1.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.2,.95,.38,.74)',
+            duration: 2000,
+            fill: 'forwards'
+          }
+        );
+        setTimeout(() => {
+          w2.animate(
+            {
+              top: '100%'
+            },
+            {
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 1000,
+              fill: 'forwards'
+            }
+          );
+        }, 100);
+        setTimeout(() => {
+          w3.animate(
+            {
+              top: '100%'
+            },
+            {
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 1500,
+              fill: 'forwards'
+            }
+          );
+        }, 200);
+      }
+      setTimeout(() => {
+        slides[currentSlide + 1].element.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.30,0,.64,1.10)',
+            duration: 750,
+            fill: 'forwards'
+          }
+        );
+      }, 200);
+      return;
+    }
+  }
+}
 function changeSlide(deltaY: number = 0) {
   const hi = document.getElementById('hello')!;
   const whyMe = document.getElementById('whyMe')!;
@@ -61,7 +198,7 @@ function changeSlide(deltaY: number = 0) {
     if (isScroll) return;
     isScroll = true;
     setTimeout(() => (isScroll = false), 1000);
-
+    
     if (currentSlide === 1) {
       if (scrollable('page', 'down') === false) return;
     }
@@ -72,81 +209,7 @@ function changeSlide(deltaY: number = 0) {
     currentSlide++;
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
 
-    if (slides[currentSlide].name === 'whyMe') {
-      const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
-      w1.animate(
-        {
-          top: '-190%'
-        },
-        {
-          easing: 'cubic-bezier(.2,.95,.38,.74)',
-          duration: 1500,
-          fill: 'forwards'
-        }
-      );
-      setTimeout(() => {
-        w2.animate(
-          {
-            top: '-170%'
-          },
-          {
-            easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1500,
-            fill: 'forwards'
-          }
-        );
-      }, 100);
-      setTimeout(() => {
-        w3.animate(
-          {
-            top: '-150%'
-          },
-          {
-            easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1750,
-            fill: 'forwards'
-          }
-        );
-      }, 200);
-
-      setTimeout(() => {
-        slides[currentSlide].element.animate(
-          {
-            top: '0px'
-          },
-          {
-            easing: 'cubic-bezier(.30,0,.64,1.10)',
-            duration: 1500,
-            fill: 'forwards'
-          }
-        );
-      }, 200);
-      return;
-    } ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    if (slides[currentSlide].direction === 'right') {
-      slides[currentSlide].element.children[0].animate(
-        {
-          left: '0%'
-        },
-        {
-          duration: 750,
-          fill: 'forwards',
-          easing: 'cubic-bezier(.49,0,.64,1.06)'
-        }
-      );
-      return;
-    }
-    slides[currentSlide].element.animate(
-      {
-        top: '0px'
-      },
-      {
-        duration: 750,
-        fill: 'forwards',
-        easing: 'cubic-bezier(.49,0,.64,1.06)'
-      }
-    );
+    transition(slides, 'down');
   } else {
     // up
     if (isScroll) return;
@@ -162,82 +225,7 @@ function changeSlide(deltaY: number = 0) {
 
     currentSlide--;
     if (currentSlide < 0) return (currentSlide = 0);
-
-    if (slides[currentSlide+1].name === 'whyMe') {
-      const [w1, w2, w3] = slides[currentSlide+1].element.children[0].children;
-      w1.animate(
-        {
-          top: '100%'
-        },
-        {
-          easing: 'cubic-bezier(.2,.95,.38,.74)',
-          duration: 2000,
-          fill: 'forwards'
-        }
-      );
-      setTimeout(() => {
-        w2.animate(
-          {
-            top: '100%'
-          },
-          {
-            easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1000,
-            fill: 'forwards'
-          }
-        );
-      }, 100);
-      setTimeout(() => {
-        w3.animate(
-          {
-            top: '100%'
-          },
-          {
-            easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1500,
-            fill: 'forwards'
-          }
-        );
-      }, 200);
-
-      setTimeout(() => {
-        slides[currentSlide+1].element.animate(
-          {
-            top: '100%'
-          },
-          {
-            easing: 'cubic-bezier(.30,0,.64,1.10)',
-            duration: 750,
-            fill: 'forwards'
-          }
-        );
-      }, 200);
-      return;
-    } ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    if (slides[currentSlide + 1].direction === 'right') {
-      slides[currentSlide + 1].element.children[0].animate(
-        {
-          left: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'
-        },
-        {
-          duration: 750,
-          fill: 'forwards',
-          easing: 'cubic-bezier(.49,0,.64,1.06)'
-        }
-      );
-      return;
-    }
-    slides[currentSlide + 1].element.animate(
-      {
-        top: 'calc(100% + ' + slides[currentSlide + 1].bonus + 'px)'
-      },
-      {
-        duration: 750,
-        fill: 'forwards',
-        easing: 'cubic-bezier(.49,0,.64,1.06)'
-      }
-    );
+    transition(slides, 'up');
   }
 }
 
