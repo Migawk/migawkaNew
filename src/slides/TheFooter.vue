@@ -31,7 +31,7 @@ import Wave from '../SVG/FooterWave.vue';
 <style lang="sass" scoped>
 footer
     position: absolute
-    top: calc(100% + 300px)
+    top: calc(100% + 450px)
     width: 100vw
     height: 100%
 

@@ -63,7 +63,7 @@ h1
 .row
     display: flex
     flex-direction: column
-    gap: 10px
+    gap: 12px
     width: 50%
 
 .skill
@@ -82,7 +82,20 @@ hr
 
 .name
     font-size: 46px
+    word-break: break-all
 
 .content
     font-size: 24px
+    word-break: break-all
+
+@media screen and (max-width: 420px)
+    .skills
+        display: block
+    .row
+        width: 100%
+        &:first-child
+            margin-bottom: 12px
+    .name
+        text-align: center
+        font-size: 40px
 </style>

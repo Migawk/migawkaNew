@@ -12,31 +12,37 @@ import star from '../assets/star.svg';
       <div class="list">
         <div class="project">
           <img :src="mowopedia" class="projectImg" />
-          <div class="projectRating">
-            <div class="stars"><img :src="star" alt="" />1</div>
-            <div class="status">In developing</div>
+          <div class="projectResponsive">
+            <div class="projectHiddenTitle">Mowopedia</div>
+            <div class="projectRating">
+              <div class="stars"><img :src="star" alt="" />1</div>
+              <div class="status">In developing</div>
+            </div>
           </div>
           <div class="projectContent">
             <div class="projectTitle">Mowopedia</div>
             <div class="projectDescription">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Explore a linguistic map on this website, offering a plethora of dialects by
+              navigating through various European countries. Immerse yourself in the rich tapestry
+              of languages, enhancing your cultural and linguistic experience.
             </div>
           </div>
         </div>
         <div class="project">
           <img :src="eCommerce" class="projectImg" />
-          <div class="projectRating">
-            <div class="stars"><img :src="star" alt="" />2</div>
-            <div class="status">In developing</div>
+          <div class="projectResponsive">
+            <div class="projectHiddenTitle">eCommerce</div>
+            <div class="projectRating">
+              <div class="stars"><img :src="star" alt="" />2</div>
+              <div class="status">In developing</div>
+            </div>
           </div>
           <div class="projectContent">
             <div class="projectTitle">eCommerce</div>
             <div class="projectDescription">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Unveiling our eCommerce website draft – a sleek fusion of style and functionality.
+              Streamlined design, intuitive navigation, and visually engaging elements await. Your
+              seamless online shopping experience begins here.
             </div>
           </div>
         </div>
@@ -111,8 +117,45 @@ h1
   &Content
     font-weight: 700
     color: #fff
+  &HiddenTitle
+    display: none
+    color: #fff
+    font-size: 36px
+    padding: 10px 8px
   &Title
     font-size: 36px
   &Description
     font-size: 24px
+
+@media screen and (max-width: 460px)
+  h1
+    font-size: 40px
+  .list
+    padding: 24px
+  .project
+    background: #2E3850
+    border-radius: 12px
+    gap: 0
+    width: fit-content
+    overflow: hidden
+    &Img
+      border-radius: 0
+      width: 100%
+    &Rating
+      border-radius: 0
+      border-bottom-left-radius: 12px
+      border-bottom-right-radius: 12px
+      background: #3A475E
+    &Responsive
+      background: #46546C
+      border-bottom-left-radius: 12px
+      border-bottom-right-radius: 12px
+    &HiddenTitle
+      display: block
+      font-weight: 700
+    &Title
+      display: none
+    &Description
+      padding: 8px
+      font-size: 18px
 </style>

@@ -3,21 +3,26 @@ import Wave from '@/SVG/BlogWave.vue';
 </script>
 <template>
   <article id="blog">
-    <Wave class="wave"/>
-    <div class="page">
-      <h1>The Blog</h1>
-      <h2>There is nothing</h2>
-      <p>✖╭╮✖</p>
+    <div class="wrapper">
+      <Wave class="wave" />
+      <div class="page">
+        <h1>The Blog</h1>
+        <h2>There is nothing</h2>
+        <p>✖╭╮✖</p>
+      </div>
     </div>
   </article>
 </template>
 <style lang="sass" scoped>
 article
-    position: absolute
-    left: calc(100% + 300px)
-    top: 0
-    width: 100%
-    height: 100%
+    position: relative
+
+.wrapper
+  position: absolute
+  left: calc(100% + 300px)
+  transform: translateY(-100%)
+  width: 100vw
+  height: 100vh
 
 .wave
     position: absolute

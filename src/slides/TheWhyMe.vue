@@ -11,7 +11,7 @@ import { onMounted } from 'vue';
 onMounted(() => {
   const page = document.getElementById('page')!;
   page.addEventListener('scroll', (e) => {
-    const newScrolled = page.scrollTop / (page.scrollHeight - window.innerHeight) * 100;
+    const newScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
     scrolled.changeScrolled(newScrolled);
   });
 });
@@ -98,7 +98,6 @@ article
 .wave1
   position: absolute
   transform: translateY(-100%)
-  // height: 96px
 .box
     background: #ECE5C7
     color: #354259
@@ -116,21 +115,21 @@ h1
 
 .smallAdvantages
     display: flex
-    justify-content: space-between
     gap: 32px
     flex-wrap: wrap
+    justify-content: center
 
 .smallAdvantage
     display: flex
     flex-direction: column
     align-items: center
-    width: 20%
+    width: 10%
     text-align: center
     justify-content: space-between
     &Img
         width: 64px
         height: 64px
-        background: radial-gradient(circle at 50% 100%, #C2DED1 40%, #CDC2AE 10%)
+        background: radial-gradient(circle at 15% 80%, #C2DED1 35%, #CDC2AE 10%)
         border-radius: 50%
         display: flex
         justify-content: center
@@ -146,7 +145,7 @@ h1
     &Par
       display: flex
       gap: 32px
-      width: 100%
+      width: 48%
       &>*
         width: 50%
 
@@ -165,7 +164,7 @@ h1
         max-width: 152px
         min-height: 152px
         max-height: 152px
-        background: #CDC2AE
+        background: radial-gradient(circle at 15% 80%, #FF9999 35%, #CDC2AE 10%)
         border-radius: 50%
         display: flex
         justify-content: center
@@ -184,6 +183,43 @@ h1
     &Description
         font-size: 22px
 
+
+@media screen and (max-width: 1040px)
+  .smallAdvantages
+    justify-content: space-between
+  .smallAdvantagePar
+    width: 100%
+  
+  .bigAdvantage
+    justify-content: center
+    align-items: center
+    &Content
+      padding: 0
+      text-align: center
+
+@media screen and (max-width: 570px)
+  .box
+    padding: 12px
+  .smallAdvantagePar
+    justify-content: space-between
+
+@media screen and (max-width: 430px)
+  .smallAdvantagePar
+      justify-content: center
+      flex-wrap: wrap
+
+  .bigAdvantages
+    gap: 16px
+  .bigAdvantage
+    justify-content: center
+    align-items: center
+    &Content
+      padding: 0
+      text-align: center
+    &Description
+      display: none
+
+
 @media screen and (max-width: 720px)
   .smallAdvantage
     &Name
@@ -196,5 +232,5 @@ h1
       &>img
         height: 56px
   .bigAdvantage
-    width: auto
+    width: 100%
 </style>
