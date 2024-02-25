@@ -22,10 +22,7 @@ onMounted(() => {
   <article id="whyMe">
     <div class="waves">
       <div class="wave1">
-        <svg
-          viewBox="0 0 900 224.8"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224.8" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path1"
             d="m0 48.84 21.5-11.7c21.5-11.6 64.5-35 107.3-37 42.9-2 85.5 17.4 128.4 31.4 42.8 14 85.8 22.6 128.6 19.1 42.9-3.5 85.5-19.1 128.4-16 42.8 3.2 85.8 25.2 128.6 30.4 42.9 5.1 85.5-6.5 128.4-8 42.8-1.5 85.8 7.1 107.3 11.5l21.5 4.3v152h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
@@ -33,10 +30,7 @@ onMounted(() => {
           />
         </svg>
         <div class="wave1Bg"></div>
-        <svg
-          viewBox="0 0 900 224.8"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224.8" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path1"
             d="m0 48.84 21.5-11.7c21.5-11.6 64.5-35 107.3-37 42.9-2 85.5 17.4 128.4 31.4 42.8 14 85.8 22.6 128.6 19.1 42.9-3.5 85.5-19.1 128.4-16 42.8 3.2 85.8 25.2 128.6 30.4 42.9 5.1 85.5-6.5 128.4-8 42.8-1.5 85.8 7.1 107.3 11.5l21.5 4.3v152h-21.5-107.3-128.4-128.6-128.4-128.6-128.4-107.3-21.5z"
@@ -45,10 +39,7 @@ onMounted(() => {
         </svg>
       </div>
       <div class="wave2">
-        <svg
-          viewBox="0 0 900 224"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path2"
             d="m0 57.02 21.5-5.159c21.5-5.295 64.5-15.61 107.3-18.33 42.9-2.715 85.5 2.172 128.4-0.6788 42.8-2.987 85.8-13.85 128.6-11.54 42.9 2.172 85.5 17.65 128.4 19.41 42.8 1.765 85.8-9.91 128.6-9.096 42.9 0.9503 85.5 14.53 128.4 11.4 42.8-3.258 85.8-23.08 107.3-33.12l21.5-9.91v224h-900z"
@@ -57,10 +48,7 @@ onMounted(() => {
           />
         </svg>
         <div class="wave2Bg"></div>
-        <svg
-          viewBox="0 0 900 224"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path2"
             d="m0 57.02 21.5-5.159c21.5-5.295 64.5-15.61 107.3-18.33 42.9-2.715 85.5 2.172 128.4-0.6788 42.8-2.987 85.8-13.85 128.6-11.54 42.9 2.172 85.5 17.65 128.4 19.41 42.8 1.765 85.8-9.91 128.6-9.096 42.9 0.9503 85.5 14.53 128.4 11.4 42.8-3.258 85.8-23.08 107.3-33.12l21.5-9.91v224h-900z"
@@ -70,10 +58,7 @@ onMounted(() => {
         </svg>
       </div>
       <div class="wave3">
-        <svg
-          viewBox="0 0 900 224"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path3"
             d="m0 4.599 21.5 18.36c21.5 18.13 64.5 54.85 107.3 56.64 42.9 1.791 85.5-30.9 128.4-36.27 42.8-5.149 85.8 17.24 128.6 27.98 42.9 10.97 85.5 10.07 128.4 5.597 42.8-4.478 85.8-12.54 128.6-31.34 42.9-18.58 85.5-47.69 128.4-45.45 42.8 2.239 85.8 35.82 107.3 52.61l21.5 16.79v154.5h-900z"
@@ -82,10 +67,7 @@ onMounted(() => {
           />
         </svg>
         <div class="wave3Bg"></div>
-        <svg
-          viewBox="0 0 900 224"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 900 224" xmlns="http://www.w3.org/2000/svg">
           <path
             id="path3"
             d="m0 4.599 21.5 18.36c21.5 18.13 64.5 54.85 107.3 56.64 42.9 1.791 85.5-30.9 128.4-36.27 42.8-5.149 85.8 17.24 128.6 27.98 42.9 10.97 85.5 10.07 128.4 5.597 42.8-4.478 85.8-12.54 128.6-31.34 42.9-18.58 85.5-47.69 128.4-45.45 42.8 2.239 85.8 35.82 107.3 52.61l21.5 16.79v154.5h-900z"
@@ -101,28 +83,34 @@ onMounted(() => {
         <div class="smallAdvantages">
           <div class="smallAdvantagePar">
             <div class="smallAdvantage">
-              <div class="smallAdvantageImg">
+              <div class="smallAdvantageImg" id="smallAdvantageImg1">
                 <img :src="speed" alt="" />
               </div>
               <div class="smallAdvantageName">Rapid</div>
               <div class="smallAdvantageDescription">I prefer to write quick to load websites.</div>
             </div>
             <div class="smallAdvantage">
-              <div class="smallAdvantageImg"><img :src="pizza" alt="" /></div>
+              <div class="smallAdvantageImg" id="smallAdvantageImg2">
+                <img :src="pizza" alt="" />
+              </div>
               <div class="smallAdvantageName">Youthful</div>
               <div class="smallAdvantageDescription">For teenagers, children and young adult.</div>
             </div>
           </div>
           <div class="smallAdvantagePar">
             <div class="smallAdvantage">
-              <div class="smallAdvantageImg"><img :src="phone" alt="" /></div>
+              <div class="smallAdvantageImg" id="smallAdvantageImg3">
+                <img :src="phone" alt="" />
+              </div>
               <div class="smallAdvantageName">Responsive</div>
               <div class="smallAdvantageDescription">
                 Websites always works on any devices: Phone, Tablet, PC, TV.
               </div>
             </div>
             <div class="smallAdvantage">
-              <div class="smallAdvantageImg"><img :src="server" alt="" /></div>
+              <div class="smallAdvantageImg" id="smallAdvantageImg4">
+                <img :src="server" alt="" />
+              </div>
               <div class="smallAdvantageName">Web-server</div>
               <div class="smallAdvantageDescription">
                 Proficient in web server management and configuration.
@@ -258,6 +246,8 @@ h1
         overflow: hidden
         flex-direction: column
         margin-bottom: 20px
+        transition: .5s
+        position: relative
     &Name
         font-size: 36px
         font-weight: bold
@@ -270,6 +260,8 @@ h1
       &>*
         width: 50%
 
+.smallAdvantageImg:hover
+  transform: scale(1.2)
 .bigAdvantages
     display: flex
     justify-content: space-between

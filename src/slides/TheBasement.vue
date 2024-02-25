@@ -1,14 +1,15 @@
 <template>
   <article id="basement">
-    
-    <h1>The Basement</h1>
-    <h2>Contact me directly</h2>
-    <form action="#" method="get" @submit.prevent="console.log">
-      <input type="text" placeholder="Your name" required />
-      <input type="email" placeholder="E-mail" required />
-      <textarea placeholder="Message" required minlength="36"></textarea>
-      <input type="submit" value="Submit" class="submit" />
-    </form>
+    <div class="wrapper">
+      <h1>The Basement</h1>
+      <h2>Contact me directly</h2>
+      <form action="#" method="get" @submit.prevent="console.log">
+        <input type="text" placeholder="Your name" required />
+        <input type="email" placeholder="E-mail" required />
+        <textarea placeholder="Message" required minlength="36"></textarea>
+        <input type="submit" value="Submit" class="submit" />
+      </form>
+    </div>
   </article>
 </template>
 <style lang="sass" scoped>
@@ -20,13 +21,20 @@ article
     display: flex
     flex-direction: column
     align-items: center
-    background-size: cover
-    background-position: bottom
 h1
     font-size: 92px
     word-break: break-all
 
-
+.wrapper
+    position: absolute
+    z-index: 20
+    width: 100vw
+    height: 100vh
+    display: flex
+    flex-direction: column
+    align-items: center
+    &>*
+        position: relative
 h2
     font-size: 48px
 

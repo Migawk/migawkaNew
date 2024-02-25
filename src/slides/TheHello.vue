@@ -6,7 +6,7 @@ import TheEggs from '../SVG/HelloEggs.vue';
     <div class="topEggs"><TheEggs /></div>
     <div class="face">
       <h1>
-        "As a developer, I transform ideas into code, where each line is a path to innovation and
+        "As a develo<span class="rotate">p</span>er, I transf<span class="rotate">o</span>rm ideas into code, whe<span class="rotate">r</span>e each line is a path to innovation and
         functionality."
       </h1>
     </div>
@@ -37,6 +37,7 @@ article
 
 h1
     font-size: 60px
+    display: inline-block
 
 @media screen and (max-width: 700px)
   h1
@@ -71,6 +72,15 @@ h1
     height: 10px
     bottom: -64px
     animation: 1.6s infinite ease-in-out scrollable
+.rotate
+  animation: 1.6s 1 ease-in-out textRotate
+  display: inline-block
+  &:first-child
+    animation-delay: .5s
+  &::nth-child(2)
+    animation-delay: .75s
+  &:last-child
+    animation-delay: 1s
 
 @keyframes scrollable
   0%
@@ -82,4 +92,11 @@ h1
     bottom: -12px
     height: 1px
     opacity: .1
+
+@keyframes textRotate
+  0%
+    transform: rotateY(0deg)
+  100%
+    transform: rotateY(360deg)
+
 </style>

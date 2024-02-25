@@ -1,22 +1,30 @@
 <script lang="ts" setup>
 import slide from '@/store/slide';
-
-
+import { onMounted } from 'vue';
 // movement for pointer in @/store/slide.ts
+
+onMounted(() => {
+    document.addEventListener('click', (e) => {
+        const localTarget = e.target as HTMLElement;
+        if(localTarget.id.startsWith('nav')) {
+            slide.change(Number(localTarget.id.slice(3)));
+        }
+    })
+});
 </script>
 <template>
     <nav>
         <div class="pointer" id="navPointer"></div>
         <div class="left">
+            <div class="navCircle" id="nav0"></div>
             <div class="navCircle" id="nav1"></div>
             <div class="navCircle" id="nav2"></div>
             <div class="navCircle" id="nav3"></div>
-            <div class="navCircle" id="nav4"></div>
         </div>
         <div class="right">
+            <div class="navCircle" id="nav4"></div>
             <div class="navCircle" id="nav5"></div>
             <div class="navCircle" id="nav6"></div>
-            <div class="navCircle" id="nav7"></div>
         </div>
     </nav>
 </template>
@@ -27,7 +35,7 @@ nav
     left: 48px
     display: flex
     gap: 10px
-    z-index: 10
+    z-index: 100
 
 .pointer
     width: 20px
@@ -51,4 +59,8 @@ nav
     background: #999
     opacity: .4
     border-radius: 50%
+
+@media screen and (max-width: 500px)
+    nav
+        display: none
 </style>

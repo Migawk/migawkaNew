@@ -15,13 +15,14 @@ import TheFooter from './TheFooter.vue';
 
 .baseFooter
     position: absolute
-    top: 100%
+    top: calc(100% + 300px)
     z-index: 10
 
 #page2
     max-width: 100vw
     height: 100vh
     overflow-y: scroll
+    overflow-x: hidden
     position: absolute
     z-index: 15
 </style>

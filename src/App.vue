@@ -45,9 +45,13 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide].direction === 'right') {
       const [w1, w2, w3] = slides[currentSlide].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
+        w1.style.transform = 'translateX(0%)';
+        w2.style.transform = 'translateX(0%)';
+        w3.style.transform = 'translateX(0%)';
+        
         w1.animate(
           {
-            transform: 'translateX(-250%)'
+            transform: 'translateX(-255%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -57,7 +61,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
         );
         w2.animate(
           {
-            transform: 'translateX(-250%)'
+            transform: 'translateX(-255%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -67,7 +71,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
         );
         w3.animate(
           {
-            transform: 'translateX(-250%)'
+            transform: 'translateX(-255%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -91,6 +95,10 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide]) {
       const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
       if (w1 && w2 && w3) {
+        w1.style.transform = 'translateY(0)';
+        w2.style.transform = 'translateY(0)';
+        w3.style.transform = 'translateY(0)';
+
         w1.animate(
           {
             transform: 'translateY(-200%)'
@@ -142,6 +150,9 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide + 1].direction === 'right') {
       const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
+        w1.style.transform = 'translateX(-255%)';
+        w2.style.transform = 'translateX(-255%)';
+        w3.style.transform = 'translateX(-255%)';
         w1.animate(
           {
             transform: 'translateX(0%)'
@@ -188,6 +199,10 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide + 1]) {
       const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children;
       if (w1 && w2 && w3) {
+        w1.style.transform = 'translateY(-200%)';
+        w2.style.transform = 'translateY(-200%)';
+        w3.style.transform = 'translateY(-200%)';
+
         w1.animate(
           {
             transform: 'translateY(0)'
@@ -249,7 +264,7 @@ function changeSlide(deltaY: number = 0) {
     { name: 'skills', element: skills, bonus: 300, direction: 'down' },
     { name: 'blog', element: blog, bonus: 300, direction: 'right' },
     { name: 'interested', element: interested, bonus: 0, direction: 'down' },
-    { name: 'baseFooter', element: baseFooter, bonus: 0, direction: 'down' }
+    { name: 'baseFooter', element: baseFooter, bonus: 300, direction: 'down' }
   ];
 
   if (deltaY > 0) {
@@ -259,18 +274,21 @@ function changeSlide(deltaY: number = 0) {
     setTimeout(() => (isScroll = false), 1000);
 
     if (slides[currentSlide].name === 'whyMe') {
+      document.getElementById('page')?.focus();
       if (scrollable('page', 'down') === false) return;
     }
     if (slides[currentSlide].name === 'portfolio') {
+      document.getElementById('page1')?.focus();
       if (scrollable('page1', 'down') === false) return;
     }
     if (slides[currentSlide].name === 'baseFooter') {
+      document.getElementById('page2')?.focus();
       if (scrollable('page2', 'down') === false) return;
     }
 
     currentSlide++;
-    slide.change(currentSlide);
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
+    slide.change(currentSlide);
 
     transition(slides, 'down');
   } else {
@@ -280,18 +298,21 @@ function changeSlide(deltaY: number = 0) {
     setTimeout(() => (isScroll = false), 1000);
 
     if (currentSlide === 1) {
+      document.getElementById('page')?.focus();
       if (scrollable('page', 'up') === false) return;
     }
     if (currentSlide === 2) {
+      document.getElementById('page1')?.focus();
       if (scrollable('page1', 'up') === false) return;
     }
     if (currentSlide === 6) {
+      document.getElementById('page2')?.focus();
       if (scrollable('page2', 'up') === false) return;
     }
 
     currentSlide--;
-    slide.change(currentSlide);
     if (currentSlide < 0) return (currentSlide = 0);
+    slide.change(currentSlide);
     transition(slides, 'up');
   }
 }
@@ -307,9 +328,14 @@ window.addEventListener('touchmove', (e) => {
 window.addEventListener('wheel', (e) => {
   changeSlide(e.deltaY);
 });
+window.addEventListener('keydown', (e) => {
+  const key = e.key.toUpperCase() as 'ARROWDOWN' | 'ARROWUP' | 'S' | 'W';
+  if (key === 'ARROWDOWN' || key === 'S') return changeSlide(1);
+  if (key === 'ARROWUP' || key === 'W') return changeSlide(-1);
+});
 </script>
 <template>
-  <TheNavigator/>
+  <TheNavigator />
   <main>
     <TheHello />
     <TheWhyMe />

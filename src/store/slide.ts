@@ -12,6 +12,7 @@ const slide = reactive({
           left: '0px'
         },
         {
+          easing: 'cubic-bezier(.2,.95,.38,.74)',
           duration: 250,
           fill: 'forwards'
         }
@@ -23,6 +24,7 @@ const slide = reactive({
           top: 30 * this.current - 30 + 'px'
         },
         {
+          easing: 'cubic-bezier(.2,.95,.38,.74)',
           duration: 250,
           fill: 'forwards'
         }
@@ -30,9 +32,11 @@ const slide = reactive({
     } else if (this.current > 4) {
       pointer?.animate(
         {
+          left: '30px',
           top: 30 * this.current - 30 + 'px'
         },
         {
+          easing: 'cubic-bezier(.2,.95,.38,.74)',
           duration: 250,
           fill: 'forwards'
         }

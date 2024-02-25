@@ -108,7 +108,10 @@ article
         padding: 12px
         border: 4px solid rgba(0, 0, 0, 0)
         outline: 2px solid rgba(0, 0, 0, 0)
-        transition: .5s
+        transition: .4s
+        &:hover
+            outline: 2px solid #FF4500
+            border: 4px solid #354259
         &:focus
             outline: 2px solid #9C4747
             border: 4px solid #354259
@@ -121,6 +124,12 @@ article
         font-weight: 700
         font-size: 14px
         cursor: pointer
+        border: 4px solid rgba(0, 0, 0, 0)
+        outline: 2px solid rgba(0, 0, 0, 0)
+        transition: .4s
+        &:hover
+            outline: 2px solid #B0E57C
+            border: 4px solid #354259
 
 h1
     font-size: 108px
@@ -147,6 +156,9 @@ h1
     padding: 16px 24px
     cursor: pointer
     z-index: 5
+    transition: .2s
+    &:hover
+      animation: shake 1s infinite
 
 .toFooter
     font-size: 56px
@@ -170,7 +182,6 @@ h1
         left: 0
         transform: rotate(180deg) translate(2px, -129px)
         z-index: 3
-
 @media screen and (max-width: 768px)
     h1
         font-size: 36px
@@ -185,4 +196,16 @@ h1
             width: 256px
             height: 256px
             transform: rotate(180deg) translate(2px, -64px)
+
+@keyframes shake
+  10%, 90%
+    transform: translate(-2px, 2px)
+  20%, 80%
+    transform: translate(2px, -2px)
+  30%, 70%
+    transform: translate(-2px, -2px)
+  40%, 60%
+    transform: translate(2px, -2px)
+  50%
+    transform: translate(0, 0)
 </style>
