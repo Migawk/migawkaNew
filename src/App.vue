@@ -7,8 +7,11 @@ import TheBlog from './slides/TheBlog.vue';
 import TheInterested from './slides/TheInterested.vue';
 import TheBasement from './slides/TheBasement.vue';
 import TheFooter from './slides/TheFooter.vue';
-import scrolled from './store/scrolled';
 import TheBasementAndFooter from './slides/TheBasementAndFooter.vue';
+import TheNavigator from './elements/TheNavigator.vue';
+
+import scrolled from './store/scrolled';
+import slide from './store/slide';
 
 let currentSlide = 0;
 let isScroll = false;
@@ -21,7 +24,7 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
   const page = document.getElementById(slideContentId)!; // take directly
   const localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
   if (direction === 'down') {
-    if (localScrolled < 95 && localScrolled !== -1) {
+    if (localScrolled < 80 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
@@ -40,11 +43,11 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
 function transition(slides: any[], direction: 'up' | 'down') {
   if (direction === 'down') {
     if (slides[currentSlide].direction === 'right') {
-      const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
+      const [w1, w2, w3] = slides[currentSlide].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
         w1.animate(
           {
-            left: '-200%'
+            transform: 'translateX(-250%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -54,7 +57,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
         );
         w2.animate(
           {
-            left: '-200%'
+            transform: 'translateX(-250%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -64,7 +67,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
         );
         w3.animate(
           {
-            left: '-200%'
+            transform: 'translateX(-250%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -72,13 +75,16 @@ function transition(slides: any[], direction: 'up' | 'down') {
             fill: 'forwards'
           }
         );
-        slides[currentSlide].element.children[1].animate({
-          left: '-100%'
-        }, {
-          easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1700,
+        slides[currentSlide].element.children[0].children[1].animate(
+          {
+            left: '-100%'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1300,
             fill: 'forwards'
-        });
+          }
+        );
       }
       return;
     }
@@ -87,38 +93,34 @@ function transition(slides: any[], direction: 'up' | 'down') {
       if (w1 && w2 && w3) {
         w1.animate(
           {
-            top: '-220%'
+            transform: 'translateY(-200%)'
           },
           {
             easing: 'cubic-bezier(.2,.95,.38,.74)',
-            duration: 1500,
+            duration: 1900,
             fill: 'forwards'
           }
         );
-        setTimeout(() => {
-          w2.animate(
-            {
-              top: '-220%'
-            },
-            {
-              easing: 'cubic-bezier(.49,0,.64,1.06)',
-              duration: 1500,
-              fill: 'forwards'
-            }
-          );
-        }, 100);
-        setTimeout(() => {
-          w3.animate(
-            {
-              top: '-220%'
-            },
-            {
-              easing: 'cubic-bezier(.49,0,.64,1.06)',
-              duration: 1750,
-              fill: 'forwards'
-            }
-          );
-        }, 200);
+        w2.animate(
+          {
+            transform: 'translateY(-200%)'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1300,
+            fill: 'forwards'
+          }
+        );
+        w3.animate(
+          {
+            transform: 'translateY(-200%)'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1750,
+            fill: 'forwards'
+          }
+        );
       }
 
       setTimeout(() => {
@@ -128,30 +130,31 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.30,0,.64,1.10)',
-            duration: 1500,
+            duration: 1100,
             fill: 'forwards'
           }
         );
-      }, 200);
+      }, 100);
       return;
     }
-  } else { // up
+  } else {
+    // up
     if (slides[currentSlide + 1].direction === 'right') {
-      const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children;
+      const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
         w1.animate(
           {
-            left: '100%'
+            transform: 'translateX(0%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1500,
+            duration: 1200,
             fill: 'forwards'
           }
         );
         w2.animate(
           {
-            left: '100%'
+            transform: 'translateX(0%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -161,7 +164,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
         );
         w3.animate(
           {
-            left: '100%'
+            transform: 'translateX(0%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
@@ -169,13 +172,16 @@ function transition(slides: any[], direction: 'up' | 'down') {
             fill: 'forwards'
           }
         );
-        slides[currentSlide + 1].element.children[1].animate({
-          left: '100%'
-        }, {
-          easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1700,
+        slides[currentSlide + 1].element.children[0].children[1].animate(
+          {
+            left: '100%'
+          },
+          {
+            easing: 'cubic-bezier(1,0,.64,1.06)',
+            duration: 1500,
             fill: 'forwards'
-        });
+          }
+        );
       }
       return;
     }
@@ -184,51 +190,45 @@ function transition(slides: any[], direction: 'up' | 'down') {
       if (w1 && w2 && w3) {
         w1.animate(
           {
-            top: '100%'
+            transform: 'translateY(0)'
           },
           {
             easing: 'cubic-bezier(.2,.95,.38,.74)',
-            duration: 2000,
+            duration: 1600,
             fill: 'forwards'
           }
         );
-        setTimeout(() => {
-          w2.animate(
-            {
-              top: '100%'
-            },
-            {
-              easing: 'cubic-bezier(.49,0,.64,1.06)',
-              duration: 1000,
-              fill: 'forwards'
-            }
-          );
-        }, 100);
-        setTimeout(() => {
-          w3.animate(
-            {
-              top: '100%'
-            },
-            {
-              easing: 'cubic-bezier(.49,0,.64,1.06)',
-              duration: 1500,
-              fill: 'forwards'
-            }
-          );
-        }, 200);
-      }
-      setTimeout(() => {
-        slides[currentSlide + 1].element.animate(
+        w2.animate(
           {
-            top: '100%'
+            transform: 'translateY(0)'
           },
           {
-            easing: 'cubic-bezier(.30,0,.64,1.10)',
-            duration: 750,
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1000,
             fill: 'forwards'
           }
         );
-      }, 200);
+        w3.animate(
+          {
+            transform: 'translateY(0)'
+          },
+          {
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1500,
+            fill: 'forwards'
+          }
+        );
+      }
+      slides[currentSlide + 1].element.animate(
+        {
+          top: '100%'
+        },
+        {
+          easing: 'cubic-bezier(.30,0,.64,1.10)',
+          duration: 1000,
+          fill: 'forwards'
+        }
+      );
       return;
     }
   }
@@ -269,6 +269,7 @@ function changeSlide(deltaY: number = 0) {
     }
 
     currentSlide++;
+    slide.change(currentSlide);
     if (currentSlide >= slides.length) return (currentSlide = slides.length - 1);
 
     transition(slides, 'down');
@@ -289,6 +290,7 @@ function changeSlide(deltaY: number = 0) {
     }
 
     currentSlide--;
+    slide.change(currentSlide);
     if (currentSlide < 0) return (currentSlide = 0);
     transition(slides, 'up');
   }
@@ -307,6 +309,7 @@ window.addEventListener('wheel', (e) => {
 });
 </script>
 <template>
+  <TheNavigator/>
   <main>
     <TheHello />
     <TheWhyMe />

@@ -210,6 +210,15 @@ article
     background: #a3d2a1
     width: 100vw
     height: 100vh
+
+@media screen and (max-width: 700px)
+  .wave1Bg
+    height: 200vh
+  .wave2Bg
+    height: 200vh
+  .wave3Bg
+    height: 200vh
+
 .box
     background: #ECE5C7
     color: #354259

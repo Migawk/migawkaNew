@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import TheEggs from "../SVG/HelloEggs.vue";
-
+import TheEggs from '../SVG/HelloEggs.vue';
 </script>
 <template>
   <article id="hello">
-    <div class="topEggs"><TheEggs/></div>
+    <div class="topEggs"><TheEggs /></div>
     <div class="face">
       <h1>
         "As a developer, I transform ideas into code, where each line is a path to innovation and
@@ -12,7 +11,10 @@ import TheEggs from "../SVG/HelloEggs.vue";
       </h1>
     </div>
     <div class="glass" id="glass"></div>
-    <div class="bottomEggs"><TheEggs/></div>
+    <div class="bottomEggs"><TheEggs /></div>
+    <div class="scroll">
+      <p>Scroll</p>
+    </div>
   </article>
 </template>
 
@@ -53,4 +55,31 @@ h1
 .topEggs
     position: absolute
     transform: translate(-16px, -16px) scale(.7) translate(-64px, -96px)
+
+.scroll
+  position: absolute
+  bottom: 86px
+  left: 50%
+  &>p
+    transform: translateX(-50%)
+  &:after
+    content: ''
+    position: absolute
+    display: block
+    background: #fff
+    width: 1px
+    height: 10px
+    bottom: -64px
+    animation: 1.6s infinite ease-in-out scrollable
+
+@keyframes scrollable
+  0%
+    bottom: -64px
+    height: 10px
+  50%
+    height: 20px
+  100%
+    bottom: -12px
+    height: 1px
+    opacity: .1
 </style>

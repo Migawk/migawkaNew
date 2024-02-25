@@ -29,7 +29,7 @@
 <style lang="sass" scoped>
 footer
     width: 100vw
-    height: 100vh
+    min-height: 100vh
     background: #000
     color: #fff
     position: relative
