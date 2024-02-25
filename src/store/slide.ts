@@ -13,7 +13,7 @@ const slide = reactive({
         },
         {
           easing: 'cubic-bezier(.2,.95,.38,.74)',
-          duration: 250,
+          duration: 1250,
           fill: 'forwards'
         }
       );
@@ -25,7 +25,7 @@ const slide = reactive({
         },
         {
           easing: 'cubic-bezier(.2,.95,.38,.74)',
-          duration: 250,
+          duration: 1250,
           fill: 'forwards'
         }
       );
@@ -37,7 +37,7 @@ const slide = reactive({
         },
         {
           easing: 'cubic-bezier(.2,.95,.38,.74)',
-          duration: 250,
+          duration: 1250,
           fill: 'forwards'
         }
       );

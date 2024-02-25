@@ -45,10 +45,10 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide].direction === 'right') {
       const [w1, w2, w3] = slides[currentSlide].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
-        w1.style.transform = 'translateX(0%)';
-        w2.style.transform = 'translateX(0%)';
-        w3.style.transform = 'translateX(0%)';
-        
+        [w1, w2, w3].forEach((e) => {
+          e.style.transform = 'translateX(0%)';
+        });
+
         w1.animate(
           {
             transform: 'translateX(-255%)'
@@ -95,17 +95,16 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide]) {
       const [w1, w2, w3] = slides[currentSlide].element.children[0].children;
       if (w1 && w2 && w3) {
-        w1.style.transform = 'translateY(0)';
-        w2.style.transform = 'translateY(0)';
-        w3.style.transform = 'translateY(0)';
-
+        [w1, w2, w3].forEach((e) => {
+          e.style.transform = 'translateY(0)';
+        });
         w1.animate(
           {
             transform: 'translateY(-200%)'
           },
           {
-            easing: 'cubic-bezier(.2,.95,.38,.74)',
-            duration: 1900,
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1100,
             fill: 'forwards'
           }
         );
@@ -115,7 +114,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1300,
+            duration: 1400,
             fill: 'forwards'
           }
         );
@@ -138,11 +137,11 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.30,0,.64,1.10)',
-            duration: 1100,
+            duration: 800,
             fill: 'forwards'
           }
         );
-      }, 100);
+      }, 400);
       return;
     }
   } else {
@@ -150,16 +149,16 @@ function transition(slides: any[], direction: 'up' | 'down') {
     if (slides[currentSlide + 1].direction === 'right') {
       const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
-        w1.style.transform = 'translateX(-255%)';
-        w2.style.transform = 'translateX(-255%)';
-        w3.style.transform = 'translateX(-255%)';
+        [w1, w2, w3].forEach((e) => {
+          e.style.transform = 'translateX(-255%)';
+        });
         w1.animate(
           {
             transform: 'translateX(0%)'
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1200,
+            duration: 1100,
             fill: 'forwards'
           }
         );
@@ -183,33 +182,35 @@ function transition(slides: any[], direction: 'up' | 'down') {
             fill: 'forwards'
           }
         );
-        slides[currentSlide + 1].element.children[0].children[1].animate(
-          {
-            left: '100%'
-          },
-          {
-            easing: 'cubic-bezier(1,0,.64,1.06)',
-            duration: 1500,
-            fill: 'forwards'
-          }
-        );
+        setTimeout(() => {
+          slides[currentSlide + 1].element.children[0].children[1].animate(
+            {
+              left: '100%'
+            },
+            {
+              easing: 'cubic-bezier(1,0,.64,1.06)',
+              duration: 450,
+              fill: 'forwards'
+            }
+          );
+        }, 700);
       }
       return;
     }
     if (slides[currentSlide + 1]) {
       const [w1, w2, w3] = slides[currentSlide + 1].element.children[0].children;
       if (w1 && w2 && w3) {
-        w1.style.transform = 'translateY(-200%)';
-        w2.style.transform = 'translateY(-200%)';
-        w3.style.transform = 'translateY(-200%)';
+        [w1, w2, w3].forEach((e) => {
+          e.style.transform = 'translateY(-200%)';
+        });
 
         w1.animate(
           {
             transform: 'translateY(0)'
           },
           {
-            easing: 'cubic-bezier(.2,.95,.38,.74)',
-            duration: 1600,
+            easing: 'cubic-bezier(.49,0,.64,1.06)',
+            duration: 1100,
             fill: 'forwards'
           }
         );
@@ -234,16 +235,18 @@ function transition(slides: any[], direction: 'up' | 'down') {
           }
         );
       }
-      slides[currentSlide + 1].element.animate(
-        {
-          top: '100%'
-        },
-        {
-          easing: 'cubic-bezier(.30,0,.64,1.10)',
-          duration: 1000,
-          fill: 'forwards'
-        }
-      );
+      setTimeout(() => {
+        slides[currentSlide + 1].element.animate(
+          {
+            top: '100%'
+          },
+          {
+            easing: 'cubic-bezier(.30,0,.64,1.10)',
+            duration: 750,
+            fill: 'forwards'
+          }
+        );
+      }, 300);
       return;
     }
   }
@@ -324,6 +327,8 @@ window.addEventListener('touchmove', (e) => {
   deltaY = -(e.touches[0].clientY - start);
   changeSlide(deltaY);
 });
+
+window.addEventListener('load', console.log);
 
 window.addEventListener('wheel', (e) => {
   changeSlide(e.deltaY);

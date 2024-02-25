@@ -189,7 +189,7 @@ hr
   &Bg
     background: #00c3a6
     width: 100vw
-    height: 100vh
+    height: 75vh
 
 .wave3
   position: absolute

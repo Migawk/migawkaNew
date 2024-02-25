@@ -35,6 +35,7 @@ h1
     align-items: center
     &>*
         position: relative
+        opacity: .95
 h2
     font-size: 48px
 

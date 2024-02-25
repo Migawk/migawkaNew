@@ -4,9 +4,54 @@ import locker from '../assets/locker.svg';
 import InterestedEggs from '@/SVG/InterestedEggs.vue';
 
 const open = ref(false);
+const isSend = ref(false);
+const isErr = ref(false);
 
 function formSubmit(e: Event) {
-  console.log(e);
+  isSend.value = true;
+
+  const pswd = (e.target as HTMLFormElement).password;
+
+  fetch('http://server.migawka.space/cv', {
+    method: 'POST',
+    body: JSON.stringify({ password: pswd.value }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then((res) => res.blob())
+    .then((res) => {
+      if (res.size === 0) throw new Error('403');
+      const file = window.URL.createObjectURL(res as any);
+      window.location.assign(file);
+    })
+    .catch(() => {
+      isSend.value = false;
+      isErr.value = true;
+      pswd.animate(
+        [
+          {
+            transform: 'translate(-2px, 2px)'
+          },
+          {
+            transform: 'translate(2px, -2px)',
+            background: 'white'
+          },
+          {
+            transform: 'translate(-2px, -2px)'
+          },
+          {
+            transform: 'translate(2px, 2px)'
+          },
+          {
+            transform: 'translate(0, 0)'
+          }
+        ],
+        {
+          duration: 500
+        }
+      );
+    });
 }
 
 function handleClick(e: Event) {
@@ -31,8 +76,16 @@ function handleClick(e: Event) {
               <img :src="locker" />
             </div>
             <form class="form" @submit.prevent="formSubmit">
-              <input type="password" placeholder="Password" class="formPassword" name="password" />
-              <input type="submit" value="Send" class="formSubmit" />
+              <p><span v-if="isErr">Wrong password :&lt;</span></p>
+              <input
+                type="password"
+                @keyup="isErr = false"
+                placeholder="Password"
+                class="formPassword"
+                name="password"
+                :disabled="isSend"
+              />
+              <input type="submit" value="Send" class="formSubmit" :disabled="isSend" />
             </form>
           </div>
         </div>
@@ -66,7 +119,7 @@ article
     background: #354259
     border-radius: 12px
     width: 400px
-    height: 200px
+    height: 250px
     display: flex
     justify-content: center
     align-items: center
@@ -83,7 +136,7 @@ article
 
 .locker
     position: absolute
-    transform: translateY(-120%)
+    transform: translateY(-145%)
     background: #9C4747
     padding: 16px
     border-radius: 50%
@@ -100,6 +153,12 @@ article
     flex-direction: column
     align-items: flex-end
     gap: 12px
+    & > p
+      color: #9C4747
+      font-weight: 700
+      font-size: 24px
+      height: 36px
+      width: 210px
     &Password
         border: none
         background: #333333
@@ -109,12 +168,18 @@ article
         border: 4px solid rgba(0, 0, 0, 0)
         outline: 2px solid rgba(0, 0, 0, 0)
         transition: .4s
+        position: relative
         &:hover
             outline: 2px solid #FF4500
             border: 4px solid #354259
         &:focus
             outline: 2px solid #9C4747
             border: 4px solid #354259
+        &:disabled
+          background: #555
+          cursor: not-allowed
+          &:hover
+            outline: 2px solid #9C4747
     &Submit
         background: #B0E57C
         border: none
@@ -130,6 +195,13 @@ article
         &:hover
             outline: 2px solid #B0E57C
             border: 4px solid #354259
+        &:disabled
+          background: #D6F7C2
+          color: #333
+          cursor: not-allowed
+          &:hover
+            outline: 2px solid #D6F7C2
+
 
 h1
     font-size: 108px
