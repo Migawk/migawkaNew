@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import TheEggs from '../SVG/HelloEggs.vue';
+import TheContacts from '@/elements/TheContacts.vue';
 </script>
 <template>
   <article id="hello">
+    <TheContacts class="contacts"/>
     <div class="topEggs"><TheEggs /></div>
     <div class="face">
       <h1>
@@ -81,6 +83,11 @@ h1
     animation-delay: .75s
   &:last-child
     animation-delay: 1s
+
+.contacts
+  position: absolute
+  right: 64px
+  top: 0
 
 @keyframes scrollable
   0%

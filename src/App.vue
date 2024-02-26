@@ -9,6 +9,7 @@ import TheBasement from './slides/TheBasement.vue';
 import TheFooter from './slides/TheFooter.vue';
 import TheBasementAndFooter from './slides/TheBasementAndFooter.vue';
 import TheNavigator from './elements/TheNavigator.vue';
+import TheCursor from './elements/TheCursor.vue';
 
 import scrolled from './store/scrolled';
 import slide from './store/slide';
@@ -79,16 +80,18 @@ function transition(slides: any[], direction: 'up' | 'down') {
             fill: 'forwards'
           }
         );
-        slides[currentSlide].element.children[0].children[1].animate(
-          {
-            left: '-100%'
-          },
-          {
-            easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1300,
-            fill: 'forwards'
-          }
-        );
+        setTimeout(() => {
+          slides[currentSlide].element.children[0].children[1].animate(
+            {
+              left: '-100%'
+            },
+            {
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 900,
+              fill: 'forwards'
+            }
+          );
+        }, 400);
       }
       return;
     }
@@ -158,7 +161,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1100,
+            duration: 1400,
             fill: 'forwards'
           }
         );
@@ -266,7 +269,7 @@ function changeSlide(deltaY: number = 0) {
     { name: 'portfolio', element: portfolio, bonus: 300, direction: 'down' },
     { name: 'skills', element: skills, bonus: 300, direction: 'down' },
     { name: 'blog', element: blog, bonus: 300, direction: 'right' },
-    { name: 'interested', element: interested, bonus: 0, direction: 'down' },
+    { name: 'interested', element: interested, bonus: 300, direction: 'down' },
     { name: 'baseFooter', element: baseFooter, bonus: 300, direction: 'down' }
   ];
 
@@ -283,6 +286,9 @@ function changeSlide(deltaY: number = 0) {
     if (slides[currentSlide].name === 'portfolio') {
       document.getElementById('page1')?.focus();
       if (scrollable('page1', 'down') === false) return;
+    }
+    if (slides[currentSlide].name === 'skills') {
+      if (scrollable('pageSkills', 'down') === false) return;
     }
     if (slides[currentSlide].name === 'baseFooter') {
       document.getElementById('page2')?.focus();
@@ -307,6 +313,9 @@ function changeSlide(deltaY: number = 0) {
     if (currentSlide === 2) {
       document.getElementById('page1')?.focus();
       if (scrollable('page1', 'up') === false) return;
+    }
+    if (slides[currentSlide].name === 'skills') {
+      if (scrollable('pageSkills', 'up') === false) return;
     }
     if (currentSlide === 6) {
       document.getElementById('page2')?.focus();
@@ -341,6 +350,7 @@ window.addEventListener('keydown', (e) => {
 </script>
 <template>
   <TheNavigator />
+  <TheCursor />
   <main>
     <TheHello />
     <TheWhyMe />

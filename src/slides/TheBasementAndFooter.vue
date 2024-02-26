@@ -25,4 +25,6 @@ import TheFooter from './TheFooter.vue';
     overflow-x: hidden
     position: absolute
     z-index: 15
+    &::-webkit-scrollbar
+      display: none
 </style>

@@ -68,35 +68,38 @@ import Wave from '../SVG/SkillWave.vue';
         </svg>
       </div>
     </div>
-    <h1>Skills</h1>
-    <div class="parentense"></div>
-    <div class="skills">
-      <div class="row">
-        <div class="skill">
-          <div class="name">Front-end</div>
-          <hr />
-          <div class="content">
-            Layouting, SASS, React.js, Vue.js, Responsive, Semantic,<br />Redux/Zustand.
+    <div class="page" id="pageSkills">
+      <h1>Skills</h1>
+      <div class="rows">
+        <div class="skills">
+          <div class="row">
+            <div class="skill">
+              <div class="name">Front-end</div>
+              <hr />
+              <div class="content">
+                Layouting, SASS, React.js, Vue.js, Responsive, Semantic,<br />Redux/Zustand.
+              </div>
+            </div>
+            <div class="skill">
+              <div class="name">Back-end</div>
+              <hr />
+              <div class="content">SQL, Nest.js(+Express.js), http(Node.js), Prisma ORM.</div>
+            </div>
           </div>
-        </div>
-        <div class="skill">
-          <div class="name">Back-end</div>
-          <hr />
-          <div class="content">SQL, Nest.js(+Express.js), http(Node.js), Prisma ORM.</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="skill">
-          <div class="name">Dev-ops</div>
-          <hr />
-          <div class="content">Linux, Docker, Nginx, Windows, Networking</div>
-        </div>
-        <div class="skill">
-          <div class="name">Other</div>
-          <hr />
-          <div class="content">
-            Git, PostgreSQL, MySQL, SQLite, TypeScript,<br />
-            declarative(Rx.js), lodash, Inkscape(SVG), Python.
+          <div class="row">
+            <div class="skill">
+              <div class="name">Dev-ops</div>
+              <hr />
+              <div class="content">Linux, Docker, Nginx, Windows, Networking</div>
+            </div>
+            <div class="skill">
+              <div class="name">Other</div>
+              <hr />
+              <div class="content">
+                Git, PostgreSQL, MySQL, SQLite, TypeScript,<br />
+                declarative(Rx.js), lodash, Inkscape(SVG), Python.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -117,8 +120,27 @@ h1
     font-size: 92px
     color: #fff
 
+.page
+  display: flex
+  flex-direction: column
+.rows
+  width: 100%
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+@media screen and (max-width: 600px)
+  .rows
+    display: block
+#pageSkills
+  height: 100vh
+  overflow-y: scroll
+  &::-webkit-scrollbar
+      display: none
 .skills
     padding: 0 32px
+    padding-bottom: 36px
     display: flex
     justify-content: center
     align-items: flex-start

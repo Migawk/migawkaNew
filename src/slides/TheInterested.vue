@@ -12,7 +12,7 @@ function formSubmit(e: Event) {
 
   const pswd = (e.target as HTMLFormElement).password;
 
-  fetch('http://server.migawka.space/cv', {
+  fetch('https://server.migawka.space/cv', {
     method: 'POST',
     body: JSON.stringify({ password: pswd.value }),
     headers: {
@@ -57,6 +57,7 @@ function formSubmit(e: Event) {
 function handleClick(e: Event) {
   const el = e.target as HTMLElement;
   if (el.id !== 'modalField') return;
+  if(window.innerWidth < 500) return;
   open.value = false;
 }
 </script>
@@ -100,7 +101,7 @@ function handleClick(e: Event) {
 article
     background: #354259
     position: absolute
-    top: 100%
+    top: calc(100% + 300px)
     width: 100%
     height: 100%
     padding: 36px 0
@@ -133,6 +134,10 @@ article
         width: 100%
         height: 100%
         z-index: 50
+
+@media screen and (max-width: 450px)
+  .modal
+    width: 100%
 
 .locker
     position: absolute
