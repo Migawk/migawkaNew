@@ -247,7 +247,6 @@ h1
         flex-direction: column
         margin-bottom: 20px
         transition: .5s
-        position: relative
     &Name
         font-size: 36px
         font-weight: bold
@@ -260,7 +259,7 @@ h1
       &>*
         width: 50%
 
-.smallAdvantageImg:hover
+.smallAdvantageImg:hover, .bigAdvantageImg:hover
   transform: scale(1.2)
 .bigAdvantages
     display: flex
@@ -282,6 +281,7 @@ h1
         display: flex
         justify-content: center
         align-items: center
+        transition: .5s
         &>img
             width: 86px
     &Content

@@ -9,9 +9,10 @@ onMounted(() => {
   const cursor = document.getElementById('cursor')!;
   const cursor1 = document.getElementById('cursor1')!;
   setInterval(() => {
-    if(isFocused.value) return;
+    if (isFocused.value) return;
+
     const { x, y } = cursor.getBoundingClientRect();
-    [cursor, cursor1].forEach((e, i) => {
+    [cursor, cursor1].forEach((e) => {
       e.animate(
         {
           transform: `translate(${pointerX + randomF(-4, 4)}px, ${pointerY + randomF(-4, 4)}px)`
@@ -24,27 +25,46 @@ onMounted(() => {
       );
     });
   }, 100);
+
   document.addEventListener('mousemove', (e) => {
     const [x, y] = [e.clientX, e.clientY];
     [pointerX, pointerY] = [x, y];
     const eTarget = e.target as HTMLElement;
-    if(eTarget.id === 'portfImg') {
-      const {left: targX, top: targY, width: targWidth, height: targHeight} = eTarget.getBoundingClientRect();
+    if (
+      eTarget.id === 'portfImg' ||
+      eTarget.id === 'interestedBtn' ||
+      eTarget.tagName === 'INPUT' ||
+      eTarget.tagName === 'TEXTAREA' ||
+      eTarget.tagName === 'BUTTON' ||
+      eTarget.id === 'interestedBtnChild'
+    ) {
+      const {
+        left: targX,
+        top: targY,
+        width: targWidth,
+        height: targHeight
+      } = eTarget.getBoundingClientRect();
       isFocused.value = true;
-      cursor.animate({
-        transform: 'translate(0, 0)',
-        left: targX + 'px',
-        top: targY + 'px',
-        width: targWidth + 'px',
-        height: targHeight + 'px',
-        borderRadius: '12px'
-      }, {
-        duration: 1000,
-        fill: 'forwards'
-      });
+      [cursor, cursor1].forEach((e, i) => {
+
+      e.animate(
+        {
+          transform: 'translate(0, 0)',
+          left: targX + 'px',
+          top: targY + 'px',
+          width: targWidth + 'px',
+          height: targHeight + 'px',
+          borderRadius: '12px'
+        },
+        {
+          duration: i == 0 ? 1000 : 3000,
+          fill: 'forwards'
+        }
+      );
+      })
       return;
     }
-    console.log('passed');
+    isFocused.value = false;
 
     [cursor, cursor1].forEach((e, i) => {
       e.animate(
@@ -54,11 +74,11 @@ onMounted(() => {
           top: 0,
           width: '8px',
           height: '8px',
-          borderRadius: '50%',
+          borderRadius: '50%'
         },
         {
           duration: 200 + i * 500,
-          fill: 'forwards',
+          fill: 'forwards'
           // easing: 'cubic-bezier(.95,.21,1,1.2)'
         }
       );
@@ -74,7 +94,7 @@ onMounted(() => {
 .cursor
     width: 8px
     height: 8px
-    background: rgba(255, 255, 255, 1)
+    background: rgb(255, 255, 255)
     position: fixed
     border-radius: 50%
     left: 0
@@ -82,8 +102,9 @@ onMounted(() => {
     z-index: 1500
     pointer-events: none
     mix-blend-mode: exclusion
-    border: 1px solid #00f
-
+#cursor1
+  background: rgb(255, 0, 128)
+  mix-blend-mode: soft-light
 @media screen and (max-width: 600px)
     .cursor
         display: none

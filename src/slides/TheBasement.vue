@@ -61,6 +61,8 @@ input, textarea
 
 .submit
     cursor: pointer
+    border-radius: 8px
+    background: #e8e9e9
 
 textarea
     min-width: 100%

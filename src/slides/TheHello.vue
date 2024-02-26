@@ -15,7 +15,7 @@ import TheContacts from '@/elements/TheContacts.vue';
     <div class="glass" id="glass"></div>
     <div class="bottomEggs"><TheEggs /></div>
     <div class="scroll">
-      <p>Scroll</p>
+      <button>Scroll</button>
     </div>
   </article>
 </template>
@@ -63,7 +63,11 @@ h1
   position: absolute
   bottom: 86px
   left: 50%
-  &>p
+  &>button
+    border: none
+    background: none
+    padding: 8px 16px
+    color: #fff
     transform: translateX(-50%)
   &:after
     content: ''

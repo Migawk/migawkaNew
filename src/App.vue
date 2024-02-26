@@ -23,8 +23,9 @@ let deltaY = 0;
 function scrollable(slideContentId: string, direction: 'up' | 'down') {
   // isScroll = false;
   const page = document.getElementById(slideContentId)!; // take directly
-  const localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
+  let localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
   if (direction === 'down') {
+    if(Math.abs(page.scrollHeight - window.innerHeight) < 10) localScrolled = 100;
     if (localScrolled < 80 && localScrolled !== -1) {
       return false;
     } else {
@@ -344,6 +345,7 @@ window.addEventListener('wheel', (e) => {
 });
 window.addEventListener('keydown', (e) => {
   const key = e.key.toUpperCase() as 'ARROWDOWN' | 'ARROWUP' | 'S' | 'W';
+  if(document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
   if (key === 'ARROWDOWN' || key === 'S') return changeSlide(1);
   if (key === 'ARROWUP' || key === 'W') return changeSlide(-1);
 });

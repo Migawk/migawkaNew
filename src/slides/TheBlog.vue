@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import Wave from '@/SVG/BlogWave.vue';
+import Witch from '@/assets/witch.svg';
 </script>
 <template>
   <article id="blog" class="wrapper">
@@ -72,7 +73,87 @@ import Wave from '@/SVG/BlogWave.vue';
       <div class="page">
         <h1>The Blog</h1>
         <h2>There is nothing</h2>
-        <p>✖╭╮✖</p>
+        <svg
+          width="96px"
+          height="96px"
+          viewBox="0 0 400 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M134.238 99.2112C158.807 115.833 186.922 125.593 213.427 137.391"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M205.92 127.493C341.899 48.8819 177.083 79.2472 134.238 113.952"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M142.994 117.595C109.394 168.467 182.02 186.204 200.7 134.926"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="Mlog
+There is nothin198.547 178.4C208.513 193.222 235.112 206.43 241.665 222.747C242.378 224.521 234.116 230.728 232.758 232.08C204.022 260.703 179.826 294.136 151.207 322.637"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M231.807 220.823C194.075 230.64 136.055 239.603 105.953 232.286"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M63.5352 281.628C132.945 262.764 203.659 243.714 271.406 219.408"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M318.169 178.4C286.118 203.489 274.366 214.003 277.574 218.93C283.302 227.728 328.937 215.962 336.456 217.954"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M278.475 219.408C296.659 211.865 315.968 199.301 335.038 198.196"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M196.176 178.4C199.296 210.776 176.225 220.849 165.354 247.691"
+            stroke="#B04F4F"
+            stroke-opacity="0.9"
+            stroke-width="12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </div>
     </div>
   </article>
@@ -103,11 +184,6 @@ article
     // top: 100%
 h1
     font-size: 108px
-
-p
-    color: #B04F4F
-    font-size: 86px
-    font-weight: 700
 
 .wave1
   position: absolute

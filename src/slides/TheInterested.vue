@@ -66,9 +66,9 @@ function handleClick(e: Event) {
     <h1>Are you interested?</h1>
     <div class="buttonArea">
       <p>* Required a password</p>
-      <button class="button" @click="open = !open">
-        <img :src="locker" />
-        <p>Open the resume</p>
+      <button class="button" id="interestedBtn" @click="open = !open">
+        <img :src="locker" id="interestedBtnChild"/>
+        <p id="interestedBtnChild">Open the resume</p>
       </button>
       <teleport to="body">
         <div class="modalBg" v-if="open === true" id="modalField" @click="handleClick">
@@ -182,7 +182,6 @@ article
             border: 4px solid #354259
         &:disabled
           background: #555
-          cursor: not-allowed
           &:hover
             outline: 2px solid #9C4747
     &Submit
@@ -193,7 +192,6 @@ article
         padding: 12px
         font-weight: 700
         font-size: 14px
-        cursor: pointer
         border: 4px solid rgba(0, 0, 0, 0)
         outline: 2px solid rgba(0, 0, 0, 0)
         transition: .4s
@@ -203,7 +201,6 @@ article
         &:disabled
           background: #D6F7C2
           color: #333
-          cursor: not-allowed
           &:hover
             outline: 2px solid #D6F7C2
 
@@ -231,7 +228,6 @@ h1
     font-size: 32px
     width: 280px
     padding: 16px 24px
-    cursor: pointer
     z-index: 5
     transition: .2s
     &:hover
