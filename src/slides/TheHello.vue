@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import TheEggs from '../SVG/HelloEggs.vue';
 import TheContacts from '@/elements/TheContacts.vue';
+import slide from '@/store/slide';
 </script>
 <template>
   <article id="hello">
@@ -15,7 +16,10 @@ import TheContacts from '@/elements/TheContacts.vue';
     <div class="glass" id="glass"></div>
     <div class="bottomEggs"><TheEggs /></div>
     <div class="scroll">
-      <button>Scroll</button>
+      <button @click="() => {
+        slide.changeDelta(1);
+        slide.change();
+      }">Scroll</button>
     </div>
   </article>
 </template>

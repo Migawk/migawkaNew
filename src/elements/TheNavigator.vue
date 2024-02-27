@@ -7,6 +7,7 @@ onMounted(() => {
     document.addEventListener('click', (e) => {
         const localTarget = e.target as HTMLElement;
         if(localTarget.id.startsWith('nav')) {
+            console.log(Number(localTarget.id.slice(3)));
             slide.change(Number(localTarget.id.slice(3)));
         }
     })
@@ -16,15 +17,15 @@ onMounted(() => {
     <nav>
         <div class="pointer" id="navPointer"></div>
         <div class="left">
-            <div class="navCircle" id="nav0"></div>
-            <div class="navCircle" id="nav1"></div>
-            <div class="navCircle" id="nav2"></div>
-            <div class="navCircle" id="nav3"></div>
+            <button class="navCircle" id="nav0"></button>
+            <button class="navCircle" id="nav1"></button>
+            <button class="navCircle" id="nav2"></button>
+            <button class="navCircle" id="nav3"></button>
         </div>
         <div class="right">
-            <div class="navCircle" id="nav4"></div>
-            <div class="navCircle" id="nav5"></div>
-            <div class="navCircle" id="nav6"></div>
+            <button class="navCircle" id="nav4"></button>
+            <button class="navCircle" id="nav5"></button>
+            <button class="navCircle" id="nav6"></button>
         </div>
     </nav>
 </template>
@@ -58,6 +59,7 @@ nav
     height: 20px
     background: #999
     opacity: .4
+    border: none
     border-radius: 50%
 
 @media screen and (max-width: 500px)

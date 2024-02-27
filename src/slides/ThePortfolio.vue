@@ -75,7 +75,7 @@ import star from '../assets/star.svg';
       <h1>Portfolio</h1>
       <div class="list">
         <div class="project">
-          <a href="https://github.com/Migawk/eCommerce">
+          <a href="http://mowopedia.migawka.space/">
             <img :src="mowopedia" class="projectImg" id="portfImg" />
           </a>
           <div class="projectResponsive">
@@ -95,7 +95,7 @@ import star from '../assets/star.svg';
           </div>
         </div>
         <div class="project">
-          <a href="http://mowopedia.migawka.space/">
+          <a href="https://github.com/Migawk/eCommerce">
             <img :src="eCommerce" class="projectImg" id="portfImg" />
           </a>
           <div class="projectResponsive">

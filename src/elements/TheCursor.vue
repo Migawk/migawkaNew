@@ -77,9 +77,9 @@ onMounted(() => {
           borderRadius: '50%'
         },
         {
-          duration: 200 + i * 500,
-          fill: 'forwards'
-          // easing: 'cubic-bezier(.95,.21,1,1.2)'
+          duration: 100 + i * 500,
+          fill: 'forwards',
+          easing: 'ease-in-out'
         }
       );
     });
@@ -97,8 +97,6 @@ onMounted(() => {
     background: rgb(255, 255, 255)
     position: fixed
     border-radius: 50%
-    left: 0
-    right: 0
     z-index: 1500
     pointer-events: none
     mix-blend-mode: exclusion

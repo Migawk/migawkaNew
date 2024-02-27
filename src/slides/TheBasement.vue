@@ -60,7 +60,6 @@ input, textarea
     outline: none
 
 .submit
-    cursor: pointer
     border-radius: 8px
     background: #e8e9e9
 

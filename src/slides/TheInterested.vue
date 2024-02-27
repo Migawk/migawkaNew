@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import locker from '../assets/locker.svg';
 import InterestedEggs from '@/SVG/InterestedEggs.vue';
+import slide from '@/store/slide';
 
 const open = ref(false);
 const isSend = ref(false);
@@ -21,6 +22,7 @@ function formSubmit(e: Event) {
   })
     .then((res) => res.blob())
     .then((res) => {
+      isSend.value = false;
       if (res.size === 0) throw new Error('403');
       const file = window.URL.createObjectURL(res as any);
       window.location.assign(file);
@@ -57,7 +59,7 @@ function formSubmit(e: Event) {
 function handleClick(e: Event) {
   const el = e.target as HTMLElement;
   if (el.id !== 'modalField') return;
-  if(window.innerWidth < 500) return;
+  if (window.innerWidth < 500) return;
   open.value = false;
 }
 </script>
@@ -66,8 +68,16 @@ function handleClick(e: Event) {
     <h1>Are you interested?</h1>
     <div class="buttonArea">
       <p>* Required a password</p>
-      <button class="button" id="interestedBtn" @click="open = !open">
-        <img :src="locker" id="interestedBtnChild"/>
+      <button
+        class="button"
+        id="interestedBtn"
+        @click="
+          () => {
+            open = !open;
+          }
+        "
+      >
+        <img :src="locker" id="interestedBtnChild" />
         <p id="interestedBtnChild">Open the resume</p>
       </button>
       <teleport to="body">
@@ -92,7 +102,17 @@ function handleClick(e: Event) {
         </div>
       </teleport>
     </div>
-    <button class="toFooter">To footer</button>
+    <button
+      class="toFooter"
+      @click="
+        () => {
+          slide.changeDelta(1);
+          slide.change();
+        }
+      "
+    >
+      To footer
+    </button>
     <div class="topEggs"><InterestedEggs /></div>
     <div class="bottomEggs"><InterestedEggs /></div>
   </article>
@@ -238,7 +258,6 @@ h1
     background: none
     color: #fff
     border: none
-    cursor: pointer
     z-index: 5
     font-weight: 700
 

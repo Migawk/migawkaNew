@@ -87,14 +87,14 @@ onMounted(() => {
                 <img :src="speed" alt="" />
               </div>
               <div class="smallAdvantageName">Rapid</div>
-              <div class="smallAdvantageDescription">I prefer to write quick to load websites.</div>
+              <div class="smallAdvantageDescription">I prefer to write quick and responsive to load websites.</div>
             </div>
             <div class="smallAdvantage">
               <div class="smallAdvantageImg" id="smallAdvantageImg2">
                 <img :src="pizza" alt="" />
               </div>
               <div class="smallAdvantageName">Youthful</div>
-              <div class="smallAdvantageDescription">For teenagers, children and young adult.</div>
+              <div class="smallAdvantageDescription">For teenagers, children, and young adult audiences.</div>
             </div>
           </div>
           <div class="smallAdvantagePar">
