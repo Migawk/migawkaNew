@@ -7,7 +7,6 @@ onMounted(() => {
     document.addEventListener('click', (e) => {
         const localTarget = e.target as HTMLElement;
         if(localTarget.id.startsWith('nav')) {
-            console.log(Number(localTarget.id.slice(3)));
             slide.change(Number(localTarget.id.slice(3)));
         }
     })

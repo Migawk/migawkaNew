@@ -5,19 +5,17 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
   const page = document.getElementById(slideContentId)!; // take directly
   let localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
   if (direction === 'down') {
-    if(Math.abs(page.scrollHeight - window.innerHeight) < 10) localScrolled = 100;
+    if (Math.abs(page.scrollHeight - window.innerHeight) < 10) localScrolled = 100;
     if (localScrolled < 80 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
-      // page.scrollTo(0, 0);
     }
   } else {
     if (localScrolled > 5 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
-      // page.scrollTo(0, page.scrollHeight);
     }
   }
 }
@@ -303,23 +301,24 @@ const slide = reactive({
       { name: 'baseFooter', element: baseFooter, bonus: 300, direction: 'down' }
     ];
 
-    if(newSlide) {
+    if (newSlide) {
       this.current = newSlide;
       slides[this.current].element.style.top = '0';
       slides[this.current].element.style.left = '0';
       slides[this.current].element.style.transform = 'translate(0, 0)';
-      slides.slice(0, this.current).forEach(e => {
+      slides.slice(0, this.current).forEach((e) => {
         e.element.style.top = '0px';
         e.element.style.left = '0px';
       });
-      slides.slice(this.current+1, slides.length).forEach(e => {
-        console.log(e.direction);
-        if(e.direction === 'right') {
-          e.element.style.left = '100%';
+      slides.slice(this.current + 1, slides.length).forEach((e) => {
+        if (e.direction === 'right') {
+          e.element.style.left = '-100%';
         } else {
           e.element.style.top = '100%';
         }
       });
+      if (slides[this.current].name === 'blog')
+        (slides[this.current].element.children[0].children[1] as HTMLElement).style.left = '-100%';
       return;
     }
     if (this.deltaY > 0) {

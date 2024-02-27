@@ -26,7 +26,8 @@ onMounted(() => {
     });
   }, 100);
 
-  document.addEventListener('mousemove', (e) => {
+  
+  function cursorFunc(e: any) {
     const [x, y] = [e.clientX, e.clientY];
     [pointerX, pointerY] = [x, y];
     const eTarget = e.target as HTMLElement;
@@ -83,6 +84,12 @@ onMounted(() => {
         }
       );
     });
+  }
+  document.addEventListener('wheel', (e) => {
+    cursorFunc(e);
+  })
+  document.addEventListener('mousemove', (e) => {
+    cursorFunc(e);
   });
 });
 </script>
