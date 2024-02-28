@@ -106,7 +106,7 @@ function handleClick(e: Event) {
       class="toFooter"
       @click="
         () => {
-          slide.changeDelta(1);
+          slide.changeDelta(200);
           slide.change();
         }
       "

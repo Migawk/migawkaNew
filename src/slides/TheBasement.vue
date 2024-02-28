@@ -1,12 +1,34 @@
+<script setup lang="ts">
+function toContact(e: Event) {
+  const eTarget = e.target as unknown as {
+    name: HTMLInputElement;
+    email: HTMLInputElement;
+    message: HTMLTextAreaElement;
+  };
+  const { name, email, message } = eTarget;
+  const body = {
+    name: name.value,
+    email: email.value,
+    message: message.value
+  };
+  fetch('http://server.migawka.space/contact', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+</script>
 <template>
   <article id="basement">
     <div class="wrapper">
       <h1>The Basement</h1>
       <h2>Contact me directly</h2>
-      <form action="#" method="get" @submit.prevent="console.log">
-        <input type="text" placeholder="Your name" required />
-        <input type="email" placeholder="E-mail" required />
-        <textarea placeholder="Message" required minlength="36"></textarea>
+      <form action="#" method="get" @submit.prevent="toContact">
+        <input type="text" placeholder="Your name" required name="name" />
+        <input type="email" placeholder="E-mail" required name="email" />
+        <textarea placeholder="Message" required minlength="36" name="message"></textarea>
         <input type="submit" value="Submit" class="submit" />
       </form>
     </div>

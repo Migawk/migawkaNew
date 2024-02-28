@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import Wave from '@/SVG/BlogWave.vue';
-import Witch from '@/assets/witch.svg';
 </script>
 <template>
   <article id="blog" class="wrapper">

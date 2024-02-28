@@ -321,6 +321,7 @@ const slide = reactive({
         (slides[this.current].element.children[0].children[1] as HTMLElement).style.left = '-100%';
       return;
     }
+    if(Math.abs(this.deltaY) < 90) return;
     if (this.deltaY > 0) {
       // down
       if (slide.isScroll) return;

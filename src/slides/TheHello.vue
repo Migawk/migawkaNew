@@ -5,22 +5,28 @@ import slide from '@/store/slide';
 </script>
 <template>
   <article id="hello">
-    <TheContacts class="contacts"/>
     <div class="topEggs"><TheEggs /></div>
+    <div class="bottomEggs"><TheEggs /></div>
     <div class="face">
       <h1>
-        "As a develo<span class="rotate">p</span>er, I transf<span class="rotate">o</span>rm ideas into code, whe<span class="rotate">r</span>e each line is a path to innovation and
+        "As a develo<span class="rotate">p</span>er, I transf<span class="rotate">o</span>rm ideas
+        into code, whe<span class="rotate">r</span>e each line is a path to innovation and
         functionality."
       </h1>
     </div>
-    <div class="glass" id="glass"></div>
-    <div class="bottomEggs"><TheEggs /></div>
     <div class="scroll">
-      <button @click="() => {
-        slide.changeDelta(1);
-        slide.change();
-      }">Scroll</button>
+      <button
+        @click="
+          () => {
+            slide.changeDelta(200);
+            slide.change();
+          }
+        "
+      >
+        Scroll
+      </button>
     </div>
+    <TheContacts class="contacts" />
   </article>
 </template>
 
@@ -45,9 +51,6 @@ h1
     font-size: 60px
     display: inline-block
 
-@media screen and (max-width: 700px)
-  h1
-    font-size: 32px
 
 .bottomEggs
     display: flex
@@ -61,7 +64,7 @@ h1
 
 .topEggs
     position: absolute
-    transform: translate(-16px, -16px) scale(.7) translate(-64px, -96px)
+    transform: scale(.7) translate(-90px, -112px)
 
 .scroll
   position: absolute
@@ -97,6 +100,18 @@ h1
   right: 64px
   top: 0
 
+@media screen and (max-width: 900px)
+  h1
+      font-size: 32px
+  .contacts
+    right: 0
+  .bottomEggs
+    &>*
+        transform: rotate(180deg) scale(.5) translate(-256px, -256px)
+  .topEggs
+      position: absolute
+      transform: scale(.5) translate(-288px, -256px)
+
 @keyframes scrollable
   0%
     bottom: -64px
@@ -113,5 +128,4 @@ h1
     transform: rotateY(0deg)
   100%
     transform: rotateY(360deg)
-
 </style>
