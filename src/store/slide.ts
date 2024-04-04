@@ -4,6 +4,7 @@ import scrolled from './scrolled';
 function scrollable(slideContentId: string, direction: 'up' | 'down') {
   const page = document.getElementById(slideContentId)!; // take directly
   let localScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
+
   if (direction === 'down') {
     if (Math.abs(page.scrollHeight - window.innerHeight) < 10) localScrolled = 100;
     if (localScrolled < 80 && localScrolled !== -1) {
@@ -321,7 +322,8 @@ const slide = reactive({
         (slides[this.current].element.children[0].children[1] as HTMLElement).style.left = '-100%';
       return;
     }
-    if(Math.abs(this.deltaY) < 90) return;
+    
+    if(Math.abs(this.deltaY) < 60) return;
     if (this.deltaY > 0) {
       // down
       if (slide.isScroll) return;

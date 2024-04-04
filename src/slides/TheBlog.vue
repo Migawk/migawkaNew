@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import Wave from '@/SVG/BlogWave.vue';
 </script>
 <template>
   <article id="blog" class="wrapper">

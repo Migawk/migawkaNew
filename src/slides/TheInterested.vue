@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import locker from '../assets/locker.svg';
 import InterestedEggs from '@/SVG/InterestedEggs.vue';
 import slide from '@/store/slide';
@@ -13,7 +13,7 @@ function formSubmit(e: Event) {
 
   const pswd = (e.target as HTMLFormElement).password;
 
-  fetch('https://server.migawka.space/cv', {
+    fetch('https://server.migawka.space/cv', {
     method: 'POST',
     body: JSON.stringify({ password: pswd.value }),
     headers: {
