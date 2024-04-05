@@ -7,7 +7,7 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
 
   if (direction === 'down') {
     if (Math.abs(page.scrollHeight - window.innerHeight) < 10) localScrolled = 100;
-    if (localScrolled < 80 && localScrolled !== -1) {
+    if (localScrolled < 50 && localScrolled !== -1) {
       return false;
     } else {
       scrolled.changeScrolled(-1);
@@ -261,6 +261,7 @@ const slide = reactive({
     this.isScroll = toggle;
   },
   change(newSlide?: number) {
+    localStorage.setItem("slide", this.current.toString());
     const pointer = document.getElementById('navPointer')!;
     if (this.current < 4) {
       pointer.animate(
@@ -334,7 +335,7 @@ const slide = reactive({
       slides.slice(this.current + 1, slides.length).forEach((e) => {
         e.element.style.display = 'none';
         if (e.direction === 'right') {
-          (e.element.children[0] as HTMLElement).style.left = '0%';
+          // (e.element.children[0] as HTMLElement).style.left = '0%';
         } else {
           e.element.style.top = '100%';
         }
@@ -350,7 +351,7 @@ const slide = reactive({
       // down
       if (slide.isScroll) return;
       slide.isScroll = true;
-      setTimeout(() => (slide.isScroll = false), 1000);
+      setTimeout(() => (slide.isScroll = false), 2000);
 
       if (slides[this.current].name === 'whyMe') {
         document.getElementById('page')?.focus();
@@ -376,7 +377,7 @@ const slide = reactive({
       // up
       if (slide.isScroll) return;
       slide.isScroll = true;
-      setTimeout(() => (slide.isScroll = false), 1000);
+      setTimeout(() => (slide.isScroll = false), 2000);
 
       if (this.current === 1) {
         document.getElementById('page')?.focus();

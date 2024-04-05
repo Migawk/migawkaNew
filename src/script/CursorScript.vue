@@ -1,9 +1,12 @@
-const canvas = document.querySelector('#canvas');
-const ctx = canvas.getContext('2d');
+<script setup lang="ts">
+import slide from "@/store/slide";
 
-let w,
-  h,
-  balls = [];
+const canvas = document.querySelector('#canvas') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d')!;
+
+let w: any,
+  h: any,
+  balls: any = [];
 let mouse = {
   x: undefined,
   y: undefined
@@ -17,6 +20,14 @@ let rgb = [
   'rgb(230, 126, 34)',
   'rgb(231, 76, 60)'
 ];
+let winterRGB = [
+  '#314C59',
+  '#313859',
+  '#315952',
+  '#2c333b',
+  '#352c3b',
+  '#2d2c3b'
+]
 
 function init() {
   resizeReset();
@@ -55,24 +66,25 @@ let counter = 0;
 let isFiring = false;
 const limiter = 70;
 
-function mousemove(e) {
+function mousemove(e: MouseEvent) {
   const movement = Math.abs(e.movementX) + Math.abs(e.movementY);
-  
+
   if (!isFiring) {
     if (movement < limiter) return;
   }
-  if(movement < 5) return;
+  if (movement < 5) return;
   if (movement > limiter) {
     counter = 30;
     isFiring = true;
   }
   if (counter < 0) return (isFiring = false);
 
-  mouse.x = e.x;
-  mouse.y = e.y;
+  mouse.x = e.x as any;
+  mouse.y = e.y as any;
 
+  const list = slide.current === 5 ? winterRGB : rgb;
   for (let i = 0; i < 3; i++) {
-    balls.push(new Ball(e.movementX, e.movementY));
+    balls.push(new Ball(e.movementX, e.movementY, list));
   }
 }
 
@@ -81,21 +93,41 @@ function mouseout() {
   mouse.y = undefined;
 }
 
-function getRandomInt(min, max) {
+function getRandomInt(min: number, max: number) {
   return Math.round(Math.random() * (max - min)) + min;
 }
 
-function easeOutQuart(x) {
+function easeOutQuart(x: number) {
   return 1 - Math.pow(1 - x, 4);
 }
 
 class Ball {
-  constructor(directionX, directionY) {
+  directionX: number
+  directionY: number
+  list: string[]
+  start: {
+    x: number
+    y: number
+    size: number
+  }
+  end: {
+    x: number
+    y: number
+  }
+  x: number
+  y: number
+  size: number
+  style: string
+  time: number
+  ttl: number
+
+  constructor(directionX: number, directionY: number, list: string[]) {
     this.directionX = directionX;
     this.directionY = directionY;
+    this.list = list;
     this.start = {
-      x: mouse.x + getRandomInt(-20, 20),
-      y: mouse.y + getRandomInt(-20, 20),
+      x: (mouse.x as any) + getRandomInt(-20, 20),
+      y: (mouse.y as any) + getRandomInt(-20, 20),
       size: getRandomInt(5, 10)
     };
     this.end = {
@@ -107,7 +139,7 @@ class Ball {
     this.y = this.start.y;
     this.size = this.start.size;
 
-    this.style = rgb[getRandomInt(0, rgb.length - 1)];
+    this.style = this.list[getRandomInt(0, rgb.length - 1)];
 
     this.time = 0;
     this.ttl = 125;
@@ -135,3 +167,4 @@ window.addEventListener('DOMContentLoaded', init);
 window.addEventListener('resize', resizeReset);
 window.addEventListener('mousemove', mousemove);
 window.addEventListener('mouseout', mouseout);
+</script>

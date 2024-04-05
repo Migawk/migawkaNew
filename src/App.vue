@@ -10,16 +10,24 @@ import TheNavigator from './elements/TheNavigator.vue';
 import TheCursor from './elements/TheCursor.vue';
 
 import slide from './store/slide';
+import CursorScript from '@/script/CursorScript.vue'
 
-let start = 0;
-let deltaY = 0;
+let start = { x: 0, y: 0 };
+let delta = { x: 0, y: 0 };
+
 
 window.addEventListener('touchstart', (e) => {
-  start = e.touches[0].clientY;
+  [start.y, start.x] = [e.touches[0].clientY, e.touches[0].clientX];
 });
 window.addEventListener('touchmove', (e) => {
-  deltaY = -(e.touches[0].clientY - start);
-  slide.changeDelta(deltaY);
+  delta.y = -(e.touches[0].clientY - start.y);
+  delta.x = -(e.touches[0].clientX - start.x);
+
+  if ((slide.current === 3 && delta.x > 60) || (slide.current === 4 && delta.x < -60)) {
+    slide.changeDelta(delta.x);
+  } else {
+    slide.changeDelta(delta.y);
+  }
   slide.change();
 });
 
@@ -40,10 +48,12 @@ window.addEventListener('keydown', (e) => {
   if (key === 'ARROWUP' || key === 'W') {
     slide.changeDelta(-60);
     slide.change();
-    return};
+    return
+  };
 });
 </script>
 <template>
+  <CursorScript/>
   <TheNavigator />
   <TheCursor />
   <main>
@@ -62,7 +72,7 @@ main
   max-height: 100vh
   overflow: hidden
 
-article
+article, #baseFooter
   display: none
 #hello
   display: block

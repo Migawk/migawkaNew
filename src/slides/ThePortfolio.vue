@@ -80,8 +80,8 @@ import star from '../assets/star.svg';
           <div class="projectResponsive">
             <div class="projectHiddenTitle">Mowopedia</div>
             <div class="projectRating">
-              <div class="stars"><img :src="star" alt="" />1</div>
-              <div class="status">In development </div>
+              <div class="stars"><img :src="star" alt="star" /><span>3</span></div>
+              <div class="status">v0.1</div>
             </div>
           </div>
           <div class="projectContent">
@@ -100,7 +100,7 @@ import star from '../assets/star.svg';
           <div class="projectResponsive">
             <div class="projectHiddenTitle">eCommerce</div>
             <div class="projectRating">
-              <div class="stars"><img :src="star" alt="" />2</div>
+              <div class="stars"><img :src="star" alt="" /><span>5</span></div>
               <div class="status">In development</div>
             </div>
           </div>
@@ -193,6 +193,11 @@ h1
     font-size: 36px
   &Description
     font-size: 24px
+  &Rating>.stars
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 4px
 
 @media screen and (max-width: 500px)
   h1
