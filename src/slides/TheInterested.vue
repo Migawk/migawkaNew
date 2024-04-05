@@ -13,7 +13,7 @@ function formSubmit(e: Event) {
 
   const pswd = (e.target as HTMLFormElement).password;
 
-    fetch('https://server.migawka.space/cv', {
+  fetch('https://server.migawka.space/cv', {
     method: 'POST',
     body: JSON.stringify({ password: pswd.value }),
     headers: {
@@ -65,56 +65,48 @@ function handleClick(e: Event) {
 </script>
 <template>
   <article id="interested">
-    <h1>Are you interested?</h1>
-    <div class="buttonArea">
-      <p>* Required a password</p>
-      <button
-        class="button"
-        id="interestedBtn"
-        @click="
-          () => {
-            open = !open;
-          }
-        "
-      >
-        <img :src="locker" id="interestedBtnChild" />
-        <p id="interestedBtnChild">Open the resume</p>
-      </button>
-      <teleport to="body">
-        <div class="modalBg" v-if="open === true" id="modalField" @click="handleClick">
-          <div class="modal">
-            <div class="locker">
-              <img :src="locker" />
-            </div>
-            <form class="form" @submit.prevent="formSubmit">
-              <p><span v-if="isErr">Wrong password :&lt;</span></p>
-              <input
-                type="password"
-                @keyup="isErr = false"
-                placeholder="Password"
-                class="formPassword"
-                name="password"
-                :disabled="isSend"
-              />
-              <input type="submit" value="Send" class="formSubmit" :disabled="isSend" />
-            </form>
-          </div>
-        </div>
-      </teleport>
-    </div>
-    <button
-      class="toFooter"
-      @click="
-        () => {
-          slide.changeDelta(200);
-          slide.change();
+    <div class="waves"></div>
+    <div class="page">
+      <h1>Are you interested?</h1>
+      <div class="buttonArea">
+        <p>* Required a password</p>
+        <button class="button" id="interestedBtn" @click="() => {
+          open = !open;
         }
-      "
-    >
-      To footer
-    </button>
-    <div class="topEggs"><InterestedEggs /></div>
-    <div class="bottomEggs"><InterestedEggs /></div>
+          ">
+          <img :src="locker" id="interestedBtnChild" />
+          <p id="interestedBtnChild">Open the resume</p>
+        </button>
+        <teleport to="body">
+          <div class="modalBg" v-if="open === true" id="modalField" @click="handleClick">
+            <div class="modal">
+              <div class="locker">
+                <img :src="locker" />
+              </div>
+              <form class="form" @submit.prevent="formSubmit">
+                <p><span v-if="isErr">Wrong password :&lt;</span></p>
+                <input type="password" @keyup="isErr = false" placeholder="Password" class="formPassword"
+                  name="password" :disabled="isSend" />
+                <input type="submit" value="Send" class="formSubmit" :disabled="isSend" />
+              </form>
+            </div>
+          </div>
+        </teleport>
+      </div>
+      <button class="toFooter" @click="() => {
+        slide.changeDelta(200);
+        slide.change();
+      }
+        ">
+        To footer
+      </button>
+      <div class="topEggs">
+        <InterestedEggs />
+      </div>
+      <div class="bottomEggs">
+        <InterestedEggs />
+      </div>
+    </div>
   </article>
 </template>
 <style lang="sass" scoped>
@@ -131,6 +123,12 @@ article
     justify-content: space-between
     overflow: hidden
 
+.page
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-direction: column
+  height: 100vh
 .modal
     position: absolute
     left: 50%
@@ -300,4 +298,5 @@ h1
     transform: translate(2px, -2px)
   50%
     transform: translate(0, 0)
+
 </style>

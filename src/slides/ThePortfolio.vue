@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import mowopedia from '../assets/mowopediaA.jpg';
 import eCommerce from '../assets/eCommerceA.jpg';
-import PortfolioWave from '@/SVG/PortfolioWave.vue';
 import star from '../assets/star.svg';
 </script>
 <template>

@@ -33,12 +33,12 @@ window.addEventListener('keydown', (e) => {
   if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA')
     return;
   if (key === 'ARROWDOWN' || key === 'S') {
-    slide.changeDelta(1);
+    slide.changeDelta(60);
     slide.change();
     return;
   };
   if (key === 'ARROWUP' || key === 'W') {
-    slide.changeDelta(-1);
+    slide.changeDelta(-60);
     slide.change();
     return};
 });
@@ -61,4 +61,9 @@ main
   max-width: 100vw
   max-height: 100vh
   overflow: hidden
+
+article
+  display: none
+#hello
+  display: block
 </style>

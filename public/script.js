@@ -57,12 +57,13 @@ const limiter = 70;
 
 function mousemove(e) {
   const movement = Math.abs(e.movementX) + Math.abs(e.movementY);
+  
   if (!isFiring) {
     if (movement < limiter) return;
   }
-  if(movement < 20) return;
+  if(movement < 5) return;
   if (movement > limiter) {
-    counter = 10;
+    counter = 30;
     isFiring = true;
   }
   if (counter < 0) return (isFiring = false);

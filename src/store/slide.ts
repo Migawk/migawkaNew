@@ -22,8 +22,14 @@ function scrollable(slideContentId: string, direction: 'up' | 'down') {
 }
 function transition(slides: any[], direction: 'up' | 'down') {
   if (direction === 'down') {
+    setTimeout(() => {
+      slides[slide.current - 1].element.style.display = 'none';
+    }, 1200);
+    slides[slide.current].element.style.display = 'block';
+
     if (slides[slide.current].direction === 'right') {
       const [w1, w2, w3] = slides[slide.current].element.children[0].children[0].children;
+
       if (w1 && w2 && w3) {
         [w1, w2, w3].forEach((e) => {
           e.style.transform = 'translateX(0%)';
@@ -35,7 +41,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1500,
+            duration: 2000,
             fill: 'forwards'
           }
         );
@@ -45,7 +51,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1700,
+            duration: 2400,
             fill: 'forwards'
           }
         );
@@ -55,22 +61,23 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1900,
+            duration: 2800,
             fill: 'forwards'
           }
         );
+
         setTimeout(() => {
-          slides[slide.current].element.children[0].children[1].animate(
+          slides[slide.current].element.children[0].animate(
             {
-              left: '-100%'
+              left: '0%'
             },
             {
               easing: 'cubic-bezier(.49,0,.64,1.06)',
-              duration: 900,
+              duration: 800,
               fill: 'forwards'
             }
           );
-        }, 400);
+        }, 900);
       }
       return;
     }
@@ -128,6 +135,15 @@ function transition(slides: any[], direction: 'up' | 'down') {
     }
   } else {
     // up
+    setTimeout(() => {
+      slides[slide.current + 1].element.style.display = 'none';
+    }, 3000);
+
+    slides[slide.current].element.style.display = 'block';
+
+    if(slides[slide.current].direction) {
+      slides[slide.current].element.children[0].style.left = "0%";
+    };
     if (slides[slide.current + 1].direction === 'right') {
       const [w1, w2, w3] = slides[slide.current + 1].element.children[0].children[0].children;
       if (w1 && w2 && w3) {
@@ -140,7 +156,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1400,
+            duration: 2000,
             fill: 'forwards'
           }
         );
@@ -150,7 +166,7 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1700,
+            duration: 2500,
             fill: 'forwards'
           }
         );
@@ -160,22 +176,22 @@ function transition(slides: any[], direction: 'up' | 'down') {
           },
           {
             easing: 'cubic-bezier(.49,0,.64,1.06)',
-            duration: 1900,
+            duration: 2600,
             fill: 'forwards'
           }
         );
         setTimeout(() => {
-          slides[slide.current + 1].element.children[0].children[1].animate(
+          slides[slide.current + 1].element.children[0].animate(
             {
               left: '100%'
             },
             {
-              easing: 'cubic-bezier(1,0,.64,1.06)',
-              duration: 450,
+              easing: 'cubic-bezier(.49,0,.64,1.06)',
+              duration: 800,
               fill: 'forwards'
             }
           );
-        }, 700);
+        }, 800);
       }
       return;
     }
@@ -307,23 +323,29 @@ const slide = reactive({
       slides[this.current].element.style.top = '0';
       slides[this.current].element.style.left = '0';
       slides[this.current].element.style.transform = 'translate(0, 0)';
+      slides[this.current].element.style.display = 'block';
+      (slides[this.current].element.children[0] as HTMLElement).style.left = '0%';
+
       slides.slice(0, this.current).forEach((e) => {
         e.element.style.top = '0px';
         e.element.style.left = '0px';
+        e.element.style.display = 'none';
       });
       slides.slice(this.current + 1, slides.length).forEach((e) => {
+        e.element.style.display = 'none';
         if (e.direction === 'right') {
-          e.element.style.left = '-100%';
+          (e.element.children[0] as HTMLElement).style.left = '0%';
         } else {
           e.element.style.top = '100%';
         }
       });
+
       if (slides[this.current].name === 'blog')
         (slides[this.current].element.children[0].children[1] as HTMLElement).style.left = '-100%';
       return;
     }
-    
-    if(Math.abs(this.deltaY) < 60) return;
+
+    if (Math.abs(this.deltaY) < 60) return;
     if (this.deltaY > 0) {
       // down
       if (slide.isScroll) return;
