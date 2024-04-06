@@ -11,7 +11,7 @@ const isErr = ref(false);
 function blinking(starList: HTMLCollection) {
   if (slide.current !== 5) return;
 
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 4; i++) {
     const star = starList[Math.round(Math.random() * starList.length - 1)];
     if (!star) return;
 
@@ -36,7 +36,7 @@ onMounted(() => {
   const starList = constellation.children as unknown as HTMLCollection;
   const freeStarList = randomStars.children as unknown as HTMLCollection;
 
-  setInterval(() => { blinking(starList); blinking(freeStarList) }, 1500);
+  setInterval(() => { blinking(starList); blinking(freeStarList) }, 1000);
 });
 
 function formSubmit(e: Event) {
@@ -318,6 +318,8 @@ h1
     z-index: 5
 
 .buttonArea
+    position: relative
+    z-index: 5000
     color: #3A5A69
     font-weight: 700
     display: flex
@@ -359,13 +361,24 @@ h1
   height: 25vh
 .stars
   position: absolute
-  left: 0
   top: 0
+  left: 50%
+  transform: translateX(-50%)
   width: 100vw
-  object-fit: cover
 .forest
   position: absolute
   bottom: 0
-  left: 0
-  width: 100vw
+  left: 50%
+  transform: translateX(-50%)
+  width: 130vw
+
+@media screen and (max-width: 1050px)
+  .stars
+    transform: translateX(-50%)
+    height: 70vh
+    width: auto
+  .forest
+    transform: translateX(-60%)
+    width: auto
+    height: 50vh
 </style>
