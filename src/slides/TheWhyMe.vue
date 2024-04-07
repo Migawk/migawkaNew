@@ -4,15 +4,13 @@ import pizza from '../assets/pizza.svg';
 import phone from '../assets/phone.svg';
 import server from '../assets/server.svg';
 import webpage from '../assets/webpage.svg';
-import HeaderWave from '@/SVG/HeaderWave.vue';
 import scrolled from '../store/scrolled';
-import purpleWave from '../assets/slideTransition/purpleWave.svg';
 
 import { onMounted } from 'vue';
 
 onMounted(() => {
   const page = document.getElementById('page')!;
-  page.addEventListener('scroll', (e) => {
+  page.addEventListener('scroll', () => {
     const newScrolled = (page.scrollTop / (page.scrollHeight - window.innerHeight)) * 100;
     scrolled.changeScrolled(newScrolled);
   });

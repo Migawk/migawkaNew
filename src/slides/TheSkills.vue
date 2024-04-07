@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import TypeWriterAnimation from '@/SVG/TypeWriterAnimation.vue';
 import slide from '@/store/slide';
+import { frontEnd } from "@/script/skillsAnimation";
+
 </script>
 
 <template>
@@ -50,8 +53,13 @@ import slide from '@/store/slide';
       <div class="rows">
         <div class="skills">
           <div class="row">
-            <div class="skill">
-              <div class="name">Front-end</div>
+            <div class="skill" @mouseenter="frontEnd">
+              <div class="name"><span>Front-end</span>
+                <div class="animations">
+                  <TypeWriterAnimation />
+
+                </div>
+              </div>
               <hr />
               <div class="content">
                 Layouting, SASS, React.js, Vue.js, Responsive, Semantic,<br />Redux/Zustand.
@@ -81,7 +89,7 @@ import slide from '@/store/slide';
         </div>
       </div>
       <div class="center">
-      <div class="scroll">
+        <div class="scroll">
           <button @click="() => {
             slide.changeDelta(200);
             slide.change();
@@ -158,6 +166,13 @@ hr
 .name
     font-size: 46px
     word-break: break-all
+    display: flex
+    justify-content: space-between
+    width: 100%
+
+.animations > svg
+  position: absolute
+  transform: translate(-75%, 0) scale(.5)
 
 .content
     font-size: 24px
@@ -214,6 +229,11 @@ hr
     width: 100vw
     height: 100vh
 
+.center
+  display: flex
+  justify-content: center
+  height: 86px
+
 @media screen and (max-width: 700px)
   .wave1Bg
     height: 200vh
@@ -221,12 +241,8 @@ hr
     height: 200vh
   .wave3Bg
     height: 200vh
-
-.center
-  display: flex
-  justify-content: center
-  margin: 86px 0
-  height: calc(86px * 2)
+  .center
+    padding: calc(86px * .25) 0 calc(86px * 2) 0
 .scroll
   transform: translateX(50%)
   &>button

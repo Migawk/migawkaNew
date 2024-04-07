@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import slide from '@/store/slide';
+
 </script>
 <template>
   <article id="blog" class="wrapper">
@@ -44,9 +46,11 @@
           </svg>
         </div>
       </div>
-      <div class="page" id="qwe">
-        <h1>The Blog</h1>
-        <h2>There is nothing</h2>
+      <div class="page">
+        <div class="infoField">
+          <h1>The Blog</h1>
+          <h2>There is nothing</h2>
+        </div>
         <svg width="96px" height="96px" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M134.238 99.2112C158.807 115.833 186.922 125.593 213.427 137.391" stroke="#B04F4F"
             stroke-opacity="0.9" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
@@ -70,6 +74,17 @@ There is nothin198.547 178.4C208.513 193.222 235.112 206.43 241.665 222.747C242.
           <path d="M196.176 178.4C199.296 210.776 176.225 220.849 165.354 247.691" stroke="#B04F4F" stroke-opacity="0.9"
             stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
+        <div class="center">
+          <div class="scroll">
+            <button @click="() => {
+              slide.changeDelta(-200);
+              slide.change();
+            }
+              ">
+              Back
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </article>
@@ -93,6 +108,10 @@ article
     padding: 64px
     text-align: center
     color: #fff
+    display: flex
+    justify-content: space-between
+    flex-direction: column
+    align-items: center
 h1
     font-size: 108px
 
@@ -147,6 +166,10 @@ h1
     width: 100vw
     height: 100vh
 
+.center
+  display: flex
+  justify-content: center
+  height: 86px
 @media screen and (max-width: 700px)
   .wave1Bg
     width: 200vh
@@ -154,4 +177,37 @@ h1
     width: 200vh
   .wave3Bg
     width: 200vh
+  .center
+    padding: calc(86px * .25) 0 calc(86px * 2) 0
+.scroll
+  transform: translateX(50%)
+
+  &>button
+    border: none
+    background: none
+    padding: 8px 16px
+    color: #fff
+    transform: translateX(-50%)
+    cursor: pointer
+  &:after
+    content: ''
+    position: absolute
+    display: block
+    background: #fff
+    height: 1px
+    width: 10px
+    animation: 1.4s infinite ease-in-out scrollable
+
+@keyframes scrollable
+  0%
+    left: -36px
+    width: 1px
+    opacity: .1
+  50%
+    width: 20px
+    opacity: 1
+  100%
+    width: 1px
+    left: 36px
+    opacity: .1
 </style>

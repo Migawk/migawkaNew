@@ -263,6 +263,7 @@ const slide = reactive({
   change(newSlide?: number) {
     localStorage.setItem("slide", this.current.toString());
     const pointer = document.getElementById('navPointer')!;
+    
     if (this.current < 4) {
       pointer.animate(
         {

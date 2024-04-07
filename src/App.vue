@@ -10,7 +10,7 @@ import TheNavigator from './elements/TheNavigator.vue';
 import TheCursor from './elements/TheCursor.vue';
 
 import slide from './store/slide';
-import CursorScript from '@/script/CursorScript.vue'
+import CursorScript from '@/script/cursorScript'
 
 let start = { x: 0, y: 0 };
 let delta = { x: 0, y: 0 };
@@ -51,9 +51,11 @@ window.addEventListener('keydown', (e) => {
     return
   };
 });
+
+CursorScript();
+
 </script>
 <template>
-  <CursorScript/>
   <TheNavigator />
   <TheCursor />
   <main>

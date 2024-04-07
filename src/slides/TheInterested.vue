@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import locker from '../assets/locker.svg';
+import locker from "@/assets/locker.svg";
 import InterestedStars from "@/SVG/InterestedStars.vue"
 import slide from '@/store/slide';
 
 const open = ref(false);
 const isSend = ref(false);
 const isErr = ref(false);
+
+const random = (max: number, min: number): number => Math.round(Math.random() * (max - min + 1)) + min;
 
 function blinking(starList: HTMLCollection) {
   if (slide.current !== 5) return;
@@ -18,6 +20,9 @@ function blinking(starList: HTMLCollection) {
     blink(star);
   }
   function blink(el: Element) {
+    const duration = Math.round(Math.random() * (8000 - 3000) + 3000);
+
+    if(el.getAnimations().length) return;
     el.animate([{
       opacity: "1",
     }, {
@@ -25,10 +30,40 @@ function blinking(starList: HTMLCollection) {
     }, {
       opacity: "1",
     }], {
-      duration: Math.round(Math.random() * (8000 - 3000) + 3000),
+      duration: duration,
       fill: "forwards"
     });
+
+    setTimeout(() => { el.getAnimations().map(a => a.cancel()) }, duration);
   }
+}
+
+function comet(link: HTMLElement) {
+  const newComet = document.createElementNS('http://www.w3.org/2000/svg', "circle");
+  newComet.setAttribute("r", (random(1, 1) / 5).toString());
+  newComet.setAttribute("cy", random(10, 0).toString());
+  newComet.setAttribute("style", "opacity:" + random(10, 1) / 5);
+  newComet.setAttribute("cx", random(window.innerWidth * .25, 25).toString());
+  newComet.setAttribute("fill", "#fff");
+  (link.parentNode as HTMLElement).append(newComet); // doesnt work, wtf.
+
+
+  newComet.animate({
+    transform: `translate(-${random(100, 50)}px, ${random(100, 50)}px)`
+  }, {
+    duration: 5000,
+    fill: "forwards"
+  });
+  setTimeout(() => {
+    newComet.animate({
+      opacity: "0"
+    }, {
+      duration: 500,
+      fill: "forwards"
+    });
+  }, 4500);
+  setTimeout(() => { newComet.remove() }, 5000);
+
 }
 onMounted(() => {
   const constellation = document.getElementById('constellation')!;
@@ -36,7 +71,8 @@ onMounted(() => {
   const starList = constellation.children as unknown as HTMLCollection;
   const freeStarList = randomStars.children as unknown as HTMLCollection;
 
-  setInterval(() => { blinking(starList); blinking(freeStarList) }, 1000);
+  setInterval(() => { blinking(starList); blinking(freeStarList) }, 1500);
+  setInterval(() => { comet(randomStars) }, 5000);
 });
 
 function formSubmit(e: Event) {
@@ -125,7 +161,6 @@ function handleClick(e: Event) {
         </teleport>
       </div>
       <div class="positioner">
-        <!-- <img class="stars" :src="stars" /> -->
         <InterestedStars class="stars" />
         <svg class="forest" viewBox="0 0 1366 276" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_25_436)">
@@ -318,8 +353,8 @@ h1
     z-index: 5
 
 .buttonArea
-    position: relative
-    z-index: 5000
+    // position: relative
+    // z-index: 25
     color: #3A5A69
     font-weight: 700
     display: flex

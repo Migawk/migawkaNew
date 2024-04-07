@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import mowopedia from '../assets/mowopediaA.jpg';
-import eCommerce from '../assets/eCommerceA.jpg';
+import mowopedia from '../assets/mowopedia.jpg';
+import eCommerce from '../assets/eCommerce.jpg';
 import star from '../assets/star.svg';
 </script>
 <template>
