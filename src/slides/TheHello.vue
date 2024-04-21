@@ -9,7 +9,7 @@ import slide from '@/store/slide';
     <div class="bottomEggs"><TheEggs /></div>
     <div class="face">
       <h1>
-        "As a develo<span class="rotate">p</span>er, I transf<span class="rotate">o</span>rm ideas
+        "As a <div style="display: inline-flex;">develo<span class="rotate">p</span>er</div>, I <div style="display: inline-flex;">transf<span class="rotate">o</span>rm</div> ideas
         into code, whe<span class="rotate">r</span>e each line is a path to innovation and
         functionality."
       </h1>
