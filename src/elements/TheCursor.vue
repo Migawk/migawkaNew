@@ -9,9 +9,9 @@ onMounted(() => {
   const cursor = document.getElementById('cursor')!;
   const cursor1 = document.getElementById('cursor1')!;
   setInterval(() => {
+    const { x, y } = cursor.getBoundingClientRect();
     if (isFocused.value) return;
 
-    const { x, y } = cursor.getBoundingClientRect();
     [cursor, cursor1].forEach((e) => {
       e.animate(
         {
@@ -26,13 +26,14 @@ onMounted(() => {
     });
   }, 100);
 
-  
+
   function cursorFunc(e: any) {
     const [x, y] = [e.clientX, e.clientY];
     [pointerX, pointerY] = [x, y];
     const eTarget = e.target as HTMLElement;
     if (
       eTarget.id === 'portfImg' ||
+      eTarget.id === 'blogElement' ||
       eTarget.id === 'interestedBtn' ||
       eTarget.tagName === 'INPUT' ||
       eTarget.tagName === 'TEXTAREA' ||
@@ -48,20 +49,20 @@ onMounted(() => {
       isFocused.value = true;
       [cursor, cursor1].forEach((e, i) => {
 
-      e.animate(
-        {
-          transform: 'translate(0, 0)',
-          left: targX + 'px',
-          top: targY + 'px',
-          width: targWidth + 'px',
-          height: targHeight + 'px',
-          borderRadius: '12px'
-        },
-        {
-          duration: i == 0 ? 1000 : 3000,
-          fill: 'forwards'
-        }
-      );
+        e.animate(
+          {
+            transform: 'translate(0, 0)',
+            left: targX + 'px',
+            top: targY + 'px',
+            width: targWidth + 'px',
+            height: targHeight + 'px',
+            borderRadius: '12px'
+          },
+          {
+            duration: i == 0 ? 1000 : 3000,
+            fill: 'forwards'
+          }
+        );
       })
       return;
     }

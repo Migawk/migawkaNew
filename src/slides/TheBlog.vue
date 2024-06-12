@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import slide from '@/store/slide';
+import videoImg from '@/assets/videoImg.png';
 
 </script>
 <template>
@@ -49,9 +50,9 @@ import slide from '@/store/slide';
       <div class="page">
         <div class="infoField">
           <h1>The Blog</h1>
-          <h2>There is nothing</h2>
+          <!-- <h2>There is nothing</h2> -->
         </div>
-        <svg width="96px" height="96px" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg width="96px" height="96px" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M134.238 99.2112C158.807 115.833 186.922 125.593 213.427 137.391" stroke="#B04F4F"
             stroke-opacity="0.9" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M205.92 127.493C341.899 48.8819 177.083 79.2472 134.238 113.952" stroke="#B04F4F"
@@ -73,7 +74,15 @@ There is nothin198.547 178.4C208.513 193.222 235.112 206.43 241.665 222.747C242.
             stroke-opacity="0.9" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
           <path d="M196.176 178.4C199.296 210.776 176.225 220.849 165.354 247.691" stroke="#B04F4F" stroke-opacity="0.9"
             stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        </svg> -->
+        <div class="list">
+          <div class="listElement">
+            <a href="https://www.youtube.com/watch?v=hUacgk7rn_4"><img :src="videoImg" alt="Image of the video" width="256" id="blogElement"></a>
+            <a href="https://www.youtube.com/watch?v=hUacgk7rn_4" class="listElementTitle" id="blogElement">
+              WP multilanguage solution
+            </a>
+          </div>
+        </div>
         <div class="center">
           <div class="scroll">
             <button @click="() => {
@@ -210,4 +219,23 @@ h1
     width: 1px
     left: 36px
     opacity: .1
+
+.list
+  display: flex
+  &Element
+    color: #FFF7D4
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 12px
+    &Title
+      font-weight: bold
+      padding: 4px 12px
+      text-decoration: none
+      &:visited
+        color: #00AECD
+    &>img
+      border-radius: 12px
+      object-fit: contain
 </style>

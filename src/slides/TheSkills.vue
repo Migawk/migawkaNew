@@ -157,6 +157,10 @@ h1
     display: flex
     flex-direction: column
     gap: 10px
+    transition: .5s
+    transition-timing-function: cubic-bezier(.46,.49,.25,1.35)
+    &:hover
+      transform: scale(1.1)
 
 hr
     background: #354259

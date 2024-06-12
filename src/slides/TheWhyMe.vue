@@ -82,7 +82,7 @@ onMounted(() => {
           <div class="smallAdvantagePar">
             <div class="smallAdvantage">
               <div class="smallAdvantageImg" id="smallAdvantageImg1">
-                <img :src="speed" alt="" />
+                <img :src="speed" alt="Quick sign" />
               </div>
               <div class="smallAdvantageName">Rapid</div>
               <div class="smallAdvantageDescription">I prefer to write quick and responsive to load websites.</div>
@@ -245,6 +245,9 @@ h1
         flex-direction: column
         margin-bottom: 20px
         transition: .5s
+        &>img
+          transition: .75s
+          transition-timing-function: cubic-bezier(.46,.49,.25,1.35)
     &Name
         font-size: 36px
         font-weight: bold
@@ -257,8 +260,14 @@ h1
       &>*
         width: 50%
 
+.bigAdvantageImg > *
+  transition: .75s
+  transition-timing-function: cubic-bezier(.46,.49,.25,1.35)
+
 .smallAdvantageImg:hover, .bigAdvantageImg:hover
   transform: scale(1.2)
+  &>*
+    transform: scale(1.5)
 .bigAdvantages
     display: flex
     justify-content: space-between
