@@ -8,18 +8,25 @@ import TheInterested from './slides/TheInterested.vue';
 import TheBasementAndFooter from './slides/TheBasementAndFooter.vue';
 import TheNavigator from './elements/TheNavigator.vue';
 import TheCursor from './elements/TheCursor.vue';
-
 import slide from './store/slide';
-import CursorScript from '@/script/cursorScript'
+import CursorScript from '@/script/cursorScript';
+import TheAdmin from './slides/TheAdmin.vue';
+import { onMounted, ref } from 'vue';
 
 let start = { x: 0, y: 0 };
 let delta = { x: 0, y: 0 };
-
+let isAdmin = ref(false);
+let isShift = ref(false);
+let token = ref("");
 
 window.addEventListener('touchstart', (e) => {
+  if (isAdmin.value) return;
+
   [start.y, start.x] = [e.touches[0].clientY, e.touches[0].clientX];
 });
 window.addEventListener('touchmove', (e) => {
+  if (isAdmin.value) return;
+
   delta.y = -(e.touches[0].clientY - start.y);
   delta.x = -(e.touches[0].clientX - start.x);
 
@@ -30,29 +37,81 @@ window.addEventListener('touchmove', (e) => {
   }
   slide.change();
 });
-
-window.addEventListener('load', console.log);
+// window.addEventListener('load', console.log);
 window.addEventListener('wheel', (e) => {
+  if (isAdmin.value) return;
+  if (isShift.value) return;
+
   slide.changeDelta(e.deltaY);
   slide.change();
 });
 window.addEventListener('keydown', (e) => {
-  const key = e.key.toUpperCase() as 'ARROWDOWN' | 'ARROWUP' | 'S' | 'W';
+  if (isAdmin.value) return;
+
+  const key = e.key.toUpperCase() as 'ARROWDOWN' | 'ARROWUP' | 'S' | 'W' | "SHIFT";
   if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA')
     return;
-  if (key === 'ARROWDOWN' || key === 'S') {
-    slide.changeDelta(60);
-    slide.change();
+
+  switch (key) {
+    case "ARROWDOWN":
+    case "S": {
+      slide.changeDelta(60);
+      slide.change();
+      return;
+    }
+    case "ARROWUP":
+    case "W": {
+      slide.changeDelta(-60);
+      slide.change();
+      return;
+    }
+    case "SHIFT": {
+      isShift.value = true;
+    }
+  }
+});
+window.addEventListener('keyup', (e) => {
+  if (isAdmin.value) return;
+
+  const key = e.key.toUpperCase() as "SHIFT";
+  if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA')
     return;
-  };
-  if (key === 'ARROWUP' || key === 'W') {
-    slide.changeDelta(-60);
-    slide.change();
-    return
-  };
+
+  switch (key) {
+    case "SHIFT": {
+      isShift.value = false;
+    }
+  }
 });
 
-CursorScript();
+onMounted(async () => {
+  const cookies = document.cookie;
+  if (cookies) {
+    const parsed = Object.fromEntries(
+      document.cookie.split(";").map(c => c.trim().split("="))
+    );
+
+    if (parsed.token && parsed.migawka) {
+
+      const isOk = await fetch(import.meta.env.VITE_SERVER + "verify", {
+        method: "POST",
+        body: JSON.stringify({ token: parsed.token }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => res.json()).then(res => "name" in res);
+
+      if (isOk) {
+        isAdmin.value = true;
+        token.value = parsed.token;
+      } else {
+        CursorScript();
+      }
+    }
+  } else {
+    CursorScript();
+  }
+})
 
 </script>
 <template>
@@ -67,6 +126,7 @@ CursorScript();
     <TheInterested />
     <TheBasementAndFooter />
   </main>
+  <TheAdmin :token="token" v-if="isAdmin" />
 </template>
 <style lang="sass" scoped>
 main

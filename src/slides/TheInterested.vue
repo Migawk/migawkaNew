@@ -5,7 +5,7 @@ import InterestedStars from "@/SVG/InterestedStars.vue"
 import slide from '@/store/slide';
 
 const open = ref(false);
-const isSend = ref(false);
+const isSent = ref(false);
 const isErr = ref(false);
 
 const random = (max: number, min: number): number => Math.round(Math.random() * (max - min + 1)) + min;
@@ -76,11 +76,11 @@ onMounted(() => {
 });
 
 function formSubmit(e: Event) {
-  isSend.value = true;
+  isSent.value = true;
 
   const pswd = (e.target as HTMLFormElement).password;
 
-  fetch('https://server.migawka.space/cv', {
+  fetch(import.meta.env.VITE_SERVER+'cv', {
     method: 'POST',
     body: JSON.stringify({ password: pswd.value }),
     headers: {
@@ -89,13 +89,13 @@ function formSubmit(e: Event) {
   })
     .then((res) => res.blob())
     .then((res) => {
-      isSend.value = false;
+      isSent.value = false;
       if (res.size === 0) throw new Error('403');
       const file = window.URL.createObjectURL(res as any);
       window.location.assign(file);
     })
     .catch(() => {
-      isSend.value = false;
+      isSent.value = false;
       isErr.value = true;
       pswd.animate(
         [
@@ -153,8 +153,8 @@ function handleClick(e: Event) {
               <form class="form" @submit.prevent="formSubmit">
                 <p><span v-if="isErr">Wrong password :&lt;</span></p>
                 <input type="password" @keyup="isErr = false" placeholder="Password" class="formPassword"
-                  name="password" :disabled="isSend" />
-                <input type="submit" value="Send" class="formSubmit" :disabled="isSend" />
+                  name="password" :disabled="isSent" />
+                <input type="submit" value="Send" class="formSubmit" :disabled="isSent" />
               </form>
             </div>
           </div>

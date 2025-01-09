@@ -141,6 +141,7 @@ h1
     justify-content: center
     align-items: flex-start
     width: 100%
+    max-width: 95vw
     gap: 10px
 
 .row
