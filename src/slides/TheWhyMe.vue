@@ -310,16 +310,23 @@ h1
   .smallAdvantagePar
     width: 100%
 
+  .bigAdvantages
+    gap: 12px
   .bigAdvantage
     justify-content: center
     align-items: center
+    &Name
+      text-align: left
     &Content
       padding: 0
       text-align: center
+    &Description
+      text-align: left
 
 @media screen and (max-width: 570px)
   .box
     padding: 12px
+    padding-bottom: 24px
   .smallAdvantagePar
     justify-content: space-between
 

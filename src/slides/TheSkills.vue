@@ -115,6 +115,7 @@ h1
     text-align: center
     font-size: 92px
     color: #fff
+    margin-bottom: 24px
 
 .page
   display: flex
@@ -181,9 +182,8 @@ hr
 
 .content
     font-size: 24px
-    word-break: break-all
 
-@media screen and (max-width: 420px)
+@media screen and (max-width: 600px)
     .skills
         display: block
     .row
@@ -191,8 +191,13 @@ hr
         &:first-child
             margin-bottom: 12px
     .name
-        text-align: center
+        text-align: center // not working
+        display: flex
+        justify-content: center
         font-size: 40px
+    .content
+      text-align: center
+      font-size: 20px
 
 
 .wave1

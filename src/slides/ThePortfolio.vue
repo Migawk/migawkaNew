@@ -1,26 +1,68 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUpdated, ref, watch } from 'vue'
+import TheProject from '@/elements/TheProject.vue';
+import slide from '@/store/slide';
 
 const projList = ref<null | IProj[]>(null);
 onMounted(async () => {
-  const { projects, tools } = await fetch(import.meta.env.VITE_SERVER + "mig/projects").then(res => res.json());
-
-  projList.value = projects.map((pr: IProj) => {
-    const stack = pr.stack.map((stEl) => {
-      const st = tools.find((t: any) => t.name === stEl);
-
-      if (st && !st.img.startsWith("http")) st.img = import.meta.env.VITE_SERVER + st.img;
-      return st;
-    }).filter(x => x != undefined);
-
-    const img = import.meta.env.VITE_SERVER + pr.img;
-    return {
-      ...pr,
-      img,
-      stack
-    }
-  }).filter((x: any) => x != undefined);
+  const { projects } = await fetch(import.meta.env.VITE_SERVER + "mig/projects").then(res => res.json());
+  
+  projList.value = [...projects, ...projects, ...projects];
 });
+let scrolled = ref<number>(0);
+const refList = ref<null | HTMLElement>(null);
+
+const unwatch: any = watch(slide, () => {
+  if(slide.current === 2) {
+    if(window.innerWidth < 600) return unwatch();
+    unwatch();
+    const list = document.getElementById("portfolioList");
+    const wrapped = document.getElementById("portfolioWrappedList");
+    if(!wrapped || !list) return;
+
+    refList.value = wrapped;
+    
+    const bounding = wrapped.getBoundingClientRect();
+    scrolled.value = bounding.width/2;
+
+    // list.scrollTo(bounding.width/2, 0);
+    let accX = 0;
+    let pressed = false;
+    
+    list.addEventListener("mouseup", () => {
+      pressed = false;
+    });
+    list.addEventListener("mousedown", () => {
+      pressed = true;
+    });
+    list.addEventListener("mousemove", (mv) => {
+      if(pressed) accX += mv.movementX;
+    });
+    setInterval(() => {
+      if(Math.abs(accX) >= 0.1) {
+        scrolled.value -= accX;
+        accX *= .6;
+    }
+    }, 20);
+  }
+})
+
+const unwatchScrolled: any = watch(scrolled, () => {
+  if(window.innerWidth < 600) return unwatchScrolled();
+
+  const el = refList.value;
+  if(!el) return;
+  const {width} = el.getBoundingClientRect();
+  
+  const wid = window.innerWidth;
+  if(scrolled.value > width-wid) {
+    scrolled.value = wid;
+  }
+  if(scrolled.value < wid) {
+    scrolled.value = width-wid;
+  }
+  el.style.transform = `translateX(-${scrolled.value}px)`;
+})
 
 </script>
 <template>
@@ -69,26 +111,11 @@ onMounted(async () => {
     <div class="page" id="page1">
       <h1>Portfolio</h1>
       <div class="content">
-        <div class="list">
-          <div class="project" v-for="pr in projList">
-            <a :href="pr.link">
-              <img :src="pr.img" class="projectImg" id="portfImg" width=500 height=280 />
-            </a>
-            <div class="projectResponsive">
-              <div class="projectHiddenTitle">{{ pr.name }}</div>
-              <ul class="projectInfo">
-                <li class="projectStack" v-for="st in pr.stack">
-                  <img :src="st.img" :alt="st.name" width="16">
-                  <p class="projectStackText">{{ st.name }}</p>
-                </li>
-              </ul>
-            </div>
-            <div class="projectContent">
-              <div class="projectTitle">{{ pr.name }}</div>
-              <div class="projectDescription">
-                {{ pr.des }}
-              </div>
-            </div>
+        <div class="topList" id="portfolioList">
+          <div class="list" id="portfolioWrappedList">
+            <template v-for="pr in projList">
+              <TheProject :pr="pr" />
+            </template>
           </div>
         </div>
       </div>
@@ -124,101 +151,27 @@ h1
   display: flex
   justify-content: center
   align-items: center
+
+.topList
+  overflow: hidden
 .list
   display: flex
   gap: 96px
-  padding: 0 20%
+  padding: 0 10%
 
   min-height: max-content
-  overflow-x: scroll
+  width: max-content
+  user-select: none
   
   border-radius: 12px
 
-@media screen and (max-width: 1080px)
-  .list
-    flex-direction: column
-.project
-  display: flex
-  flex-direction: column
-  gap: 48px
-  min-width: 500px
-  max-width: 500px
-  height: 100%
-  &Img
-    border-radius: 12px
-    object-fit: cover
-  &Info
-    display: flex
-    padding: 12px 24px
-    gap: 32px
-
-    background: #46546C
-    color: #fff
-
-    font-size: 24px
-    font-weight: 700
-
-    border-radius: 12px
-    & > *:first-child
-      list-style-type: none
-  &Stack
-    list-style-type: circle
-    display: flex
-    justify-content: center
-    align-items: center
-    gap: 8px
-    &Text
-      font-size: 16px
-      transform: translateY(-1px)
-  &Content
-    font-weight: 700
-    color: #fff
-  &HiddenTitle
-    display: none
-    color: #fff
-    font-size: 36px
-    padding: 10px 8px
-  &Title
-    font-size: 36px
-  &Description
-    font-size: 24px
-  &Rating>.stars
-    display: flex
-    align-items: center
-    justify-content: center
-    gap: 4px
-
-@media screen and (max-width: 500px)
+@media screen and (max-width: 600px)
   h1
     font-size: 40px
+    
   .list
+    flex-direction: column
     padding: 24px
-  .project
-    background: #2E3850
-    border-radius: 12px
-    gap: 0
-    width: fit-content
-    overflow: hidden
-    &Img
-      border-radius: 0
-      width: 100%
-    &Rating
-      border-radius: 0
-      border-bottom-left-radius: 12px
-      border-bottom-right-radius: 12px
-      background: #3A475E
-    &Responsive
-      background: #46546C
-      border-bottom-left-radius: 12px
-      border-bottom-right-radius: 12px
-    &HiddenTitle
-      display: block
-      font-weight: 700
-    &Title
-      display: none
-    &Description
-      padding: 8px
-      font-size: 18px
 
 .wave1
   position: absolute

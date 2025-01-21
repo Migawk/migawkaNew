@@ -45,6 +45,7 @@ window.addEventListener('wheel', (e) => {
   slide.changeDelta(e.deltaY);
   slide.change();
 });
+
 window.addEventListener('keydown', (e) => {
   if (isAdmin.value) return;
 
@@ -91,15 +92,14 @@ onMounted(async () => {
       document.cookie.split(";").map(c => c.trim().split("="))
     );
 
-    if (parsed.token && parsed.migawka) {
-
-      const isOk = await fetch(import.meta.env.VITE_SERVER + "verify", {
+    if (parsed.token) {
+      const isOk = await fetch(import.meta.env.VITE_SERVER + "auth/verify", {
         method: "POST",
-        body: JSON.stringify({ token: parsed.token }),
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authentication": `Bearer ${parsed.token}`
         }
-      }).then(res => res.json()).then(res => "name" in res);
+      }).then(res => res.json());
 
       if (isOk) {
         isAdmin.value = true;

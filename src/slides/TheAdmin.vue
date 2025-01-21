@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import TheProject from '@/elements/TheProject.vue';
 import { ref } from 'vue';
 import { onMounted, reactive } from 'vue';
 
@@ -6,46 +7,58 @@ const { token } = defineProps(["token"]);
 const projects = reactive<IProj[]>([]);
 const tools = reactive<ITool[]>([]);
 
+type TMsg = {
+    color: string;
+    content: string
+} | null;
+
+const phMsg = ref<TMsg>(null);
+const tMsg = ref<TMsg>(null);
+const prMsg = ref<TMsg>(null);
+
 const isCreatingProj = ref(false);
 const isCreatingTool = ref(false);
 
 onMounted(async () => {
-    const { projects: projsRes, tools: tlsRes } = await fetch(import.meta.env.VITE_SERVER + "mig/projects").then(res => res.json());
+    const { projects: projectFetched, tools: toolFetched } = await fetch(import.meta.env.VITE_SERVER + "mig/projects").then(res => res.json()) as { projects: IProj[], tools: ITool[] };
 
-    tlsRes.forEach((tl: ITool) => {
-        tools.push(tl);
-    });
-    projsRes.forEach((proj: IProj) => {
-        proj.stack = proj.stack.map((stEl) => {
-            const st = tools.find((t: any) => t.name === stEl);
-
-            if (st && !st.img.startsWith("http")) st.img = import.meta.env.VITE_SERVER + st.img;
-            return st;
-        }).filter(x => x != undefined);
-        proj.img = import.meta.env.VITE_SERVER + proj.img;
-
+    projectFetched.forEach((proj: IProj) => {
         projects.push(proj);
     });
-})
+
+    toolFetched.forEach(t => {
+        tools.push(t);
+    });
+});
 
 const toggleProj = () => isCreatingProj.value = !isCreatingProj.value;
 const toggleTool = () => isCreatingTool.value = !isCreatingTool.value;
 const parse = (el: HTMLInputElement) => el.value;
 
+function setMsg(ent: any, content: string, color: string) {
+    ent.value = {
+            content,
+            color
+        }
+        setTimeout(() => {
+            ent.value = null;
+        }, 5000);
+}
 function uplPhoto(ev: any) {
     const { img } = ev.target;
 
     const formData = new FormData();
     formData.append("file", img.files[0]);
-    formData.append("token", token);
 
     fetch(import.meta.env.VITE_SERVER + "static", {
         method: "POST",
         body: formData,
         headers: {
-            "authentication": token
+            "Authentication": `Bearer ${token}`
         }
-    }).then(res => res.text()).then(console.log);
+    }).then(res => res.text()).then((res) => {
+        setMsg(phMsg, "File uploaded", "#191")
+    });
 }
 function createProj(ev: any) {
     const { target } = ev as any;
@@ -63,7 +76,6 @@ function createProj(ev: any) {
     fetch(import.meta.env.VITE_SERVER + "mig/projects", {
         method: "POST",
         body: JSON.stringify({
-            token,
             project: {
                 name,
                 img,
@@ -73,9 +85,12 @@ function createProj(ev: any) {
             }
         }),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authentication": `Bearer ${token}`
         }
-    }).then(res => res.json()).then(console.log)
+    }).then(res => res.json()).then(() => {
+        setMsg(prMsg, "File uploaded", "#191")
+    })
 }
 function createTool(ev: any) {
     const { target } = ev as any;
@@ -85,47 +100,36 @@ function createTool(ev: any) {
     fetch(import.meta.env.VITE_SERVER + "mig/projects", {
         method: "POST",
         body: JSON.stringify({
-            token,
             tool: {
                 name,
                 img: link
             }
         }),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authentication": `Bearer ${token}`
         }
-    }).then(res => res.json()).then(console.log)
+    }).then(res => res.json()).then(() => {
+        setMsg(tMsg, "File uploaded", "#191")
+    })
 }
-
 </script>
 <template>
     <section id="admin">
+        <div class="msgs">
+            <div v-if="phMsg">{{ phMsg.content }}</div>
+            <div v-if="tMsg">{{ tMsg.content }}</div>
+            <div v-if="prMsg">{{ prMsg.content }}</div>
+        </div>
         <form @submit.prevent="uplPhoto">
             <input type="file" name="img" id="img">
             <input type="submit" class="spec">
         </form>
         <div class="projects">
             <template v-if="projects">
-                <div class="project" v-for="pr in projects">
-                    <a :href="pr.link">
-                        <img :src="pr.img" class="projectImg" id="portfImg" width=500 height=280 />
-                    </a>
-                    <div class="projectResponsive">
-                        <div class="projectHiddenTitle">{{ pr.name }}</div>
-                        <ul class="projectInfo">
-                            <li class="projectStack" v-for="st in pr.stack">
-                                <img :src="st.img" :alt="st.name" width="16">
-                                <p class="projectStackText">{{ st.name }}</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="projectContent">
-                        <div class="projectTitle">{{ pr.name }}</div>
-                        <div class="projectDescription">
-                            {{ pr.des }}
-                        </div>
-                    </div>
-                </div>
+                <template v-for="pr in projects">
+                    <TheProject :pr="pr" />
+                </template>
                 <div class="project" v-if="!isCreatingProj">
                     <button @click="toggleProj()" class="spec">New Proj</button>
                 </div>
@@ -152,7 +156,9 @@ function createTool(ev: any) {
             <template v-if="tools">
                 <div class="tls" v-for="tl in tools">
                     <div class="tool spec">
-                        {{ tl.name }}
+
+                        <img :src="tl.img" :alt="tl.name" width="16">
+                        <p>{{ tl.name }}</p>
                     </div>
                 </div>
             </template>
@@ -187,57 +193,6 @@ section
     flex-wrap: wrap
     gap: 16px
     width: 90vw
-.project
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  gap: 48px
-  min-width: 500px
-  max-width: 500px
-  &Img
-    border-radius: 12px
-    object-fit: cover
-  &Info
-    display: flex
-    padding: 12px 24px
-    gap: 32px
-
-    background: #46546C
-    color: #fff
-
-    font-size: 24px
-    font-weight: 700
-
-    border-radius: 12px
-    & > *:first-child
-      list-style-type: none
-  &Stack
-    list-style-type: circle
-    display: flex
-    justify-content: center
-    align-items: center
-    gap: 8px
-    &Text
-      font-size: 16px
-      transform: translateY(-1px)
-  &Content
-    font-weight: 700
-    color: #fff
-  &HiddenTitle
-    display: none
-    color: #fff
-    font-size: 36px
-    padding: 10px 8px
-  &Title
-    font-size: 36px
-  &Description
-    font-size: 24px
-  &Rating>.stars
-    display: flex
-    align-items: center
-    justify-content: center
-    gap: 4px
 
 .spec
     background: #00000044
@@ -255,6 +210,8 @@ section
     gap: 4px
 .tool
     padding: 8px
+    display: flex
+    gap: 4px
 .list
     display: flex
     gap: 6px

@@ -112,6 +112,10 @@ h1
       position: absolute
       transform: scale(.5) translate(-288px, -256px)
 
+@media screen and (max-width: 900px)
+  h1
+    text-align: center
+
 @keyframes scrollable
   0%
     bottom: -64px
