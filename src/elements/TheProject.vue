@@ -4,7 +4,7 @@ const { pr } = defineProps<{ pr: IProj }>();
 <template>
 	<div class="project">
 		<a :href="pr.link">
-			<img :src="pr.img" class="projectImg" id="portfImg" width=500 height=280 />
+			<img :src="pr.img" class="projectImg" id="portfImg" />
 		</a>
 		<div class="projectResponsive">
 			<div class="projectHiddenTitle">{{ pr.name }}</div>
@@ -28,12 +28,11 @@ const { pr } = defineProps<{ pr: IProj }>();
   display: flex
   flex-direction: column
   gap: 48px
-  min-width: 500px
-  max-width: 500px
   height: 100%
   &Img
     border-radius: 12px
     object-fit: cover
+    width: 100%
   &Info
     display: flex
     padding: 12px 24px

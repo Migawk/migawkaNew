@@ -160,7 +160,7 @@ h1
   padding: 0 10%
 
   min-height: max-content
-  width: max-content
+  width: 100%
   user-select: none
   
   border-radius: 12px
